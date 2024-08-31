@@ -3,21 +3,70 @@ import { Container, Typography, Card, CardContent, CardMedia, Button, Grid, AppB
 
 function App() {
   return (
+    <Box sx={{
+      backgroundColor: '#f0f0f0', // Background color for the entire page
+      minHeight: '100vh', // Ensure it covers the full height of the viewport
+      padding: 3,
+    }}>
     <div>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton size="large" edge="start" color="inherit" aria-label="menu">
-            {/* Your logo here */}
-          </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Car Repair
-          </Typography>
-          <Button color="inherit">Shop</Button>
-          <Button color="inherit">Booking</Button>
-          <Button color="inherit">Cart</Button>
-          <Button color="inherit">About Us</Button>
-        </Toolbar>
-      </AppBar>
+    <AppBar position="static" sx= {{borderRadius: '15px',}}>
+  <Toolbar>
+    <IconButton size="large" edge="start" color="inherit" aria-label="menu">
+      {/* Your logo here */}
+    </IconButton>
+    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+      Car Repair
+    </Typography>
+    <Button
+      color="inherit"
+      sx={{
+        '&:hover': {
+          textDecoration: 'none',
+          backgroundColor: 'primary.main',
+          color: 'black',
+        },
+      }}
+    >
+      Shop
+    </Button>
+    <Button
+      color="inherit"
+      sx={{
+        '&:hover': {
+          textDecoration: 'none',
+          backgroundColor: 'primary.main',
+          color: 'black',
+        },
+      }}
+    >
+      Booking
+    </Button>
+    <Button
+      color="inherit"
+      sx={{
+        '&:hover': {
+          textDecoration: 'none',
+          backgroundColor: 'primary.main',
+          color: 'black',
+        },
+      }}
+    >
+      Cart
+    </Button>
+    <Button
+      color="inherit"
+      sx={{
+        '&:hover': {
+          textDecoration: 'none',
+          backgroundColor: 'primary.main',
+          color: 'black',
+        },
+      }}
+    >
+      Logout
+    </Button>
+  </Toolbar>
+</AppBar>
 
       <Container maxWidth="md" sx={{ mt: 4 }}>
         <Typography variant="h4" align="center" gutterBottom>
@@ -64,6 +113,7 @@ function App() {
         </Box>
       </Container>
     </div>
+    </Box>
   );
 }
 
