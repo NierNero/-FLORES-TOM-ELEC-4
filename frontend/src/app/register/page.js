@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from 'react';
-import { Container, TextField, Button, Typography, Alert } from '@mui/material';
+import { Container, TextField, Button, Typography, Alert, Box } from '@mui/material';
 
 function App() {
   // State to hold the input values and error message
@@ -57,6 +57,11 @@ function App() {
   };
 
   return (
+    <Box sx={{
+      backgroundColor: '#f0f0f0', // Background color for the entire page
+      minHeight: '100vh', // Ensure it covers the full height of the viewport
+      padding: 3,
+    }}>
     <Container 
       maxWidth="xs" 
       sx={{ 
@@ -65,7 +70,6 @@ function App() {
         flexDirection: 'column', 
         alignItems: 'center', 
         justifyContent: 'center', 
-        minHeight: '91vh'
       }}
     >
       <Typography variant="h4" component="h1" gutterBottom>
@@ -117,6 +121,7 @@ function App() {
         </Button>
       </form>
     </Container>
+    </Box>
   );
 }
 
