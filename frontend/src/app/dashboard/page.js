@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Typography, Card, CardContent, CardMedia, Button, Grid, AppBar, Toolbar, Link, Box } from '@mui/material';
+import { Container, Typography, Card, CardContent, CardMedia, Button, Grid, AppBar, Toolbar, Link, Box, IconButton } from '@mui/material';
 
 // Mock data for the repair shops
 const repairShops = [
@@ -26,7 +26,7 @@ const repairShops = [
 ];
 
 const RepairShopCard = ({ shop }) => (
-  <Card sx={{ height: '39vh', display: 'flex', flexDirection: 'column' }}>
+  <Card sx={{ height: '39vh', display: 'flex', flexDirection: 'column', marginTop: '6' }}>
     <CardMedia
       component="img"
       height="100"
@@ -51,72 +51,83 @@ const RepairShopCard = ({ shop }) => (
 
 const App = () => {
   return (
-    <>
-      <AppBar position="static">
+    <Box sx={{
+      backgroundColor: '#f0f0f0', // Background color for the entire page
+      minHeight: '100vh', // Ensure it covers the full height of the viewport
+      padding: 3,
+
+    }}>
+      <AppBar position="static" sx= {{borderRadius: '15px',}}>
         <Toolbar>
+          <IconButton size="large" edge="start" color="inherit" aria-label="menu">
+            </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             CARCARE
           </Typography>
-          <Link
+          <Button
             href="/"
             color="inherit"
             sx={{
               marginRight: 2,
               textDecoration: 'none',
               '&:hover': {
+                backgroundColor: 'primary.main',
                 color: 'black',
               },
             }}
             underline="none"
           >
             Home
-          </Link>
-          <Link
+          </Button>
+          <Button
             href="/cart"
             color="inherit"
             sx={{
               marginRight: 2,
               textDecoration: 'none',
               '&:hover': {
+                backgroundColor: 'primary.main',
                 color: 'black',
               },
             }}
             underline="none"
           >
             Cart
-          </Link>
-          <Link
+          </Button>
+          <Button
             href="/book"
             color="inherit"
             sx={{
               marginRight: 2,
               textDecoration: 'none',
               '&:hover': {
+                backgroundColor: 'primary.main',
                 color: 'black',
               },
             }}
             underline="none"
           >
             Book
-          </Link>
-          <Link
+          </Button>
+          <Button
             href="/login"
             color="inherit"
             sx={{
               textDecoration: 'none',
               '&:hover': {
+                backgroundColor: 'primary.main',
                 color: 'black',
               },
             }}
             underline="none"
           >
             Logout
-          </Link>
+          </Button>
         </Toolbar>
       </AppBar>
 
       <Container>
-        <Typography variant="h4" align="center" gutterBottom sx={{ marginTop: 6 }}>
+        <Typography variant="h4" align="center" gutterBottom sx={{ marginTop: 6, marginBottom: 6 }}>
           Available Repair Shops
         </Typography>
 
@@ -130,8 +141,9 @@ const App = () => {
           ))}
         </Grid>
       </Container>
-    </>
+    </Box>
   );
 };
 
 export default App;
+
