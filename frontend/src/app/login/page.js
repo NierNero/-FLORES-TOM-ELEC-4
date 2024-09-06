@@ -16,23 +16,23 @@ function Login() {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            backgroundColor: '#ffffff', // White background for form container
+            backgroundColor: '#ffffff', 
             padding: 3,
-            borderRadius: 2, // Rounded corners
-            boxShadow: 3, // Add shadow for a card-like effect
+            borderRadius: 2, 
+            boxShadow: 3, 
             minHeight: '100vh',
           }}
         >
           <Container  maxWidth="xs" sx={{
-            mt: 8, // Top margin for the Container
+            mt: 8, 
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            backgroundColor: '#ffffff', // White background for form container
+            backgroundColor: '#ffffff',
             padding: 3,
-            borderRadius: 2, // Rounded corners
-            boxShadow: 3, // Card-like shadow
-            width: '100%', // Ensure it takes full width of its parent
+            borderRadius: 2, 
+            boxShadow: 3, 
+            width: '100%', 
           }}>
           <Typography component="h1" variant="h5" textAlign="center">
             Welcome Back!

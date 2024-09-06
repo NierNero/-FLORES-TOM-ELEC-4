@@ -11,85 +11,84 @@ import {
   CardContent, 
   CardMedia, 
   Button, 
-  IconButton 
+  IconButton,
+  Box
 } from '@mui/material';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import SearchIcon from '@mui/icons-material/Search';
-import { Box } from '@mui/system';
 
 const products = [
-  { id: 1, name: 'Engine Belt', price: 50, image: 'belt.png' },
-  { id: 2, name: 'Oil Filter', price: 150, image: 'oilfilter.png' }
+  { id: 1, name: 'Engine Belt', price: 50, image: '/img/belt1.jpg' },
+  { id: 2, name: 'Oil Filter', price: 150, image: '/img/oilfilter.jpg' },
+  { id: 3, name: 'Oil Filter (New)', price: 50, image: '/img/oilfilter1.jpg' },
 ];
 
 const ProductPage = () => {
   return (
     <Box 
       sx={{
-        backgroundColor: '#f0f0f0', // Background color for the entire page
-        minHeight: '100vh', // Ensure it covers the full height of the viewport
+        backgroundColor: '#fafafa', 
+        minHeight: '100vh',
         padding: 3,
       }}
     >
-      {/* AppBar Section */}
-      <AppBar position="static" sx={{ borderRadius: '15px'}}>
+      
+      <AppBar position="static" sx={{
+        borderRadius: '0 0 15px 15px', 
+        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', 
+        backgroundColor: '#333', 
+      }}>
         <Toolbar>
-          <IconButton size="large" edge="start" color="inherit" aria-label="menu">
-            {/* You can add a menu icon or any other icon here */}
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 2 }}
+          >
+            
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            CARCARE
+            Nelson's Automotive
           </Typography>
           <Button
-            href="/"
             color="inherit"
             sx={{
-              marginRight: 2,
-              textDecoration: 'none',
               '&:hover': {
-                backgroundColor: 'primary.main',
-                color: 'black',
+                backgroundColor: '#555', 
+                color: '#fff',
               },
             }}
           >
             Home
           </Button>
           <Button
-            href="/cart"
             color="inherit"
             sx={{
-              marginRight: 2,
-              textDecoration: 'none',
               '&:hover': {
-                backgroundColor: 'primary.main',
-                color: 'black',
+                backgroundColor: '#555', 
+                color: '#fff',
+              },
+            }}
+          >
+            Booking
+          </Button>
+          <Button
+            color="inherit"
+            sx={{
+              '&:hover': {
+                backgroundColor: '#555', 
+                color: '#fff',
               },
             }}
           >
             Cart
           </Button>
           <Button
-            href="/book"
             color="inherit"
             sx={{
-              marginRight: 2,
-              textDecoration: 'none',
               '&:hover': {
-                backgroundColor: 'primary.main',
-                color: 'black',
-              },
-            }}
-          >
-            Book
-          </Button>
-          <Button
-            href="/login"
-            color="inherit"
-            sx={{
-              textDecoration: 'none',
-              '&:hover': {
-                backgroundColor: 'primary.main',
-                color: 'black',
+                backgroundColor: '#555', 
+                color: '#fff',
               },
             }}
           >
@@ -101,7 +100,7 @@ const ProductPage = () => {
       {/* Search Bar */}
       <Box sx={{ display: 'flex', justifyContent: 'center', marginY: 3 }}>
         <TextField 
-          placeholder="Search" 
+          placeholder="Search for products..." 
           variant="outlined" 
           InputProps={{
             endAdornment: (
@@ -110,6 +109,7 @@ const ProductPage = () => {
               </IconButton>
             ),
           }}
+          sx={{ width: '100%', maxWidth: 600 }}
         />
       </Box>
 
@@ -117,21 +117,34 @@ const ProductPage = () => {
       <Grid container spacing={3} sx={{ paddingX: 5, marginTop: 3 }}>
         {products.map((product) => (
           <Grid item xs={12} sm={6} md={4} key={product.id}>
-            <Card>
+            <Card sx={{ 
+              borderRadius: '15px', 
+              boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', 
+              transition: 'transform 0.3s', 
+              '&:hover': { transform: 'scale(1.03)' },
+              display: 'flex', 
+              flexDirection: 'column' 
+            }}>
               <CardMedia
                 component="img"
-                height="140"
+                height="200" 
                 image={product.image}
                 alt={product.name}
+                sx={{ 
+                  borderRadius: '15px 15px 0 0', 
+                  objectFit: 'cover', 
+                  width: '100%', 
+                  maxHeight: '200px' 
+                }}
               />
               <CardContent>
-                <Typography variant="h6" component="div">
+                <Typography variant="h6" component="div" sx={{ marginBottom: 1 }}>
                   {product.name}
                 </Typography>
-                <Typography variant="body1" color="textSecondary">
+                <Typography variant="body1" color="textSecondary" sx={{ marginBottom: 2 }}>
                   $ {product.price}
                 </Typography>
-                <Grid container spacing={2} sx={{ marginTop: 2 }}>
+                <Grid container spacing={2}>
                   <Grid item xs={6}>
                     <Button variant="contained" color="primary" fullWidth>
                       Buy Now

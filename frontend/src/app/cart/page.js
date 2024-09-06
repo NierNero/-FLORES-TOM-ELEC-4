@@ -19,8 +19,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 // Dummy data
 const cartItems = [
-  { id: 1, name: 'Belt', price: 50, image: 'belt.png', shop: "Nelson's Automotive Shop" },
-  { id: 2, name: 'Oil Filter', price: 15, image: 'oilfilter.png', shop: "Nelson's Automotive Shop" }
+  { id: 1, name: 'Belt', price: 50, image: '/img/belt1.jpg', shop: "Nelson's Automotive Shop" },
+  { id: 2, name: 'Oil Filter', price: 15, image: '/img/oilfilter.jpg', shop: "Nelson's Automotive Shop" }
 ];
 
 function ShoppingCart() {
@@ -39,7 +39,6 @@ function ShoppingCart() {
 
   const handlePlaceOrder = () => {
     console.log('Order placed');
-    // Implement order placement logic here
   };
 
   const handleCancelPurchase = () => {
@@ -48,70 +47,67 @@ function ShoppingCart() {
 
   return (
     <Box sx={{
-        backgroundColor: '#f0f0f0', // Background color for the entire page
-        minHeight: '100vh', // Ensure it covers the full height of the viewport
+        backgroundColor: '#f5f5f5', 
+        minHeight: '100vh', 
         padding: 3,
       }}
     >
-      {/* AppBar */}
-      <AppBar position="static" sx={{ borderRadius: '15px', mb: 5 }}>
+      <AppBar position="static" sx={{
+        borderRadius: '0 0 20px 20px', 
+        boxShadow: '0 6px 12px rgba(0, 0, 0, 0.2)', 
+        backgroundColor: '#444', 
+      }}>
         <Toolbar>
-          <IconButton size="large" edge="start" color="inherit" aria-label="menu">
-            {/* You can add a menu icon or any other icon here */}
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 2 }}
+          >
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            CARCARE
+            Nelson's Automotive
           </Typography>
           <Button
-            href="/"
             color="inherit"
             sx={{
-              marginRight: 2,
-              textDecoration: 'none',
               '&:hover': {
-                backgroundColor: 'primary.main',
-                color: 'black',
+                backgroundColor: '#666', 
+                color: '#fff',
               },
             }}
           >
             Home
           </Button>
           <Button
-            href="/cart"
             color="inherit"
             sx={{
-              marginRight: 2,
-              textDecoration: 'none',
               '&:hover': {
-                backgroundColor: 'primary.main',
-                color: 'black',
+                backgroundColor: '#666', 
+                color: '#fff',
+              },
+            }}
+          >
+            Booking
+          </Button>
+          <Button
+            color="inherit"
+            sx={{
+              '&:hover': {
+                backgroundColor: '#666', 
+                color: '#fff',
               },
             }}
           >
             Cart
           </Button>
           <Button
-            href="/book"
             color="inherit"
             sx={{
-              marginRight: 2,
-              textDecoration: 'none',
               '&:hover': {
-                backgroundColor: 'primary.main',
-                color: 'black',
-              },
-            }}
-          >
-            Book
-          </Button>
-          <Button
-            href="/login"
-            color="inherit"
-            sx={{
-              textDecoration: 'none',
-              '&:hover': {
-                backgroundColor: 'primary.main',
-                color: 'black',
+                backgroundColor: '#666', 
+                color: '#fff',
               },
             }}
           >
@@ -120,40 +116,44 @@ function ShoppingCart() {
         </Toolbar>
       </AppBar>
 
-      {/* Main Content */}
-      <Container>
-        <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
+      <Container sx={{ mt: 5 }}>
+        <Typography variant="h4" component="div" sx={{ mb: 4 }}>
           Shopping Cart
         </Typography>
-        <Divider/>
+        <Divider sx={{ mb: 4 }}/>
 
         {cart.map(item => (
-          <Card key={item.id} sx={{ marginBottom: 2, marginTop: 4 }}>
+          <Card key={item.id} sx={{
+            mb: 2,
+            borderRadius: '15px',
+            boxShadow: '0 6px 12px rgba(0, 0, 0, 0.1)',
+            transition: 'transform 0.3s',
+            '&:hover': { transform: 'scale(1.02)' },
+          }}>
             <CardContent>
               <Grid container spacing={2} alignItems="center">
-                <Grid item xs={3}>
-                  <Typography variant="h6">{item.shop}</Typography>
+                <Grid item xs={2}>
+                  <img src={item.image} alt={item.name} width="80" style={{ borderRadius: '8px' }} />
+                </Grid>
+                <Grid item xs={5}>
+                  <Typography variant="h6">{item.name}</Typography>
+                  <Typography variant="body2" color="textSecondary">{item.shop}</Typography>
                 </Grid>
                 <Grid item xs={2}>
-                  <img src={item.image} alt={item.name} width="50" />
-                </Grid>
-                <Grid item xs={3}>
-                  <Typography>{item.name}</Typography>
+                  <Typography variant="body1" color="primary">${item.price.toFixed(2)}</Typography>
                 </Grid>
                 <Grid item xs={2}>
-                  <Typography>Total Order: ${item.price}</Typography>
-                </Grid>
-                <Grid item xs={1}>
                   <TextField
                     type="number"
                     defaultValue={1}
                     onChange={(e) => handleQuantityChange(item.id, e.target.value)}
                     size="small"
+                    sx={{ width: '100px' }}
                   />
                 </Grid>
                 <Grid item xs={1}>
                   <IconButton onClick={() => handleRemoveItem(item.id)}>
-                    <DeleteIcon />
+                    <DeleteIcon color="error" />
                   </IconButton>
                 </Grid>
               </Grid>
@@ -163,12 +163,14 @@ function ShoppingCart() {
 
         <Grid container justifyContent="flex-end" spacing={2}>
           <Grid item>
-            <Button variant="contained" color="primary" onClick={handlePlaceOrder}>
+            <Button variant="contained" color="primary" onClick={handlePlaceOrder} sx={{ marginRight: 2 }}>
               Place Order(s)
             </Button>
           </Grid>
           <Grid item>
-
+            <Button variant="outlined" color="error" onClick={handleCancelPurchase}>
+              Clear Cart
+            </Button>
           </Grid>
         </Grid>
       </Container>

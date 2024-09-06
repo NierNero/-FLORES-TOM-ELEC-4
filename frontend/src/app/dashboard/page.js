@@ -1,35 +1,34 @@
 import React from 'react';
-import { Container, Typography, Card, CardContent, CardMedia, Button, Grid, AppBar, Toolbar, Link, Box, IconButton } from '@mui/material';
+import { Container, Typography, Card, CardContent, CardMedia, Button, Grid, AppBar, Toolbar, Box, IconButton, Divider, Menu, MenuItem, Avatar } from '@mui/material';
 
-// Mock data for the repair shops
 const repairShops = [
   {
     name: 'My Repair Shop',
     description: 'Simple Shop',
-    imageUrl: '/images/person1.jpg',
+    imageUrl: '/img/1.jpg',
   },
   {
     name: 'Our Repair Shop',
     description: 'Simple Shop',
-    imageUrl: 'url-to-ryan-image',
+    imageUrl: '/img/2.jpg',
   },
   {
     name: 'Wala Repair Shop',
     description: 'Simple Shop',
-    imageUrl: 'url-to-charles-image',
+    imageUrl: '/img/3.jpg',
   },
   {
     name: 'Another Repair Shop',
     description: 'Simple Shop',
-    imageUrl: 'url-to-james-image',
+    imageUrl: '/img/4.jpg',
   },
 ];
 
 const RepairShopCard = ({ shop }) => (
-  <Card sx={{ height: '39vh', display: 'flex', flexDirection: 'column', marginTop: '6' }}>
+  <Card sx={{ height: 'auto', display: 'flex', flexDirection: 'column', marginTop: 2, borderRadius: '10px' }}>
     <CardMedia
       component="img"
-      height="100"
+      sx={{ height: 140, objectFit: 'cover' }} 
       image={shop.imageUrl}
       alt={shop.name}
     />
@@ -52,74 +51,68 @@ const RepairShopCard = ({ shop }) => (
 const App = () => {
   return (
     <Box sx={{
-      backgroundColor: '#f0f0f0', // Background color for the entire page
-      minHeight: '100vh', // Ensure it covers the full height of the viewport
+      backgroundColor: '#f0f0f0', 
+      minHeight: '100vh', 
       padding: 3,
-
     }}>
-      <AppBar position="static" sx= {{borderRadius: '15px',}}>
+      <AppBar position="static" sx={{
+        borderRadius: '0 0 15px 15px', 
+        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', 
+        backgroundColor: '#333', 
+      }}>
         <Toolbar>
-          <IconButton size="large" edge="start" color="inherit" aria-label="menu">
-            </IconButton>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 2 }}
+          >
+          </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            CARCARE
+            Nelson's Automotive
           </Typography>
           <Button
-            href="/"
             color="inherit"
             sx={{
-              marginRight: 2,
-              textDecoration: 'none',
               '&:hover': {
-                backgroundColor: 'primary.main',
-                color: 'black',
+                backgroundColor: '#555', 
+                color: '#fff',
               },
             }}
-            underline="none"
           >
             Home
           </Button>
           <Button
-            href="/cart"
             color="inherit"
             sx={{
-              marginRight: 2,
-              textDecoration: 'none',
               '&:hover': {
-                backgroundColor: 'primary.main',
-                color: 'black',
+                backgroundColor: '#555', 
+                color: '#fff',
               },
             }}
-            underline="none"
+          >
+            Booking
+          </Button>
+          <Button
+            color="inherit"
+            sx={{
+              '&:hover': {
+                backgroundColor: '#555', 
+                color: '#fff',
+              },
+            }}
           >
             Cart
           </Button>
           <Button
-            href="/book"
             color="inherit"
             sx={{
-              marginRight: 2,
-              textDecoration: 'none',
               '&:hover': {
-                backgroundColor: 'primary.main',
-                color: 'black',
+                backgroundColor: '#555', 
+                color: '#fff',
               },
             }}
-            underline="none"
-          >
-            Book
-          </Button>
-          <Button
-            href="/login"
-            color="inherit"
-            sx={{
-              textDecoration: 'none',
-              '&:hover': {
-                backgroundColor: 'primary.main',
-                color: 'black',
-              },
-            }}
-            underline="none"
           >
             Logout
           </Button>
@@ -127,10 +120,10 @@ const App = () => {
       </AppBar>
 
       <Container>
-        <Typography variant="h4" align="center" gutterBottom sx={{ marginTop: 6, marginBottom: 6 }}>
+        <Typography variant="h4" align="center" gutterBottom sx={{ marginTop: 4, marginBottom: 4 }}>
           Available Repair Shops
         </Typography>
-
+        <Divider sx={{ marginY: 1 }} />
         <Grid container spacing={3} justifyContent="center">
           {repairShops.map((shop, index) => (
             <Grid item key={index} xs={12} sm={6} md={4} lg={3}>
@@ -146,4 +139,3 @@ const App = () => {
 };
 
 export default App;
-

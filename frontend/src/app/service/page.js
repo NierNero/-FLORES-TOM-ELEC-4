@@ -1,108 +1,111 @@
 import * as React from 'react';
-import { Container, Typography, Card, CardContent, CardMedia, Button, Grid, AppBar, Toolbar, Box, IconButton } from '@mui/material';
+import { Container, Typography, Card, CardContent, CardMedia, Button, Grid, AppBar, Toolbar, Box, IconButton, Link } from '@mui/material';
 
 function App() {
   return (
     <Box sx={{
-      backgroundColor: '#f0f0f0', // Background color for the entire page
-      minHeight: '100vh', // Ensure it covers the full height of the viewport
+      backgroundColor: '#f0f0f0', 
+      minHeight: '100vh', 
       padding: 3,
     }}>
-    <div>
-    <AppBar position="static" sx= {{borderRadius: '15px',}}>
-  <Toolbar>
-    <IconButton size="large" edge="start" color="inherit" aria-label="menu">
-      {/* Your logo here */}
-    </IconButton>
-    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-      Car Repair
-    </Typography>
-    <Button
-      color="inherit"
-      sx={{
-        '&:hover': {
-          textDecoration: 'none',
-          backgroundColor: 'primary.main',
-          color: 'black',
-        },
-      }}
-    >
-      Shop
-    </Button>
-    <Button
-      color="inherit"
-      sx={{
-        '&:hover': {
-          textDecoration: 'none',
-          backgroundColor: 'primary.main',
-          color: 'black',
-        },
-      }}
-    >
-      Booking
-    </Button>
-    <Button
-      color="inherit"
-      sx={{
-        '&:hover': {
-          textDecoration: 'none',
-          backgroundColor: 'primary.main',
-          color: 'black',
-        },
-      }}
-    >
-      Cart
-    </Button>
-    <Button
-      color="inherit"
-      sx={{
-        '&:hover': {
-          textDecoration: 'none',
-          backgroundColor: 'primary.main',
-          color: 'black',
-        },
-      }}
-    >
-      Logout
-    </Button>
-  </Toolbar>
-</AppBar>
+      <AppBar position="static" sx={{
+        borderRadius: '0 0 15px 15px', 
+        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', 
+        backgroundColor: '#333', 
+      }}>
+        <Toolbar>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 2 }}
+          >
+          </IconButton>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            Nelson's Automotive
+          </Typography>
+          <Button
+            color="inherit"
+            sx={{
+              '&:hover': {
+                backgroundColor: '#555', 
+                color: '#fff',
+              },
+            }}
+          >
+            Home
+          </Button>
+          <Button
+            color="inherit"
+            sx={{
+              '&:hover': {
+                backgroundColor: '#555', 
+                color: '#fff',
+              },
+            }}
+          >
+            Booking
+          </Button>
+          <Button
+            color="inherit"
+            sx={{
+              '&:hover': {
+                backgroundColor: '#555', 
+                color: '#fff',
+              },
+            }}
+          >
+            Cart
+          </Button>
+          <Button
+            color="inherit"
+            sx={{
+              '&:hover': {
+                backgroundColor: '#555', 
+                color: '#fff',
+              },
+            }}
+          >
+            Logout
+          </Button>
+        </Toolbar>
+      </AppBar>
 
-      <Container maxWidth="md" sx={{ mt: 4 }}>
-        <Typography variant="h4" align="center" gutterBottom>
+      <Container maxWidth="md">
+        <Typography variant="h4" align="center" gutterBottom marginTop={2}>
           Our Services
         </Typography>
         <Typography variant="body1" align="center" gutterBottom>
           Get total care for your car. We offer a range of services provided by skilled and ASE-certified auto technicians.
         </Typography>
 
-        <Grid container spacing={4} mt={4}>
-          <Grid item xs={12} md={6}>
-            <Card>
+        <Grid container spacing={4} mt={2}>
+          <Grid ite sx={{width: '1000px' }}>
+              <CardMedia
+                component="img"
+                height="300"
+                image="/img/1.jpg" 
+                alt="Car Engine"
+                sx={{ objectFit: 'cover', width: '100%' }} 
+              />
               <CardContent>
                 <Typography variant="h6" gutterBottom>
                   Repair + Maintenance Services Offered:
                 </Typography>
+                
                 <ul>
-                  <li>Air Conditioning Repair</li>
-                  <li>Engine Repair/Replacement</li>
-                  <li>Brake Repair</li>
-                  <li>Suspension & Steering Repair</li>
-                  <li>Oil Change</li>
-                  <li>Tire Rotation</li>
+                  <li><Link href="link-to-air-conditioning-repair-page" sx={{ textDecoration: 'none', color: 'black', '&:hover': { color: 'blue', textDecoration: 'red' } }}>Air Conditioning Repair</Link></li>
+                  <li><Link href="link-to-engine-repair-replacement-page" sx={{ textDecoration: 'none', color: 'black', '&:hover': { color: 'blue', textDecoration: '' } }}>Engine Repair/Replacement</Link></li>
+                  <li><Link href="link-to-brake-repair-page" sx={{ textDecoration: 'none', color: 'black', '&:hover': { color: 'blue', textDecoration: '' } }}>Brake Repair</Link></li>
+                  <li><Link href="link-to-suspension-steering-repair-page" sx={{ textDecoration: 'none', color: 'black', '&:hover': { color: 'blue', textDecoration: '' } }}>Suspension & Steering Repair</Link></li>
+                  <li><Link href="link-to-oil-change-page" sx={{ textDecoration: 'none', color: 'black', '&:hover': { color: 'blue', textDecoration: '' } }}>Oil Change</Link></li>
+                  <li><Link href="link-to-tire-rotation-page" sx={{ textDecoration: 'none', color: 'black', '&:hover': { color: 'blue', textDecoration: '' } }}>Tire Rotation</Link></li>
+                  <li><Link href="link-to-belt-repair-page" sx={{ textDecoration: 'none', color: 'black', '&:hover': { color: 'blue', textDecoration: '' } }}>Belt Repair</Link></li>
                 </ul>
+                
               </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <Card>
-              <CardMedia
-                component="img"
-                height="300"
-                image="https://images.unsplash.com/photo-1518059175229-8d352c916d24?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1950&q=80" // Replace with your image URL
-                alt="Car Engine"
-              />
-            </Card>
+            
           </Grid>
         </Grid>
 
@@ -112,7 +115,6 @@ function App() {
           </Button>
         </Box>
       </Container>
-    </div>
     </Box>
   );
 }

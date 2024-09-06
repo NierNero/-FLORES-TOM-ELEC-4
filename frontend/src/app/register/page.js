@@ -4,17 +4,16 @@ import React, { useState } from 'react';
 import { Container, TextField, Button, Typography, Alert, Box, Link } from '@mui/material';
 
 function App() {
-  // State to hold the input values and error message
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState(''); // New state for confirm password
+  const [confirmPassword, setConfirmPassword] = useState(''); 
   const [error, setError] = useState('');
 
-  // Function to handle form submission
+ 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // Basic validation
+    
     if (!email || !password || !confirmPassword) {
       setError('Please fill in all fields.');
       return;
@@ -25,10 +24,10 @@ function App() {
       return;
     }
 
-    // Clear previous error message
+    
     setError('');
 
-    // For demonstration, we're just logging the values
+
     console.log('Email:', email);
     console.log('Password:', password);
 
@@ -40,22 +39,22 @@ function App() {
       display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            backgroundColor: '#ffffff', // White background for form container
+            backgroundColor: '#ffffff', 
             padding: 3,
-            borderRadius: 2, // Rounded corners
-            boxShadow: 3, // Add shadow for a card-like effect
+            borderRadius: 2,
+            boxShadow: 3,
             minHeight: '100vh',
     }}>
     <Container 
       maxWidth="xs" sx={{
-        mt: 8, // Top margin for the Container
+        mt: 8, 
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        backgroundColor: '#ffffff', // White background for form container
+        backgroundColor: '#ffffff', 
         padding: 3,
-        borderRadius: 2, // Rounded corners
-        boxShadow: 3, // Card-like shadow
+        borderRadius: 2, 
+        boxShadow: 3,
         width: '100%',
       }}
     >
