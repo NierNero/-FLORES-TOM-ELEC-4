@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from 'react';
-import { Container, TextField, Button, Typography, Alert, Box } from '@mui/material';
+import { Container, TextField, Button, Typography, Alert, Box, Link } from '@mui/material';
 
 function App() {
   // State to hold the input values and error message
@@ -32,44 +32,31 @@ function App() {
     console.log('Email:', email);
     console.log('Password:', password);
 
-    // Normally you would send the credentials to your backend here
-    // fetch('https://your-backend-api.com/register', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({ email, password }),
-    // })
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     if (data.success) {
-    //       // Handle successful registration
-    //       console.log('Registration successful!');
-    //     } else {
-    //       // Handle registration failure
-    //       setError('Registration failed.');
-    //     }
-    //   })
-    //   .catch(error => {
-    //     // Handle network errors
-    //     setError('An error occurred. Please try again.');
-    //   });
+    
   };
 
   return (
     <Box sx={{
-      backgroundColor: '#f0f0f0', // Background color for the entire page
-      minHeight: '100vh', // Ensure it covers the full height of the viewport
-      padding: 3,
+      display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            backgroundColor: '#ffffff', // White background for form container
+            padding: 3,
+            borderRadius: 2, // Rounded corners
+            boxShadow: 3, // Add shadow for a card-like effect
+            minHeight: '100vh',
     }}>
     <Container 
-      maxWidth="xs" 
-      sx={{ 
-        mt: 8,
-        display: 'flex', 
-        flexDirection: 'column', 
-        alignItems: 'center', 
-        justifyContent: 'center', 
+      maxWidth="xs" sx={{
+        mt: 8, // Top margin for the Container
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        backgroundColor: '#ffffff', // White background for form container
+        padding: 3,
+        borderRadius: 2, // Rounded corners
+        boxShadow: 3, // Card-like shadow
+        width: '100%',
       }}
     >
       <Typography variant="h4" component="h1" gutterBottom>
@@ -115,10 +102,18 @@ function App() {
           variant="contained" 
           color="primary" 
           fullWidth 
-          sx={{ mt: 3 }}
-        >
+          sx={{ mt: 3, mb: 2 }}
+          >
           Register
         </Button>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+              <Link href="/login" variant="body2">
+                Already Have Account
+              </Link>
+              <Link href="#" variant="body2">
+                Forgot Password?
+              </Link>
+            </Box>
       </form>
     </Container>
     </Box>

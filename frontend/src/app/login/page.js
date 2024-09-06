@@ -1,111 +1,92 @@
 'use client'
 
-import React, { useState } from 'react';
-import { Container, TextField, Button, Typography, Alert, Box } from '@mui/material';
+import React from 'react';
+import { TextField, Button, Checkbox, FormControlLabel, Typography, Link, Box, Container, CssBaseline } from '@mui/material';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-function App() {
-  // State to hold the input values and error message
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+const theme = createTheme();
 
-  // Function to handle form submission
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    // Basic validation
-    if (!email || !password) {
-      setError('Please fill in both fields.');
-      return;
-    }
-
-    // For demonstration, we're just logging the values
-    console.log('Email:', email);
-    console.log('Password:', password);
-
-    // Normally you would send the credentials to your backend here
-    // fetch('https://your-backend-api.com/login', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({ email, password }),
-    // })
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     if (data.success) {
-    //       // Handle successful login
-    //       console.log('Login successful!');
-    //     } else {
-    //       // Handle login failure
-    //       setError('Invalid email or password.');
-    //     }
-    //   })
-    //   .catch(error => {
-    //     // Handle network errors
-    //     setError('An error occurred. Please try again.');
-    //   });
-  };
-
+function Login() {
   return (
-    <Box sx={{
-      backgroundColor: '#f0f0f0', // Background color for the entire page
-      minHeight: '100vh', // Ensure it covers the full height of the viewport
-      padding: 3,
-    }}>
-    <Container 
-      maxWidth="xs" 
-      sx={{ 
-        mt: 6,
-        display: 'flex', 
-        flexDirection: 'column', 
-        alignItems: 'center', 
-        justifyContent: 'center', 
-        marginTop: 15,
-      }}
-    >
-      <Typography variant="h4" component="h1" gutterBottom>
-        Login
-      </Typography>
-      <form 
-        onSubmit={handleSubmit} 
-        style={{ width: '100%' }}
-      >
-        <TextField
-          label="Email"
-          type="email"
-          variant="outlined"
-          fullWidth
-          margin="normal"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <TextField
-          label="Password"
-          type="password"
-          variant="outlined"
-          fullWidth
-          margin="normal"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        {error && <Alert severity="error" sx={{ mt: 2 }}>{error}</Alert>}
-        <Button 
-          type="submit" 
-          variant="contained" 
-          color="primary" 
-          fullWidth 
-          sx={{ mt: 3 }}
+    <>
+      
+        <CssBaseline />
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            backgroundColor: '#ffffff', // White background for form container
+            padding: 3,
+            borderRadius: 2, // Rounded corners
+            boxShadow: 3, // Add shadow for a card-like effect
+            minHeight: '100vh',
+          }}
         >
-          Login
-        </Button>
-      </form>
-    </Container>
-    </Box>
+          <Container  maxWidth="xs" sx={{
+            mt: 8, // Top margin for the Container
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            backgroundColor: '#ffffff', // White background for form container
+            padding: 3,
+            borderRadius: 2, // Rounded corners
+            boxShadow: 3, // Card-like shadow
+            width: '100%', // Ensure it takes full width of its parent
+          }}>
+          <Typography component="h1" variant="h5" textAlign="center">
+            Welcome Back!
+          </Typography>
+          <Box component="form" noValidate sx={{ mt: 1 }}>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="idNumber"
+              label="Email"
+              name="idNumber"
+              autoComplete="idNumber"
+              autoFocus
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+            />
+            <FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
+              label="Stay signed in"
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Log In
+            </Button>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+              <Link href="/register" variant="body2">
+                Don’t have an account?
+              </Link>
+              <Link href="#" variant="body2">
+                Forgot Password?
+              </Link>
+            </Box>
+            <Typography variant="body2" color="textSecondary" align="center" sx={{ mt: 5 }}>
+              © CARCARE
+            </Typography>
+          </Box>
+        </Container>
+        </Box>
+      
+    </>
   );
 }
 
-export default App;
-
+export default Login;
