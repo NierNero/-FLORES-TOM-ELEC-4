@@ -12,7 +12,8 @@ import {
   CardMedia, 
   Button, 
   IconButton,
-  Box
+  Box,
+  Avatar
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 
@@ -22,80 +23,138 @@ const products = [
   { id: 3, name: 'Oil Filter (New)', price: 50, image: '/img/oilfilter1.jpg' },
 ];
 
+const styles = {
+  appBar: {
+    backgroundColor: 'light blue',
+    borderRadius: '0 0 20px 20px',
+    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+  },
+  toolbar: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  logo: {
+    height: '40px',
+    borderRadius: '50%',
+  },
+  
+  card: {
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    borderRadius: '15px',
+    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+  },
+  cardContent: {
+    flexGrow: 1,
+    padding: 2,
+  },
+  cardMedia: {
+    height: '200px',
+    borderTopLeftRadius: '15px',
+    borderTopRightRadius: '15px',
+  },
+  button: {
+    margin: 2,
+  },
+  container: {
+    paddingTop: 4,
+    paddingBottom: 4,
+  },
+  paper: {
+    padding: 2,
+    margin: 'auto',
+    maxWidth: '100%',
+    borderRadius: '10px',
+    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+  },
+  footer: {
+    marginTop: 4,
+    padding: 2,
+    backgroundColor: '#f5f5f5',
+  },
+  imageMapContainer: {
+    position: 'relative',
+    width: '100%',
+    height: 'auto',
+  },
+  imageMap: {
+    width: '100%',
+    height: 'auto',
+    maxWidth: '1200px', 
+  },
+};
+
+
 const ProductPage = () => {
   return (
-    <Box 
+    <Box sx={{
+      backgroundColor: '#f0f0f0', 
+      minHeight: '100vh', 
+    }}>
+      <AppBar position="static" sx={styles.appBar}>
+  <Toolbar>
+    <IconButton
+      size="large"
+      edge="start"
+      color="inherit"
+      aria-label="menu"
+      sx={{ mr: 2 }}
+    >
+    </IconButton>
+    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+      Carcare
+    </Typography>
+    <Button
+      color="inherit"
       sx={{
-        backgroundColor: '#fafafa', 
-        minHeight: '100vh',
-        padding: 3,
+        '&:hover': {
+          backgroundColor: 'black', 
+          color: '#fff',
+        },
       }}
     >
-      
-      <AppBar position="static" sx={{
-        borderRadius: '0 0 15px 15px', 
-        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', 
-        backgroundColor: '#333', 
-      }}>
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            
-          </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Nelson's Automotive
-          </Typography>
-          <Button
-            color="inherit"
-            sx={{
-              '&:hover': {
-                backgroundColor: '#555', 
-                color: '#fff',
-              },
-            }}
-          >
-            Home
-          </Button>
-          <Button
-            color="inherit"
-            sx={{
-              '&:hover': {
-                backgroundColor: '#555', 
-                color: '#fff',
-              },
-            }}
-          >
-            Booking
-          </Button>
-          <Button
-            color="inherit"
-            sx={{
-              '&:hover': {
-                backgroundColor: '#555', 
-                color: '#fff',
-              },
-            }}
-          >
-            Cart
-          </Button>
-          <Button
-            color="inherit"
-            sx={{
-              '&:hover': {
-                backgroundColor: '#555', 
-                color: '#fff',
-              },
-            }}
-          >
-            Logout
-          </Button>
-        </Toolbar>
-      </AppBar>
+      Home
+    </Button>
+    <Button
+      color="inherit"
+      sx={{
+        '&:hover': {
+          backgroundColor: 'black', 
+          color: '#fff',
+        },
+      }}
+    >
+      Booking
+    </Button>
+    <Button
+      color="inherit"
+      sx={{
+        '&:hover': {
+          backgroundColor: 'black', 
+          color: '#fff',
+        },
+      }}
+    >
+      Cart
+    </Button>
+    
+    
+    <Avatar src="profile.png" sx={{ ml: 1 }} />
+    <Button
+      color="inherit"
+      sx={{
+        '&:hover': {
+          backgroundColor: 'black rgba(0, 0, 0, 0.5)', 
+          color: '#fff',
+        },
+      }}
+    >
+      Logout
+    </Button>
+  </Toolbar>
+</AppBar>
 
       {/* Search Bar */}
       <Box sx={{ display: 'flex', justifyContent: 'center', marginY: 3 }}>

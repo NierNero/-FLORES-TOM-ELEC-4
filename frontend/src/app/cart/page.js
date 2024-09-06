@@ -13,7 +13,8 @@ import {
   Box, 
   AppBar, 
   Toolbar, 
-  Divider
+  Divider,
+  Avatar
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 
@@ -45,76 +46,163 @@ function ShoppingCart() {
     setCart([]);
   };
 
+  const styles = {
+    appBar: {
+      backgroundColor: 'light blue',
+      borderRadius: '0 0 20px 20px',
+      boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+    },
+    toolbar: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+    },
+    logo: {
+      height: '40px',
+      borderRadius: '50%',
+    },
+    card: {
+      height: '100%',
+      display: 'flex',
+      flexDirection: 'column',
+      borderRadius: '15px',
+      boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+    },
+    cardContent: {
+      flexGrow: 1,
+      padding: 2,
+    },
+    cardMedia: {
+      height: '200px',
+      borderTopLeftRadius: '15px',
+      borderTopRightRadius: '15px',
+    },
+    button: {
+      margin: 2,
+    },
+    container: {
+      paddingTop: 4,
+      paddingBottom: 4,
+    },
+    paper: {
+      padding: 2,
+      margin: 'auto',
+      maxWidth: '100%',
+      borderRadius: '10px',
+      boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+    },
+    footer: {
+      marginTop: 4,
+      padding: 2,
+      backgroundColor: '#f5f5f5',
+    },
+    imageMapContainer: {
+      position: 'relative',
+      width: '100%',
+      height: 'auto',
+    },
+    imageMap: {
+      width: '100%',
+      height: 'auto',
+      maxWidth: '1200px', 
+    },
+  };
+
   return (
     <Box sx={{
-        backgroundColor: '#f5f5f5', 
-        minHeight: '100vh', 
-        padding: 3,
+      backgroundColor: '#f0f0f0', 
+      minHeight: '100vh', 
+    }}>
+      <AppBar position="static" sx={styles.appBar}>
+  <Toolbar>
+    <IconButton
+      size="large"
+      edge="start"
+      color="inherit"
+      aria-label="menu"
+      sx={{ mr: 2 }}
+    >
+    </IconButton>
+    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+      Carcare
+    </Typography>
+    <Button
+      color="inherit"
+      sx={{
+        '&:hover': {
+          backgroundColor: 'black', 
+          color: '#fff',
+        },
       }}
     >
-      <AppBar position="static" sx={{
-        borderRadius: '0 0 20px 20px', 
-        boxShadow: '0 6px 12px rgba(0, 0, 0, 0.2)', 
-        backgroundColor: '#444', 
-      }}>
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-          </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Nelson's Automotive
-          </Typography>
-          <Button
-            color="inherit"
-            sx={{
-              '&:hover': {
-                backgroundColor: '#666', 
-                color: '#fff',
-              },
-            }}
-          >
-            Home
-          </Button>
-          <Button
-            color="inherit"
-            sx={{
-              '&:hover': {
-                backgroundColor: '#666', 
-                color: '#fff',
-              },
-            }}
-          >
-            Booking
-          </Button>
-          <Button
-            color="inherit"
-            sx={{
-              '&:hover': {
-                backgroundColor: '#666', 
-                color: '#fff',
-              },
-            }}
-          >
-            Cart
-          </Button>
-          <Button
-            color="inherit"
-            sx={{
-              '&:hover': {
-                backgroundColor: '#666', 
-                color: '#fff',
-              },
-            }}
-          >
-            Logout
-          </Button>
-        </Toolbar>
-      </AppBar>
+      Home
+    </Button>
+    <Button
+      color="inherit"
+      sx={{
+        '&:hover': {
+          backgroundColor: 'black', 
+          color: '#fff',
+        },
+      }}
+    >
+      Booking
+    </Button>
+    <Button
+      color="inherit"
+      sx={{
+        '&:hover': {
+          backgroundColor: 'black', 
+          color: '#fff',
+        },
+      }}
+    >
+      Cart
+    </Button>
+    
+    <TextField
+      sx={{
+        ...styles.search,
+        width: '200px', // Adjust the width as needed
+        '& .MuiOutlinedInput-root': {
+          '& fieldset': {
+            borderColor: 'white',
+          },
+          '&:hover fieldset': {
+            borderColor: 'white',
+          },
+          '&.Mui-focused fieldset': {
+            borderColor: 'white',
+          },
+        },
+        '& .MuiInputLabel-root': {
+          color: 'Black',
+        },
+        '& .MuiInputBase-input': {
+          color: 'black',
+          fontSize: '0.750rem', 
+          marginBottom: '4px'
+        },
+      }}
+      label="Search"
+      variant="outlined"
+      size="small"
+      placeholder="Search here..."
+    />
+    <Avatar src="profile.png" sx={{ ml: 1 }} />
+    <Button
+      color="inherit"
+      sx={{
+        '&:hover': {
+          backgroundColor: 'black rgba(0, 0, 0, 0.5)', 
+          color: '#fff',
+        },
+      }}
+    >
+      Logout
+    </Button>
+  </Toolbar>
+</AppBar>
 
       <Container sx={{ mt: 5 }}>
         <Typography variant="h4" component="div" sx={{ mb: 4 }}>
