@@ -67,7 +67,7 @@ function Login() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-            >
+              href="/dashboard">
               Log In
             </Button>
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>

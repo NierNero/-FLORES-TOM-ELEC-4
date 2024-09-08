@@ -102,7 +102,7 @@ function App() {
           color="primary" 
           fullWidth 
           sx={{ mt: 3, mb: 2 }}
-          >
+          href="/dashboard">
           Register
         </Button>
         <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>

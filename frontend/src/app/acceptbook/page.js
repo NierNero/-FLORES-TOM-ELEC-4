@@ -47,9 +47,13 @@ function App() {
     setAnchorEl(null);
   };
 
+  const handleAcceptBooking = () => {
+    // Logic for accepting the booking
+    console.log('Booking Accepted');
+  };
+
   return (
-    <Box sx={{ backgroundColor: '#f0f0f0', minHeight: '100vh',
- }}>
+    <Box sx={{ backgroundColor: '#f0f0f0', minHeight: '100vh' }}>
       <AppBar 
         position="fixed" 
         sx={{
@@ -164,73 +168,74 @@ function App() {
       </AppBar>
 
       <Box sx={{ marginTop: '70px', padding: 2 }}>
-      <Button
-  variant="text"
-  color="white"
-  sx={{
-    '&:hover': {
-      color: 'red',
-    },
-    '&:active': {
-      color: 'darkred', // Darker color when button is pressed
-    },
-    fontFamily: 'Arial, sans-serif',
-    textAlign: 'left',
-    fontSize: '1.5rem',
-    textTransform: 'none',
-    marginLeft: '6%'
-  }}
-  href="/booking"
->
-  Pending Book
-</Button>
+        <Button
+          variant="text"
+          color="white"
+          sx={{
+            '&:hover': {
+              color: 'red',
+            },
+            '&:active': {
+              color: 'darkred', // Darker color when button is pressed
+            },
+            fontFamily: 'Arial, sans-serif',
+            textAlign: 'left',
+            fontSize: '1.5rem',
+            textTransform: 'none',
+            marginLeft: '6%'
+          }}
+          href="/booking"
+        >
+          Pending Book
+        </Button>
 
-<Button
-  variant="text"
-  color="white"
-  sx={{
-    '&:hover': {
-      color: 'red',
-    },
-    '&:active': {
-      color: 'darkred', // Darker color when button is pressed
-    },
-    fontFamily: 'Arial, sans-serif',
-    textAlign: 'left',
-    fontSize: '1.5rem',
-    textTransform: 'none',
-    marginLeft: '3%'
-  }}
-  href="/acceptbook"
->
-  Accepted Book
-</Button>
+        <Button
+          variant="text"
+          color="white"
+          sx={{
+            '&:hover': {
+              color: 'red',
+            },
+            '&:active': {
+              color: 'darkred', // Darker color when button is pressed
+            },
+            fontFamily: 'Arial, sans-serif',
+            textAlign: 'left',
+            fontSize: '1.5rem',
+            textTransform: 'none',
+            marginLeft: '3%'
+          }}
+          href="/acceptbook"
+        >
+          Accepted Book
+        </Button>
 
-<Button
-  variant="text"
-  color="white"
-  sx={{
-    '&:hover': {
-      color: 'red',
-    },
-    '&:active': {
-      color: 'darkred', // Darker color when button is pressed
-    },
-    fontFamily: 'Arial, sans-serif',
-    textAlign: 'left',
-    fontSize: '1.5rem',
-    textTransform: 'none',
-    marginLeft: '3%'
-  }}
-  href="/cancelbook"
->
-  Canceled Book
-</Button>
+        <Button
+          variant="text"
+          color="white"
+          sx={{
+            '&:hover': {
+              color: 'red',
+            },
+            '&:active': {
+              color: 'darkred', // Darker color when button is pressed
+            },
+            fontFamily: 'Arial, sans-serif',
+            textAlign: 'left',
+            fontSize: '1.5rem',
+            textTransform: 'none',
+            marginLeft: '3%'
+          }}
+          href="/cancelbook"
+        >
+          Canceled Book
+        </Button>
+        
         <Divider sx={{
-    mb: 2,
-    width: '88%', // Same width as the Card
-    margin: 'auto', // Center horizontally
-  }}/>
+          mb: 2,
+          width: '88%', // Same width as the Card
+          margin: 'auto', // Center horizontally
+        }}/>
 
         <Card sx={{
             mt: { xs: 2, sm: 3, md: 3 }, // Responsive spacing above the Card
@@ -240,18 +245,16 @@ function App() {
             '&:hover': { transform: 'scale(1.02)' },
             width: '88%',
             margin: 'auto', // Center horizontally
-
-            
           }}>
           <CardContent>
-            <Grid container spacing={2} alignItems="center" >
+            <Grid container spacing={2} alignItems="center">
               <Grid item xs={2} sm="auto">
                 <Avatar
                   alt="Nelson's Automotive Shop"
                   src="/logo.png" 
                   sx={{ width: { xs: 40, sm: 50 }, // Responsive width
                   height: { xs: 40, sm: 50 }, // Responsive height
-                  borderRadius: '8px'  }}
+                  borderRadius: '8px' }}
                 />
               </Grid>
               <Grid item xs>
@@ -285,8 +288,12 @@ function App() {
             </Grid>
 
             <Box textAlign="right" mt={-5}>
-              <Button variant="contained" color="error">
-                Cancel Booking
+              <Button 
+                variant="contained" 
+                color="success" 
+                disabled // Make the button look disabled
+              >
+                Booking Accepted
               </Button>
             </Box>
           </CardContent>

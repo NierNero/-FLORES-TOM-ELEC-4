@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   AppBar, 
   Toolbar, 
@@ -13,7 +13,10 @@ import {
   Button, 
   IconButton,
   Box,
-  Avatar
+  Avatar,
+  Menu,
+  MenuItem,
+  Container
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 
@@ -21,143 +24,79 @@ const products = [
   { id: 1, name: 'Engine Belt', price: 50, image: '/img/belt1.jpg' },
   { id: 2, name: 'Oil Filter', price: 150, image: '/img/oilfilter.jpg' },
   { id: 3, name: 'Oil Filter (New)', price: 50, image: '/img/oilfilter1.jpg' },
+  { id: 4, name: 'Engine Belt', price: 50, image: '/img/belt1.jpg' },
+  { id: 5, name: 'Oil Filter (New)', price: 50, image: '/img/oilfilter1.jpg' },
+
+
 ];
 
-const styles = {
-  appBar: {
-    backgroundColor: 'light blue',
-    borderRadius: '0 0 20px 20px',
-    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-  },
-  toolbar: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  logo: {
-    height: '40px',
-    borderRadius: '50%',
-  },
-  
-  card: {
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    borderRadius: '15px',
-    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-  },
-  cardContent: {
-    flexGrow: 1,
-    padding: 2,
-  },
-  cardMedia: {
-    height: '200px',
-    borderTopLeftRadius: '15px',
-    borderTopRightRadius: '15px',
-  },
-  button: {
-    margin: 2,
-  },
-  container: {
-    paddingTop: 4,
-    paddingBottom: 4,
-  },
-  paper: {
-    padding: 2,
-    margin: 'auto',
-    maxWidth: '100%',
-    borderRadius: '10px',
-    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-  },
-  footer: {
-    marginTop: 4,
-    padding: 2,
-    backgroundColor: '#f5f5f5',
-  },
-  imageMapContainer: {
-    position: 'relative',
-    width: '100%',
-    height: 'auto',
-  },
-  imageMap: {
-    width: '100%',
-    height: 'auto',
-    maxWidth: '1200px', 
-  },
-};
-
-
 const ProductPage = () => {
+  const [scrolled, setScrolled] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const handleMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
-    <Box sx={{
-      backgroundColor: '#f0f0f0', 
-      minHeight: '100vh', 
-    }}>
-      <AppBar position="static" sx={styles.appBar}>
-  <Toolbar>
-    <IconButton
-      size="large"
-      edge="start"
-      color="inherit"
-      aria-label="menu"
-      sx={{ mr: 2 }}
-    >
-    </IconButton>
-    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-      Carcare
-    </Typography>
-    <Button
-      color="inherit"
-      sx={{
-        '&:hover': {
-          backgroundColor: 'black', 
-          color: '#fff',
-        },
-      }}
-    >
-      Home
-    </Button>
-    <Button
-      color="inherit"
-      sx={{
-        '&:hover': {
-          backgroundColor: 'black', 
-          color: '#fff',
-        },
-      }}
-    >
-      Booking
-    </Button>
-    <Button
-      color="inherit"
-      sx={{
-        '&:hover': {
-          backgroundColor: 'black', 
-          color: '#fff',
-        },
-      }}
-    >
-      Cart
-    </Button>
-    
-    
-    <Avatar src="profile.png" sx={{ ml: 1 }} />
-    <Button
-      color="inherit"
-      sx={{
-        '&:hover': {
-          backgroundColor: 'black rgba(0, 0, 0, 0.5)', 
-          color: '#fff',
-        },
-      }}
-    >
-      Logout
-    </Button>
-  </Toolbar>
-</AppBar>
+    <Box sx={{ backgroundColor: '#f4f4f4', minHeight: '100vh' }}>
+      <AppBar 
+        position="fixed" 
+        sx={{
+          backgroundColor: scrolled ? '#333' : '#0d47a1', 
+          boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+          height: '70px',
+          display: 'flex',
+          justifyContent: 'center',
+          transition: 'background-color 0.3s ease',
+        }}
+      >
+        <Toolbar sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 2 }}
+          >
+            {/* Menu icon can be added here if needed */}
+          </IconButton>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            Carcare
+          </Typography>
+          <Button color="inherit" sx={{ '&:hover': { color: 'red' }, fontWeight: 'bold' }} href="/dashboard">Home</Button>
+          <Button color="inherit" sx={{ '&:hover': { color: 'red' }, fontWeight: 'bold' }} href="/booking">Booking</Button>
+          <Button color="inherit" sx={{ '&:hover': { color: 'red' }, fontWeight: 'bold' }} href="/cart">Cart</Button>
+          <Avatar src="/profile.png" sx={{ ml: 1, cursor: 'pointer' }} onClick={handleMenuOpen} />
+          <Menu
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleMenuClose}
+            PaperProps={{ sx: { width: '200px' } }}
+          >
+            <MenuItem onClick={handleMenuClose} href="/profile">Profile</MenuItem>
+            <MenuItem onClick={handleMenuClose} href="/settings">Settings</MenuItem>
+            <MenuItem onClick={handleMenuClose} href="/login">Logout</MenuItem>
+          </Menu>
+        </Toolbar>
+      </AppBar>
 
       {/* Search Bar */}
-      <Box sx={{ display: 'flex', justifyContent: 'center', marginY: 3 }}>
+      <Box sx={{ display: 'flex', justifyContent: 'center', marginY: 3, marginTop: '70px', padding: 2 }}>
         <TextField 
           placeholder="Search for products..." 
           variant="outlined" 
@@ -168,58 +107,71 @@ const ProductPage = () => {
               </IconButton>
             ),
           }}
-          sx={{ width: '100%', maxWidth: 600 }}
+          sx={{ width: '100%', maxWidth: 600, borderRadius: '25px', backgroundColor: 'white' }}
         />
       </Box>
 
-      {/* Products Section */}
-      <Grid container spacing={3} sx={{ paddingX: 5, marginTop: 3 }}>
-        {products.map((product) => (
-          <Grid item xs={12} sm={6} md={4} key={product.id}>
-            <Card sx={{ 
-              borderRadius: '15px', 
-              boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', 
-              transition: 'transform 0.3s', 
-              '&:hover': { transform: 'scale(1.03)' },
-              display: 'flex', 
-              flexDirection: 'column' 
-            }}>
-              <CardMedia
-                component="img"
-                height="200" 
-                image={product.image}
-                alt={product.name}
-                sx={{ 
-                  borderRadius: '15px 15px 0 0', 
-                  objectFit: 'cover', 
-                  width: '100%', 
-                  maxHeight: '200px' 
+      <Container
+        sx={{
+          marginTop: '20px',
+          padding: 2,
+          border: '1px solid #ccc',
+          backgroundColor: 'white',
+          borderRadius: '6px',
+          boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+        }}
+      >
+        {/* Products Section */}
+        <Grid container spacing={3} justifyContent="center"> 
+          {products.map((product) => (
+            <Grid item key={product.id} xs={12} sm={6} md={4} lg={3}>
+              <Card
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  borderRadius: '12px',
+                  overflow: 'hidden',
+                  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+                  transition: 'transform 0.2s ease-in-out',
+                  '&:hover': { transform: 'scale(1.02)' },
                 }}
-              />
-              <CardContent>
-                <Typography variant="h6" component="div" sx={{ marginBottom: 1 }}>
-                  {product.name}
-                </Typography>
-                <Typography variant="body1" color="textSecondary" sx={{ marginBottom: 2 }}>
-                  $ {product.price}
-                </Typography>
-                <Grid container spacing={2}>
-                  <Grid item xs={6}>
-                    <Button variant="contained" color="primary" fullWidth>
-                      Buy Now
-                    </Button>
+              >
+                <CardMedia
+                  component="img"
+                  image={product.image}
+                  alt={product.name}
+                  sx={{ 
+                    height: 200, // Set the height of the image
+                    objectFit: 'cover', // Ensure the image covers the area without distortion
+                    width: '100%', // Ensure the image covers the full width of the container
+                  }}
+                />
+                <CardContent>
+                  <Typography variant="h6" component="div" sx={{ marginBottom: 1 }}>
+                    {product.name}
+                  </Typography>
+                  <Typography variant="body1" color="textSecondary" sx={{ marginBottom: 2 }}>
+                    $ {product.price}
+                  </Typography>
+                  <Grid container spacing={2}>
+                    <Grid item xs={6}>
+                      <Button variant="contained" color="primary" fullWidth>
+                        Buy Now
+                      </Button>
+                    </Grid>
+                    <Grid item xs={6}>
+                      <Button variant="outlined" color="primary" fullWidth href="/cart"   sx={{ fontSize: '0.690rem', height: '100%' }} // Adjust font size here
+                      >
+                        Add to Cart
+                      </Button>
+                    </Grid>
                   </Grid>
-                  <Grid item xs={6}>
-                    <Button variant="outlined" color="primary" fullWidth>
-                      Add to Cart
-                    </Button>
-                  </Grid>
-                </Grid>
-              </CardContent>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
+                </CardContent>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
     </Box>
   );
 };

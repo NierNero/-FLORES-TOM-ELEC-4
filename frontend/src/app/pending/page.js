@@ -14,10 +14,10 @@ import {
   Menu,  
   MenuItem,
   Avatar,
-  TextField,
   IconButton,
-  InputAdornment,
-  Button
+  Button,
+  TextField,
+  InputAdornment
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -28,7 +28,7 @@ const cartItems = [
   { id: 2, name: 'Oil Filter', price: 15, image: '/img/oilfilter.jpg', shop: "Nelson's Automotive Shop" }
 ];
 
-function cart() {
+function pending() {
   const [cart, setCart] = useState(cartItems);
   const [scrolled, setScrolled] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -42,13 +42,6 @@ function cart() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  const handleQuantityChange = (id, value) => {
-    const updatedCart = cart.map(item =>
-      item.id === id ? { ...item, quantity: parseInt(value) || 1 } : item
-    );
-    setCart(updatedCart);
-  };
 
   const handleRemoveItem = (id) => {
     setCart(cart.filter(item => item.id !== id));
@@ -67,18 +60,14 @@ function cart() {
     setAnchorEl(null);
   };
 
-  const handlePlaceOrder = () => {
-    // Placeholder function for place order button click
-    console.log('Place Order(s) clicked');
-  };
-
-  const handleCancelPurchase = () => {
-    setCart([]); // Clears the cart
-    console.log('Cart cleared');
-  };
-
   const calculateTotal = () => {
-    return cart.reduce((total, item) => total + (item.price * (item.quantity || 1)), 0).toFixed(2);
+    return cart.reduce((total, item) => total + (item.price * 1), 0).toFixed(2); // Fixed quantity of 1
+  };
+
+  const handleCancel = () => {
+    // Implement the cancel button functionality here
+    console.log('Cancel button clicked');
+    // For example, you might want to navigate to a different page or clear the cart
   };
 
   return (
@@ -203,106 +192,106 @@ function cart() {
       </AppBar>
 
       <Container sx={{ mt: '70px', padding: 2 }}>
-      <Button
-  variant="text"
-  color="white"
-  sx={{
-    '&:hover': {
-      color: 'red',
-    },
-    '&:active': {
-      color: 'darkred', // Darker color when button is pressed
-    },
-    fontFamily: 'Arial, sans-serif',
-    textAlign: 'left',
-    fontSize: '1.5rem',
-    textTransform: 'none',
-  }}
-  href="/cart"
->
-  My Cart
-</Button>
+        <Button
+          variant="text"
+          color="white"
+          sx={{
+            '&:hover': {
+              color: 'red',
+            },
+            '&:active': {
+              color: 'darkred', // Darker color when button is pressed
+            },
+            fontFamily: 'Arial, sans-serif',
+            textAlign: 'left',
+            fontSize: '1.5rem',
+            textTransform: 'none',
+          }}
+          href="/cart"
+        >
+          My Cart
+        </Button>
 
-<Button
-  variant="text"
-  color="white"
-  sx={{
-    '&:hover': {
-      color: 'red',
-    },
-    '&:active': {
-      color: 'darkred', // Darker color when button is pressed
-    },
-    ml: 3,
-    fontFamily: 'Arial, sans-serif',
-    textAlign: 'left',
-    fontSize: '1.5rem',
-    textTransform: 'none',
-  }}
-  href="/pending"
->
-  Pending Order
-</Button>
-<Button
-  variant="text"
-  color="white"
-  sx={{
-    '&:hover': {
-      color: 'red',
-    },
-    '&:active': {
-      color: 'darkred', // Darker color when button is pressed
-    },
-    ml: 3,
-    fontFamily: 'Arial, sans-serif',
-    textAlign: 'left',
-    fontSize: '1.5rem',
-    textTransform: 'none',
-  }}
-  href="/topay"
->
-  To Pay
-</Button>
-<Button
-  variant="text"
-  color="white"
-  sx={{
-    '&:hover': {
-      color: 'red',
-    },
-    '&:active': {
-      color: 'darkred', // Darker color when button is pressed
-    },
-    ml: 3,
-    fontFamily: 'Arial, sans-serif',
-    textAlign: 'left',
-    fontSize: '1.5rem',
-    textTransform: 'none',
-  }}
-  href="/cart"
->
-  To Ship
-</Button>
-<Button
-  variant="text"
-  color="white"
-  sx={{
-    '&:hover': {
-      color: 'red',
-    },
-    '&:active': {
-      color: 'darkred', // Darker color when button is pressed
-    },
-    ml: 3,
-    fontFamily: 'Arial, sans-serif',
-    textAlign: 'left',
-    fontSize: '1.5rem',
-    textTransform: 'none',
-  }}
-  href="/cart"
->
-  To Receive
-</Button>
+        <Button
+          variant="text"
+          color="white"
+          sx={{
+            '&:hover': {
+              color: 'red',
+            },
+            '&:active': {
+              color: 'darkred', // Darker color when button is pressed
+            },
+            ml: 3,
+            fontFamily: 'Arial, sans-serif',
+            textAlign: 'left',
+            fontSize: '1.5rem',
+            textTransform: 'none',
+          }}
+          href="/pending"
+        >
+          Pending Order
+        </Button>
+        <Button
+          variant="text"
+          color="white"
+          sx={{
+            '&:hover': {
+              color: 'red',
+            },
+            '&:active': {
+              color: 'darkred', // Darker color when button is pressed
+            },
+            ml: 3,
+            fontFamily: 'Arial, sans-serif',
+            textAlign: 'left',
+            fontSize: '1.5rem',
+            textTransform: 'none',
+          }}
+          href="/topay"
+        >
+          To Pay
+        </Button>
+        <Button
+          variant="text"
+          color="white"
+          sx={{
+            '&:hover': {
+              color: 'red',
+            },
+            '&:active': {
+              color: 'darkred', // Darker color when button is pressed
+            },
+            ml: 3,
+            fontFamily: 'Arial, sans-serif',
+            textAlign: 'left',
+            fontSize: '1.5rem',
+            textTransform: 'none',
+          }}
+          href="/cart"
+        >
+          To Ship
+        </Button>
+        <Button
+          variant="text"
+          color="white"
+          sx={{
+            '&:hover': {
+              color: 'red',
+            },
+            '&:active': {
+              color: 'darkred', // Darker color when button is pressed
+            },
+            ml: 3,
+            fontFamily: 'Arial, sans-serif',
+            textAlign: 'left',
+            fontSize: '1.5rem',
+            textTransform: 'none',
+          }}
+          href="/cart"
+        >
+          To Receive
+        </Button>
 
         <Divider sx={{ mb: 2 }}/>
 
@@ -327,40 +316,14 @@ function cart() {
                   <Typography variant="body1" color="primary">${item.price.toFixed(2)}</Typography>
                 </Grid>
                 <Grid item xs={2}>
-                  <TextField
-                    type="number"
-                    label="Quantity"
-                    value={item.quantity || 1}
-                    onChange={(e) => handleQuantityChange(item.id, e.target.value)}
-                    size="small"
-                    sx={{ width: '100px' }}
-                    InputProps={{
-                      inputProps: { min: 1 }
-                    }}
-                  />
+                  <Typography variant="body1">Quantity: <span style={{  color: 'red' }}>1</span></Typography> {/* Fixed quantity with label */}
                 </Grid>
                 <Grid item xs={1}>
-                  <IconButton onClick={() => handleRemoveItem(item.id)}>
-                    <DeleteIcon color="error" />
-                  </IconButton>
                 </Grid>
               </Grid>
             </CardContent>
           </Card>
         ))}
-
-        <Grid container justifyContent="flex-end" spacing={2} sx={{ mb: 3 }}>
-          <Grid item>
-            <Button variant="contained" color="primary" onClick={handlePlaceOrder} sx={{ marginRight: 2 }}>
-              Place Order(s)
-            </Button>
-          </Grid>
-          <Grid item>
-            <Button variant="outlined" color="error" onClick={handleCancelPurchase}>
-              Clear Cart
-            </Button>
-          </Grid>
-        </Grid>
 
         <Box sx={{ mt: 3, p: 2, border: '1px solid #ddd', borderRadius: '8px', backgroundColor: '#fff' }}>
           <Typography variant="h6" component="div" gutterBottom>
@@ -370,9 +333,25 @@ function cart() {
             ${calculateTotal()}
           </Typography>
         </Box>
+
+        <Box sx={{ mt: 3, display: 'flex', justifyContent: 'flex-end' }}>
+          <Button
+            variant="contained"
+            color="error"
+            sx={{
+              '&:hover': {
+                backgroundColor: 'darkred',
+              },
+              fontFamily: 'Arial, sans-serif',
+            }}
+            onClick={handleCancel}
+          >
+            Cancel
+          </Button>
+        </Box>
       </Container>
     </Box>
   );
-}
+};
 
-export default cart;
+export default pending;
