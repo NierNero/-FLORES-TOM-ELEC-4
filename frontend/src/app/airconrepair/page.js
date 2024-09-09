@@ -69,11 +69,13 @@ function App() {
           backgroundColor: scrolled
             ? "rgba(0, 0, 0, 1)"
             : "rgba(13, 71, 161, 1)",
-          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-          height: "70px",
+            boxShadow: "0 3px 5px rgba(0, 0, 0, 0.4)",
+            height: "70px",
           display: "flex",
           justifyContent: "center",
           transition: "background-color 0.3s ease",
+          borderBottomLeftRadius: "35px", 
+          borderBottomRightRadius: "35px",
         }}
       >
         <Toolbar
@@ -108,7 +110,7 @@ function App() {
                 {navLinks.map((link) => (
                   <Button
                     key={link.href}
-                    color="inherit"
+                    color="white"
                     sx={{
                       fontSize: "14px",
                       "&:hover": { color: "red" },

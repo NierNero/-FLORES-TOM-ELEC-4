@@ -94,8 +94,8 @@ function BookingPage() {
         <Typography variant="h6" mb={4}>
           Your booking request has been submitted successfully.
         </Typography>
-        <Button variant="contained" color="primary" href="/">
-          Back to Home
+        <Button variant="contained" color="primary" href="/service">
+          Back to Service
         </Button>
       </Container>
     );
@@ -107,11 +107,13 @@ function BookingPage() {
         position="fixed"
         sx={{
           backgroundColor: scrolled ? "rgba(0, 0, 0, 1)" : "rgba(13, 71, 161, 1)",
-          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+          boxShadow: "0 3px 5px rgba(0, 0, 0, 0.4)",
           height: "70px",
           display: "flex",
           justifyContent: "center",
           transition: "background-color 0.3s ease",
+         borderBottomLeftRadius: "35px", 
+          borderBottomRightRadius: "35px",
         }}
       >
         <Toolbar
@@ -125,7 +127,7 @@ function BookingPage() {
             <IconButton
               size="large"
               edge="start"
-              color="inherit"
+              color="white"
               aria-label="menu"
               sx={{ mr: 2 }}
               onClick={handleDrawerOpen}
@@ -139,7 +141,7 @@ function BookingPage() {
           {!isMobile && (
             <Box sx={{ display: "flex" }}>
               <Button
-                color="inherit"
+                color="white"
                 sx={{
                   fontSize: "14px",
                   "&:hover": { color: "red" },
@@ -151,7 +153,7 @@ function BookingPage() {
                 Home
               </Button>
               <Button
-                color="inherit"
+                color="white"
                 sx={{
                   fontSize: "14px",
                   "&:hover": { color: "red" },
@@ -163,7 +165,7 @@ function BookingPage() {
                 Booking
               </Button>
               <Button
-                color="inherit"
+                color="white"
                 sx={{
                   fontSize: "14px",
                   "&:hover": { color: "red" },
@@ -175,7 +177,7 @@ function BookingPage() {
                 Cart
               </Button>
               <Button
-                color="inherit"
+                color="white"
                 sx={{
                   fontSize: "14px",
                   "&:hover": { color: "red" },

@@ -99,19 +99,6 @@ const RepairShopCard = ({ shop }) => {
     return [...fullStars, ...emptyStars];
   };
 
-  const getShopIcon = (shopName) => {
-    switch (shopName) {
-      case 'My Repair Shop':
-        return <ShopIcon />;
-      case 'Our Repair Shop':
-        return <ShopIcon />;
-      case 'Wala Repair Shop':
-        return <ShopIcon />;
-      default:
-        return <ShopIcon />;
-    }
-  };
-
   return (
     <Card
       sx={{
@@ -231,11 +218,13 @@ const App = () => {
           backgroundColor: scrolled
             ? "rgba(0, 0, 0, 1)"
             : "rgba(13, 71, 161, 1)",
-          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+          boxShadow: "0 3px 5px rgba(0, 0, 0, 0.4)",
           height: "70px",
           display: "flex",
           justifyContent: "center",
           transition: "background-color 0.3s ease",
+          borderBottomLeftRadius: "35px", 
+          borderBottomRightRadius: "35px",
         }}
       >
         <Toolbar
@@ -249,7 +238,7 @@ const App = () => {
             <IconButton
               size="large"
               edge="start"
-              color="inherit"
+              color="white"
               aria-label="menu"
               sx={{ mr: 2 }}
               onClick={handleDrawerOpen}
@@ -261,63 +250,22 @@ const App = () => {
             Carcare
           </Typography>
           {!isMobile && (
-            <Box sx={{ display: "flex" }}>
-              <Button
-                color="inherit"
-                sx={{
-                  fontSize: "14px",
-                  "&:hover": {
-                    color: "red",
-                  },
-                  fontWeight: "bold",
-                  fontFamily: "Arial, sans-serif",
-                }}
-                href="/dashboard"
-              >
-                Home
-              </Button>
-              <Button
-                color="inherit"
-                sx={{
-                  fontSize: "14px",
-                  "&:hover": {
-                    color: "red",
-                  },
-                  fontWeight: "bold",
-                  fontFamily: "Arial, sans-serif",
-                }}
-                href="/booking"
-              >
-                Booking
-              </Button>
-              <Button
-                color="inherit"
-                sx={{
-                  fontSize: "14px",
-                  "&:hover": {
-                    color: "red",
-                  },
-                  fontWeight: "bold",
-                  fontFamily: "Arial, sans-serif",
-                }}
-                href="/cart"
-              >
-                Cart
-              </Button>
-              <Button
-                color="inherit"
-                sx={{
-                  fontSize: "14px",
-                  "&:hover": {
-                    color: "red",
-                  },
-                  fontWeight: "bold",
-                  fontFamily: "Arial, sans-serif",
-                }}
-                href="/map"
-              >
-                Map
-              </Button>
+            <Box sx={{ display: "flex", gap: 2 }}>
+              {["/dashboard", "/booking", "/cart", "/map"].map((href, index) => (
+                <Button
+                  key={href}
+                  color="white"
+                  sx={{
+                    fontSize: "14px",
+                    "&:hover": { color: "white" },
+                    fontWeight: "bold",
+                    fontFamily: "Arial, sans-serif",
+                  }}
+                  href={href}
+                >
+                  {["Home", "Booking", "Cart", "Map"][index]}
+                </Button>
+              ))}
             </Box>
           )}
           <TextField
@@ -403,13 +351,12 @@ const App = () => {
 
       <Container
         sx={{
-          marginTop: "100px",
+          marginTop: "90px",
           marginBottom: "30px",
           padding: 2,
-          border: "1px solid #ccc",
           backgroundColor: "white",
-          borderRadius: "6px",
-          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+          borderRadius: "10px",
+          boxShadow: "0 3px 6px rgba(0, 0, 0, 0.1)",
         }}
       >
         <Typography

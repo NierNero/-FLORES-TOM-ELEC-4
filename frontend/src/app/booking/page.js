@@ -76,16 +76,18 @@ function App() {
   ];
 
   return (
-    <Box sx={{ backgroundColor: '#f0f0f0', minHeight: '100vh' }}>
+    <Box sx={{ minHeight: '100vh' }}>
       <AppBar 
         position="fixed" 
         sx={{
           backgroundColor: scrolled ? 'rgba(0, 0, 0, 1)' : 'rgba(13, 71, 161, 1)', 
-          boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+          boxShadow: "0 3px 5px rgba(0, 0, 0, 0.4)",
           height: '70px',
           display: 'flex',
           justifyContent: 'center',
           transition: 'background-color 0.3s ease', 
+          borderBottomLeftRadius: "35px", 
+          borderBottomRightRadius: "35px",
         }}
       >
         <Toolbar 
@@ -112,7 +114,7 @@ function App() {
           {!isMobile && (
             <>
               <Button
-                color="inherit"
+                color="white"
                 sx={{
                   '&:hover': {
                     color: 'red',
@@ -125,7 +127,7 @@ function App() {
                 Home
               </Button>
               <Button
-                color="inherit"
+                color="white"
                 sx={{
                   '&:hover': {
                     color: 'red',
@@ -138,7 +140,7 @@ function App() {
                 Booking
               </Button>
               <Button
-                color="inherit"
+                color="white"
                 sx={{
                   '&:hover': {
                     color: 'red',
@@ -151,7 +153,7 @@ function App() {
                 Cart
               </Button>
               <Button
-                color="inherit"
+                color="white"
                 sx={{
                   '&:hover': {
                     color: 'red',

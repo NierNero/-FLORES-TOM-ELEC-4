@@ -118,18 +118,20 @@ function Cart() {
   };
 
   return (
-    <Box sx={{ backgroundColor: "#f0f0f0", minHeight: "100vh" }}>
+    <Box sx={{ minHeight: "100vh" }}>
       <AppBar
         position="fixed"
         sx={{
           backgroundColor: scrolled
             ? "rgba(0, 0, 0, 1)"
             : "rgba(13, 71, 161, 1)",
-          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-          height: "70px",
+            boxShadow: "0 3px 5px rgba(0, 0, 0, 0.4)",
+            height: "70px",
           display: "flex",
           justifyContent: "center",
           transition: "background-color 0.3s ease",
+          borderBottomLeftRadius: "35px", 
+          borderBottomRightRadius: "35px",
         }}
       >
         <Toolbar sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
@@ -151,29 +153,29 @@ function Cart() {
           {!isMobile && (
             <Box sx={{ display: "flex" }}>
               <Button
-                color="inherit"
-                sx={{ "&:hover": { color: "red" }, fontWeight: "bold", fontFamily: "Arial, sans-serif" }}
+                color="white"
+                sx={{ "&:hover": { color: "white" }, fontWeight: "bold", fontFamily: "Arial, sans-serif" }}
                 href="/dashboard"
               >
                 Home
               </Button>
               <Button
-                color="inherit"
-                sx={{ "&:hover": { color: "red" }, fontWeight: "bold", fontFamily: "Arial, sans-serif" }}
+                color="white"
+                sx={{ "&:hover": { color: "white" }, fontWeight: "bold", fontFamily: "Arial, sans-serif" }}
                 href="/booking"
               >
                 Booking
               </Button>
               <Button
-                color="inherit"
-                sx={{ "&:hover": { color: "red" }, fontWeight: "bold", fontFamily: "Arial, sans-serif" }}
+                color="white"
+                sx={{ "&:hover": { color: "white" }, fontWeight: "bold", fontFamily: "Arial, sans-serif" }}
                 href="/cart"
               >
                 Cart
               </Button>
               <Button
-                color="inherit"
-                sx={{ "&:hover": { color: "red" }, fontWeight: "bold", fontFamily: "Arial, sans-serif" }}
+                color="white"
+                sx={{ "&:hover": { color: "white" }, fontWeight: "bold", fontFamily: "Arial, sans-serif" }}
                 href="/map"
               >
                 Map
@@ -257,7 +259,7 @@ function Cart() {
           variant="text"
           color="white"
           sx={{
-            "&:hover": { color: "red" },
+            "&:hover": { color: "white" },
             "&:active": { color: "darkred" },
             fontFamily: "Arial, sans-serif",
             textAlign: "left",
@@ -272,7 +274,7 @@ function Cart() {
           variant="text"
           color="white"
           sx={{
-            "&:hover": { color: "red" },
+            "&:hover": { color: "white" },
             "&:active": { color: "darkred" },
             ml: 3,
             fontFamily: "Arial, sans-serif",
@@ -288,7 +290,7 @@ function Cart() {
           variant="text"
           color="white"
           sx={{
-            "&:hover": { color: "red" },
+            "&:hover": { color: "white" },
             "&:active": { color: "darkred" },
             ml: 3,
             fontFamily: "Arial, sans-serif",
@@ -304,7 +306,7 @@ function Cart() {
           variant="text"
           color="white"
           sx={{
-            "&:hover": { color: "red" },
+            "&:hover": { color: "white" },
             "&:active": { color: "darkred" },
             ml: 3,
             fontFamily: "Arial, sans-serif",
@@ -320,7 +322,7 @@ function Cart() {
           variant="text"
           color="white"
           sx={{
-            "&:hover": { color: "red" },
+            "&:hover": { color: "white" },
             "&:active": { color: "darkred" },
             ml: 3,
             fontFamily: "Arial, sans-serif",

@@ -23,7 +23,7 @@ import {
   ListItemIcon,
   ListItemText,
   useMediaQuery,
-  useTheme
+  useTheme,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
@@ -38,9 +38,9 @@ function App() {
   const [anchorEl, setAnchorEl] = useState(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const open = Boolean(anchorEl);
-  
+
   const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
 
   useEffect(() => {
     const handleScroll = () => {
@@ -72,25 +72,27 @@ function App() {
   };
 
   const menuItems = [
-    { text: 'Home', icon: <HomeIcon />, href: '/dashboard' },
-    { text: 'Booking', icon: <BookingIcon />, href: '/booking' },
-    { text: 'Cart', icon: <CartIcon />, href: '/cart' },
-    { text: 'Map', icon: <MapIcon />, href: '/map' }
+    { text: "Home", icon: <HomeIcon />, href: "/dashboard" },
+    { text: "Booking", icon: <BookingIcon />, href: "/booking" },
+    { text: "Cart", icon: <CartIcon />, href: "/cart" },
+    { text: "Map", icon: <MapIcon />, href: "/map" },
   ];
 
   return (
-    <Box sx={{ backgroundColor: "#f0f0f0", minHeight: "100vh" }}>
+    <Box sx={{ minHeight: "100vh" }}>
       <AppBar
         position="fixed"
         sx={{
           backgroundColor: scrolled
             ? "rgba(0, 0, 0, 1)"
             : "rgba(13, 71, 161, 1)",
-          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+          boxShadow: "0 3px 5px rgba(0, 0, 0, 0.4)",
           height: "70px",
           display: "flex",
           justifyContent: "center",
           transition: "background-color 0.3s ease",
+          borderBottomLeftRadius: "35px",
+          borderBottomRightRadius: "35px",
         }}
       >
         <Toolbar
@@ -133,7 +135,7 @@ function App() {
               {menuItems.map((item) => (
                 <Button
                   key={item.text}
-                  color="inherit"
+                  color="white"
                   sx={{
                     "&:hover": {
                       color: "red",
@@ -204,11 +206,7 @@ function App() {
         </Toolbar>
       </AppBar>
 
-      <Drawer
-        anchor="left"
-        open={drawerOpen}
-        onClose={handleDrawerToggle}
-      >
+      <Drawer anchor="left" open={drawerOpen} onClose={handleDrawerToggle}>
         <Box
           sx={{ width: 250 }}
           role="presentation"
@@ -372,11 +370,7 @@ function App() {
             </Grid>
 
             <Box textAlign="right" mt={-5}>
-              <Button
-                variant="contained"
-                color="success"
-                disabled
-              >
+              <Button variant="contained" color="success" disabled>
                 Booking Accepted
               </Button>
             </Box>

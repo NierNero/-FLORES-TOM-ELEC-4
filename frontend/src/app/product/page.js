@@ -53,23 +53,25 @@ const ProductPage = () => {
   };
 
   return (
-    <Box sx={{ backgroundColor: '#f4f4f4', minHeight: '100vh' }}>
+    <Box sx={{  minHeight: '100vh' }}>
       <AppBar 
         position="fixed" 
         sx={{
           backgroundColor: scrolled ? '#333' : '#0d47a1', 
-          boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+          boxShadow: "0 3px 5px rgba(0, 0, 0, 0.4)",
           height: '70px',
           display: 'flex',
           justifyContent: 'center',
           transition: 'background-color 0.3s ease',
+          borderBottomLeftRadius: "35px",
+          borderBottomRightRadius: "35px",
         }}
       >
         <Toolbar sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
           <IconButton
             size="large"
             edge="start"
-            color="inherit"
+            color="white"
             aria-label="menu"
             sx={{ mr: 2 }}
           >
@@ -77,9 +79,9 @@ const ProductPage = () => {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Carcare
           </Typography>
-          <Button color="inherit" sx={{ '&:hover': { color: 'red' }, fontWeight: 'bold' }} href="/dashboard">Home</Button>
-          <Button color="inherit" sx={{ '&:hover': { color: 'red' }, fontWeight: 'bold' }} href="/booking">Booking</Button>
-          <Button color="inherit" sx={{ '&:hover': { color: 'red' }, fontWeight: 'bold' }} href="/cart">Cart</Button>
+          <Button color="white" sx={{ '&:hover': { color: 'white' }, fontWeight: 'bold' }} href="/dashboard">Home</Button>
+          <Button color="white" sx={{ '&:hover': { color: 'white' }, fontWeight: 'bold' }} href="/booking">Booking</Button>
+          <Button color="white" sx={{ '&:hover': { color: 'white' }, fontWeight: 'bold' }} href="/cart">Cart</Button>
           <Avatar src="/profile.png" sx={{ ml: 1, cursor: 'pointer' }} onClick={handleMenuOpen} />
           <Menu
             anchorEl={anchorEl}
@@ -95,10 +97,9 @@ const ProductPage = () => {
       </AppBar>
 
       {/* Search Bar */}
-      <Box sx={{ display: 'flex', justifyContent: 'center', marginY: 3, marginTop: '70px', padding: 2 }}>
+      <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '70px', padding: 2 }}>
         <TextField 
           placeholder="Search for products..." 
-          variant="outlined" 
           InputProps={{
             endAdornment: (
               <IconButton>
@@ -106,18 +107,34 @@ const ProductPage = () => {
               </IconButton>
             ),
           }}
-          sx={{ width: '100%', maxWidth: 600, borderRadius: '25px', backgroundColor: 'white' }}
-        />
+          sx={{ 
+            width: '100%', 
+            maxWidth: 600, 
+            borderRadius: '25px', 
+            backgroundColor: 'white', 
+            '& .MuiOutlinedInput-root': {
+              '& fieldset': {
+                border: 'none',
+              },
+              '&:hover fieldset': {
+                border: 'none', 
+              },
+              '&.Mui-focused fieldset': {
+                border: 'none', 
+              },
+            },
+          }}        />
       </Box>
 
       <Container
         sx={{
-          marginTop: '20px',
+          marginTop: '15px',
           padding: 2,
           border: '1px solid #ccc',
           backgroundColor: 'white',
-          borderRadius: '6px',
-          boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+          borderRadius: '10px',
+          boxShadow: "0 3px 5px rgba(0, 0, 0, 0.4)",
+          marginBottom: '12px'
         }}
       >
         {/* Products Section */}

@@ -66,18 +66,20 @@ function App() {
   ];
 
   return (
-    <Box sx={{ backgroundColor: "white", minHeight: "100vh" }}>
+    <Box sx={{ minHeight: "100vh" }}>
       <AppBar
         position="fixed"
         sx={{
           backgroundColor: scrolled
             ? "rgba(0, 0, 0, 1)"
             : "rgba(13, 71, 161, 1)",
-          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-          height: "70px",
+            boxShadow: "0 3px 5px rgba(0, 0, 0, 0.4)",
+            height: "70px",
           display: "flex",
           justifyContent: "center",
           transition: "background-color 0.3s ease",
+          borderBottomLeftRadius: "35px", 
+          borderBottomRightRadius: "35px",
         }}
       >
         <Toolbar
@@ -98,19 +100,19 @@ function App() {
             CARCARE
           </Typography>
           <Box sx={{ display: "flex", gap: 2 }}>
-            {["/dashboard", "/booking", "/cart", "/map"].map((href, index) => (
+            {["/dashboard", "/booking", "/cart", "/product", "/map"].map((href, index) => (
               <Button
                 key={href}
-                color="inherit"
+                color="white"
                 sx={{
                   fontSize: "14px",
-                  "&:hover": { color: "red" },
+                  "&:hover": { color: "white" },
                   fontWeight: "bold",
                   fontFamily: "Arial, sans-serif",
                 }}
                 href={href}
               >
-                {["Home", "Booking", "Cart", "Map"][index]}
+                {["Home", "Booking", "Cart", "Shop", "Map", ][index]}
               </Button>
             ))}
             <Avatar

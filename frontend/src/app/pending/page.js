@@ -82,7 +82,6 @@ function pending() {
   return (
     <Box
       sx={{
-        backgroundColor: "#f0f0f0",
         minHeight: "100vh",
       }}
     >
@@ -92,11 +91,13 @@ function pending() {
           backgroundColor: scrolled
             ? "rgba(0, 0, 0, 1)"
             : "rgba(13, 71, 161, 1)",
-          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-          height: "70px",
+            boxShadow: "0 3px 5px rgba(0, 0, 0, 0.4)",
+            height: "70px",
           display: "flex",
           justifyContent: "center",
           transition: "background-color 0.3s ease",
+          borderBottomLeftRadius: "35px", 
+          borderBottomRightRadius: "35px",
         }}
       >
         <Toolbar
@@ -118,10 +119,10 @@ function pending() {
             Carcare - To Pay
           </Typography>
           <Button
-            color="inherit"
+            color="white"
             sx={{
               "&:hover": {
-                color: "red",
+                color: "white",
               },
               fontWeight: "bold",
               fontFamily: "Arial, sans-serif",
@@ -131,10 +132,10 @@ function pending() {
             Home
           </Button>
           <Button
-            color="inherit"
+            color="white"
             sx={{
               "&:hover": {
-                color: "red",
+                color: "white",
               },
               fontWeight: "bold",
               fontFamily: "Arial, sans-serif",
@@ -144,10 +145,10 @@ function pending() {
             Booking
           </Button>
           <Button
-            color="inherit"
+            color="white"
             sx={{
               "&:hover": {
-                color: "red",
+                color: "white",
               },
               fontWeight: "bold",
               fontFamily: "Arial, sans-serif",
@@ -218,7 +219,7 @@ function pending() {
           color="white"
           sx={{
             "&:hover": {
-              color: "red",
+              color: "white",
             },
             "&:active": {
               color: "darkred", 
@@ -238,7 +239,7 @@ function pending() {
           color="white"
           sx={{
             "&:hover": {
-              color: "red",
+              color: "white",
             },
             "&:active": {
               color: "darkred", 
@@ -258,7 +259,7 @@ function pending() {
           color="white"
           sx={{
             "&:hover": {
-              color: "red",
+              color: "white",
             },
             "&:active": {
               color: "darkred", 
@@ -278,7 +279,7 @@ function pending() {
           color="white"
           sx={{
             "&:hover": {
-              color: "red",
+              color: "white",
             },
             "&:active": {
               color: "darkred", 
@@ -298,7 +299,7 @@ function pending() {
           color="white"
           sx={{
             "&:hover": {
-              color: "red",
+              color: "white",
             },
             "&:active": {
               color: "darkred", 
