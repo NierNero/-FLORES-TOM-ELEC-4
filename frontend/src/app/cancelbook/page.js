@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Card,
@@ -17,9 +17,9 @@ import {
   InputAdornment,
   Menu,
   MenuItem,
-} from '@mui/material';
-import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
-import SearchIcon from '@mui/icons-material/Search';
+} from "@mui/material";
+import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
+import SearchIcon from "@mui/icons-material/Search";
 
 function App() {
   const [scrolled, setScrolled] = useState(false);
@@ -31,12 +31,12 @@ function App() {
       setScrolled(window.scrollY > 50);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const handleClick = () => {
-    console.log('Icon clicked');
+    console.log("Icon clicked");
   };
 
   const handleMenuOpen = (event) => {
@@ -48,23 +48,25 @@ function App() {
   };
 
   return (
-    <Box sx={{ backgroundColor: '#f0f0f0', minHeight: '100vh' }}>
-      <AppBar 
-        position="fixed" 
+    <Box sx={{ backgroundColor: "#f0f0f0", minHeight: "100vh" }}>
+      <AppBar
+        position="fixed"
         sx={{
-          backgroundColor: scrolled ? 'rgba(0, 0, 0, 1)' : 'rgba(13, 71, 161, 1)', 
-          boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-          height: '70px',
-          display: 'flex',
-          justifyContent: 'center',
-          transition: 'background-color 0.3s ease', 
+          backgroundColor: scrolled
+            ? "rgba(0, 0, 0, 1)"
+            : "rgba(13, 71, 161, 1)",
+          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+          height: "70px",
+          display: "flex",
+          justifyContent: "center",
+          transition: "background-color 0.3s ease",
         }}
       >
-        <Toolbar 
+        <Toolbar
           sx={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
           }}
         >
           <IconButton
@@ -74,7 +76,6 @@ function App() {
             aria-label="menu"
             sx={{ mr: 2 }}
           >
-            {/* Menu icon can be added here if needed */}
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Carcare
@@ -82,9 +83,11 @@ function App() {
           <Button
             color="inherit"
             sx={{
-              '&:hover': {
-                color: 'red',
-              }, fontWeight: 'bold', fontFamily: 'Arial, sans-serif'
+              "&:hover": {
+                color: "red",
+              },
+              fontWeight: "bold",
+              fontFamily: "Arial, sans-serif",
             }}
             href="/dashboard"
           >
@@ -93,9 +96,11 @@ function App() {
           <Button
             color="inherit"
             sx={{
-              '&:hover': {
-                color: 'red',
-              },fontWeight: 'bold', fontFamily: 'Arial, sans-serif'
+              "&:hover": {
+                color: "red",
+              },
+              fontWeight: "bold",
+              fontFamily: "Arial, sans-serif",
             }}
             href="/booking"
           >
@@ -104,9 +109,11 @@ function App() {
           <Button
             color="inherit"
             sx={{
-              '&:hover': {
-                color: 'red',
-              }, fontWeight: 'bold', fontFamily: 'Arial, sans-serif'
+              "&:hover": {
+                color: "red",
+              },
+              fontWeight: "bold",
+              fontFamily: "Arial, sans-serif",
             }}
             href="/cart"
           >
@@ -114,18 +121,18 @@ function App() {
           </Button>
           <TextField
             sx={{
-              width: '200px',
-              '& fieldset': {
-                border: 'none',
+              width: "200px",
+              "& fieldset": {
+                border: "none",
               },
-              '& .MuiInputLabel-root': {
-                color: 'black',
+              "& .MuiInputLabel-root": {
+                color: "black",
               },
-              '& .MuiInputBase-input': {
-                color: 'white', 
+              "& .MuiInputBase-input": {
+                color: "white",
               },
-              '& .MuiInputAdornment-root': {
-                color: 'white', 
+              "& .MuiInputAdornment-root": {
+                color: "white",
               },
             }}
             size="small"
@@ -134,16 +141,16 @@ function App() {
               startAdornment: (
                 <InputAdornment position="end">
                   <IconButton onClick={handleClick}>
-                    <SearchIcon sx={{ color: 'white' }} />
+                    <SearchIcon sx={{ color: "white" }} />
                   </IconButton>
                 </InputAdornment>
               ),
             }}
           />
-          <Avatar 
-            src="/profile.png" 
-            sx={{ ml: 1, cursor: 'pointer' }} 
-            onClick={handleMenuOpen} 
+          <Avatar
+            src="/profile.png"
+            sx={{ ml: 1, cursor: "pointer" }}
+            onClick={handleMenuOpen}
           />
           <Menu
             anchorEl={anchorEl}
@@ -151,33 +158,39 @@ function App() {
             onClose={handleMenuClose}
             PaperProps={{
               sx: {
-                width: '200px',
+                width: "200px",
               },
             }}
           >
-            <MenuItem onClick={handleMenuClose} href="/profile">Profile</MenuItem>
-            <MenuItem onClick={handleMenuClose} href="/settings">Settings</MenuItem>
-            <MenuItem onClick={handleMenuClose} href="/login">Logout</MenuItem>
+            <MenuItem onClick={handleMenuClose} href="/profile">
+              Profile
+            </MenuItem>
+            <MenuItem onClick={handleMenuClose} href="/settings">
+              Settings
+            </MenuItem>
+            <MenuItem onClick={handleMenuClose} href="/login">
+              Logout
+            </MenuItem>
           </Menu>
         </Toolbar>
       </AppBar>
 
-      <Box sx={{ marginTop: '70px', padding: 2 }}>
+      <Box sx={{ marginTop: "70px", padding: 2 }}>
         <Button
           variant="text"
           color="white"
           sx={{
-            '&:hover': {
-              color: 'red',
+            "&:hover": {
+              color: "red",
             },
-            '&:active': {
-              color: 'darkred', // Darker color when button is pressed
+            "&:active": {
+              color: "darkred", 
             },
-            fontFamily: 'Arial, sans-serif',
-            textAlign: 'left',
-            fontSize: '1.5rem',
-            textTransform: 'none',
-            marginLeft: '6%'
+            fontFamily: "Arial, sans-serif",
+            textAlign: "left",
+            fontSize: "1.1rem",
+            textTransform: "none",
+            marginLeft: "6%",
           }}
           href="/booking"
         >
@@ -188,17 +201,17 @@ function App() {
           variant="text"
           color="white"
           sx={{
-            '&:hover': {
-              color: 'red',
+            "&:hover": {
+              color: "red",
             },
-            '&:active': {
-              color: 'darkred', // Darker color when button is pressed
+            "&:active": {
+              color: "darkred", 
             },
-            fontFamily: 'Arial, sans-serif',
-            textAlign: 'left',
-            fontSize: '1.5rem',
-            textTransform: 'none',
-            marginLeft: '3%'
+            fontFamily: "Arial, sans-serif",
+            textAlign: "left",
+            fontSize: "1.1rem",
+            textTransform: "none",
+            marginLeft: "3%",
           }}
           href="/acceptbook"
         >
@@ -209,63 +222,76 @@ function App() {
           variant="text"
           color="white"
           sx={{
-            '&:hover': {
-              color: 'red',
+            "&:hover": {
+              color: "red",
             },
-            '&:active': {
-              color: 'darkred', // Darker color when button is pressed
+            "&:active": {
+              color: "darkred", 
             },
-            fontFamily: 'Arial, sans-serif',
-            textAlign: 'left',
-            fontSize: '1.5rem',
-            textTransform: 'none',
-            marginLeft: '3%'
+            fontFamily: "Arial, sans-serif",
+            textAlign: "left",
+            fontSize: "1.1rem",
+            textTransform: "none",
+            marginLeft: "3%",
           }}
           href="/cancelbook"
         >
           Canceled Book
         </Button>
-        
-        <Divider sx={{
-          mb: 2,
-          width: '88%', // Same width as the Card
-          margin: 'auto', // Center horizontally
-        }}/>
 
-        <Card sx={{
-            mt: { xs: 2, sm: 3, md: 3 }, // Responsive spacing above the Card
-            borderRadius: '15px',
-            boxShadow: '0 6px 12px rgba(0, 0, 0, 0.1)',
-            transition: 'transform 0.3s',
-            '&:hover': { transform: 'scale(1.02)' },
-            width: '88%',
-            margin: 'auto', // Center horizontally
-          }}>
+        <Divider
+          sx={{
+            mb: 2,
+            width: "88%", 
+            margin: "auto", 
+          }}
+        />
+
+        <Card
+          sx={{
+            mt: { xs: 2, sm: 3, md: 3 }, 
+            borderRadius: "15px",
+            boxShadow: "0 6px 12px rgba(0, 0, 0, 0.1)",
+            transition: "transform 0.3s",
+            "&:hover": { transform: "scale(1.02)" },
+            width: "88%",
+            margin: "auto", 
+          }}
+        >
           <CardContent>
             <Grid container spacing={2} alignItems="center">
               <Grid item xs={2} sm="auto">
                 <Avatar
                   alt="Nelson's Automotive Shop"
-                  src="/logo.png" 
-                  sx={{ width: { xs: 40, sm: 50 }, // Responsive width
-                  height: { xs: 40, sm: 50 }, // Responsive height
-                  borderRadius: '8px' }}
+                  src="/logo.png"
+                  sx={{
+                    width: { xs: 40, sm: 50 },
+                    height: { xs: 40, sm: 50 }, 
+                    borderRadius: "8px",
+                  }}
                 />
               </Grid>
               <Grid item xs>
                 <Typography variant="h6" component="div">
                   Nelson's Automotive Shop
                 </Typography>
-                <Typography color="text.secondary">
-                  John Doe
-                </Typography>
+                <Typography color="text.secondary">John Doe</Typography>
               </Grid>
             </Grid>
 
             <Divider sx={{ my: 2 }} />
 
             <Grid container spacing={2} alignItems="center">
-              <Grid item xs={12} sm={6} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+              <Grid
+                item
+                xs={12}
+                sm={6}
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                }}
+              >
                 <Typography variant="body1" component="div">
                   Service:
                 </Typography>
@@ -274,8 +300,20 @@ function App() {
                 </Typography>
               </Grid>
 
-              <Grid item xs={10} sm={4} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}>
-                <CalendarTodayIcon fontSize="small" sx={{ verticalAlign: 'middle', mr: 1 }} />
+              <Grid
+                item
+                xs={10}
+                sm={4}
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "flex-start",
+                }}
+              >
+                <CalendarTodayIcon
+                  fontSize="small"
+                  sx={{ verticalAlign: "middle", mr: 1 }}
+                />
                 <Typography variant="body1" component="span">
                   Fri, December 29
                 </Typography>
@@ -283,16 +321,16 @@ function App() {
             </Grid>
 
             <Box textAlign="right" mt={-5}>
-              <Button 
-                variant="contained" 
+              <Button
+                variant="contained"
                 sx={{
-                  backgroundColor: 'rgba(255, 0, 0, 0.5)', // Red with 50% opacity
-                  color: 'white',
-                  '&:hover': {
-                    backgroundColor: 'rgba(255, 0, 0, 0.7)', // Darker red on hover
+                  backgroundColor: "rgba(255, 0, 0, 0.5)", 
+                  color: "white",
+                  "&:hover": {
+                    backgroundColor: "rgba(255, 0, 0, 0.7)", 
                   },
-                  '&:disabled': {
-                    backgroundColor: 'rgba(255, 0, 0, 0.3)', // Even more transparent when disabled
+                  "&:disabled": {
+                    backgroundColor: "rgba(255, 0, 0, 0.3)", 
                   },
                 }}
                 disabled

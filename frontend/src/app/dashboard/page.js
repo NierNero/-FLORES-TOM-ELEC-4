@@ -1,5 +1,5 @@
-'use client';
-import React, { useState, useEffect } from 'react';
+"use client";
+import React, { useState, useEffect } from "react";
 import {
   Container,
   Typography,
@@ -17,78 +17,86 @@ import {
   InputAdornment,
   Menu,
   MenuItem,
-} from '@mui/material';
-import SearchIcon from '@mui/icons-material/Search';
-import Star from '@mui/icons-material/Star';
-import StarBorder from '@mui/icons-material/StarBorder';
+} from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
+import Star from "@mui/icons-material/Star";
+import StarBorder from "@mui/icons-material/StarBorder";
 
 const repairShops = [
   {
-    name: 'My Repair Shop',
-    description: 'Simple Shop',
-    imageUrl: '/img/1.jpg',
-    rating: 4
+    name: "My Repair Shop",
+    description: "Simple Shop",
+    imageUrl: "/img/1.jpg",
+    rating: 4,
   },
   {
-    name: 'Our Repair Shop',
-    description: 'Simple Shop',
-    imageUrl: '/img/2.jpg',
-    rating: 5
+    name: "Our Repair Shop",
+    description: "Simple Shop",
+    imageUrl: "/img/2.jpg",
+    rating: 5,
   },
   {
-    name: 'Wala Repair Shop',
-    description: 'Simple Shop',
-    imageUrl: '/img/3.jpg',
-    rating: 4
+    name: "Wala Repair Shop",
+    description: "Simple Shop",
+    imageUrl: "/img/3.jpg",
+    rating: 4,
   },
   {
-    name: 'Another Repair Shop',
-    description: 'Simple Shop',
-    imageUrl: '/img/4.jpg',
-    rating: 3
+    name: "Another Repair Shop",
+    description: "Simple Shop",
+    imageUrl: "/img/4.jpg",
+    rating: 3,
   },
   {
-    name: 'Another Repair Shop',
-    description: 'Simple Shop',
-    imageUrl: '/img/4.jpg',
-    rating: 2
+    name: "Another Repair Shop",
+    description: "Simple Shop",
+    imageUrl: "/img/4.jpg",
+    rating: 2,
   },
   {
-    name: 'My Repair Shop',
-    description: 'Simple Shop',
-    imageUrl: '/img/1.jpg',
-    rating: 4
+    name: "My Repair Shop",
+    description: "Simple Shop",
+    imageUrl: "/img/1.jpg",
+    rating: 4,
   },
   {
-    name: 'Our Repair Shop',
-    description: 'Simple Shop',
-    imageUrl: '/img/2.jpg',
-    rating: 1
+    name: "Our Repair Shop",
+    description: "Simple Shop",
+    imageUrl: "/img/2.jpg",
+    rating: 1,
   },
   {
-    name: 'Wala Repair Shop',
-    description: 'Simple Shop',
-    imageUrl: '/img/3.jpg',
-    rating: 4
+    name: "Wala Repair Shop",
+    description: "Simple Shop",
+    imageUrl: "/img/3.jpg",
+    rating: 4,
   },
 ];
 
 const RepairShopCard = ({ shop }) => {
   const renderStars = () => {
-    return Array.from({ length: 5 }, (_, index) => (
+    return Array.from({ length: 5 }, (_, index) =>
       index < shop.rating ? (
-        <Star key={index} sx={{ color: 'gold' }} />
+        <Star key={index} sx={{ color: "gold" }} />
       ) : (
-        <StarBorder key={index} sx={{ color: 'gold' }} />
+        <StarBorder key={index} sx={{ color: "gold" }} />
       )
-    ));
+    );
   };
 
   return (
-    <Card sx={{ height: 'auto', display: 'flex', flexDirection: 'column', marginTop: 2, borderRadius: '10px' }}>
+    <Card
+      sx={{
+        height: "auto",
+        display: "flex",
+        flexDirection: "column",
+        marginTop: 2,
+        borderRadius: "10px",
+      }}
+    >
       <CardMedia
         component="img"
-        sx={{ height: 140, objectFit: 'cover' }}
+        sx={{ height: 140, objectFit: "cover" }}
         image={shop.imageUrl}
         alt={shop.name}
       />
@@ -99,25 +107,37 @@ const RepairShopCard = ({ shop }) => {
         <Typography variant="body2" color="text.secondary">
           {shop.description}
         </Typography>
-        <Box sx={{ display: 'flex', alignItems: 'center', marginTop: 1 }}>
+        <Box sx={{ display: "flex", alignItems: "center", marginTop: 1 }}>
           {renderStars()}
         </Box>
       </CardContent>
-      <Box sx={{ padding: 2, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <Button variant="contained" color="primary" sx={{ margin: 'auto' }} href="/service">
+      <Box
+        sx={{
+          padding: 2,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Button
+          variant="contained"
+          color="primary"
+          sx={{ margin: "auto" }}
+          href="/service"
+        >
           Visit Now
         </Button>
         <Button
           variant="outlined"
           color="error"
           sx={{
-            margin: 'auto',
-            borderColor: 'red',
-            color: 'red',
-            '&:hover': {
-              borderColor: 'darkred',
-              color: 'darkred'
-            }
+            margin: "auto",
+            borderColor: "red",
+            color: "red",
+            "&:hover": {
+              borderColor: "darkred",
+              color: "darkred",
+            },
           }}
           href="/product"
         >
@@ -142,12 +162,12 @@ const App = () => {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const handleClick = () => {
-    console.log('Icon clicked');
+    console.log("Icon clicked");
   };
 
   const handleMenuOpen = (event) => {
@@ -159,23 +179,25 @@ const App = () => {
   };
 
   return (
-    <Box sx={{ backgroundColor: '#f0f0f0', minHeight: '100vh' }}>
+    <Box sx={{ backgroundColor: "#f0f0f0", minHeight: "100vh" }}>
       <AppBar
         position="fixed"
         sx={{
-          backgroundColor: scrolled ? 'rgba(0, 0, 0, 1)' : 'rgba(13, 71, 161, 1)',
-          boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-          height: '70px',
-          display: 'flex',
-          justifyContent: 'center',
-          transition: 'background-color 0.3s ease',
+          backgroundColor: scrolled
+            ? "rgba(0, 0, 0, 1)"
+            : "rgba(13, 71, 161, 1)",
+          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+          height: "70px",
+          display: "flex",
+          justifyContent: "center",
+          transition: "background-color 0.3s ease",
         }}
       >
         <Toolbar
           sx={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
           }}
         >
           <IconButton
@@ -184,20 +206,19 @@ const App = () => {
             color="inherit"
             aria-label="menu"
             sx={{ mr: 2 }}
-          >
-          </IconButton>
+          ></IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Carcare
           </Typography>
           <Button
             color="inherit"
             sx={{
-              fontSize: '14px',
-              '&:hover': {
-                color: 'red',
+              fontSize: "14px",
+              "&:hover": {
+                color: "red",
               },
-              fontWeight: 'bold',
-              fontFamily: 'Arial, sans-serif'
+              fontWeight: "bold",
+              fontFamily: "Arial, sans-serif",
             }}
             href="/dashboard"
           >
@@ -206,12 +227,12 @@ const App = () => {
           <Button
             color="inherit"
             sx={{
-              fontSize: '14px',
-              '&:hover': {
-                color: 'red',
+              fontSize: "14px",
+              "&:hover": {
+                color: "red",
               },
-              fontWeight: 'bold',
-              fontFamily: 'Arial, sans-serif'
+              fontWeight: "bold",
+              fontFamily: "Arial, sans-serif",
             }}
             href="/booking"
           >
@@ -220,12 +241,12 @@ const App = () => {
           <Button
             color="inherit"
             sx={{
-              fontSize: '14px',
-              '&:hover': {
-                color: 'red',
+              fontSize: "14px",
+              "&:hover": {
+                color: "red",
               },
-              fontWeight: 'bold',
-              fontFamily: 'Arial, sans-serif'
+              fontWeight: "bold",
+              fontFamily: "Arial, sans-serif",
             }}
             href="/cart"
           >
@@ -234,12 +255,12 @@ const App = () => {
           <Button
             color="inherit"
             sx={{
-              fontSize: '14px',
-              '&:hover': {
-                color: 'red',
+              fontSize: "14px",
+              "&:hover": {
+                color: "red",
               },
-              fontWeight: 'bold',
-              fontFamily: 'Arial, sans-serif'
+              fontWeight: "bold",
+              fontFamily: "Arial, sans-serif",
             }}
             href="/map"
           >
@@ -247,18 +268,18 @@ const App = () => {
           </Button>
           <TextField
             sx={{
-              width: '200px',
-              '& fieldset': {
-                border: 'none',
+              width: "200px",
+              "& fieldset": {
+                border: "none",
               },
-              '& .MuiInputLabel-root': {
-                color: 'black',
+              "& .MuiInputLabel-root": {
+                color: "black",
               },
-              '& .MuiInputBase-input': {
-                color: 'white',
+              "& .MuiInputBase-input": {
+                color: "white",
               },
-              '& .MuiInputAdornment-root': {
-                color: 'white',
+              "& .MuiInputAdornment-root": {
+                color: "white",
               },
             }}
             size="small"
@@ -267,7 +288,7 @@ const App = () => {
               startAdornment: (
                 <InputAdornment position="start">
                   <IconButton onClick={handleClick}>
-                    <SearchIcon sx={{ color: 'white' }} />
+                    <SearchIcon sx={{ color: "white" }} />
                   </IconButton>
                 </InputAdornment>
               ),
@@ -275,7 +296,7 @@ const App = () => {
           />
           <Avatar
             src="/profile.png"
-            sx={{ ml: 1, cursor: 'pointer' }}
+            sx={{ ml: 1, cursor: "pointer" }}
             onClick={handleMenuOpen}
           />
           <Menu
@@ -284,34 +305,51 @@ const App = () => {
             onClose={handleMenuClose}
             PaperProps={{
               sx: {
-                width: '200px',
+                width: "200px",
               },
             }}
           >
-            <MenuItem onClick={handleMenuClose} href="/profile">Profile</MenuItem>
-            <MenuItem onClick={handleMenuClose} href="/settings">Settings</MenuItem>
-            <MenuItem onClick={handleMenuClose} href="/login">Logout</MenuItem>
+            <MenuItem onClick={handleMenuClose} href="/profile">
+              Profile
+            </MenuItem>
+            <MenuItem onClick={handleMenuClose} href="/settings">
+              Settings
+            </MenuItem>
+            <MenuItem onClick={handleMenuClose} href="/login">
+              Logout
+            </MenuItem>
           </Menu>
         </Toolbar>
       </AppBar>
 
       <Container
         sx={{
-          marginTop: '70px',
+          marginTop: "70px",
           padding: 2,
-          border: '1px solid #ccc',
-          backgroundColor: 'white',
-          borderRadius: '6px',
-          boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+          border: "1px solid #ccc",
+          backgroundColor: "white",
+          borderRadius: "6px",
+          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
         }}
       >
-        <Typography variant="h4" align="center" gutterBottom sx={{ marginBottom: 2 }}>
+        <Typography
+          variant="h4"
+          align="center"
+          gutterBottom
+          sx={{ marginBottom: 2 }}
+        >
           Available Repair Shops
         </Typography>
         <Grid container spacing={3} justifyContent="center">
           {repairShops.map((shop, index) => (
             <Grid item key={index} xs={12} sm={6} md={4} lg={3}>
-              <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+              <Box
+                sx={{
+                  height: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
                 <RepairShopCard shop={shop} />
               </Box>
             </Grid>

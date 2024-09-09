@@ -73,7 +73,6 @@ const ProductPage = () => {
             aria-label="menu"
             sx={{ mr: 2 }}
           >
-            {/* Menu icon can be added here if needed */}
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Carcare
@@ -141,9 +140,9 @@ const ProductPage = () => {
                   image={product.image}
                   alt={product.name}
                   sx={{ 
-                    height: 200, // Set the height of the image
-                    objectFit: 'cover', // Ensure the image covers the area without distortion
-                    width: '100%', // Ensure the image covers the full width of the container
+                    height: 200, 
+                    objectFit: 'cover', 
+                    width: '100%', 
                   }}
                 />
                 <CardContent>

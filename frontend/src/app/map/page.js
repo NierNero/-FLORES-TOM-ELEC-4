@@ -72,7 +72,6 @@ const App = () => {
             aria-label="menu"
             sx={{ mr: 2 }}
           >
-            {/* Menu icon can be added here if needed */}
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Carcare
@@ -140,12 +139,12 @@ const App = () => {
                 maxWidth: '100%',
                 borderRadius: '10px',
                 boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-                mb: 4, // Add margin-bottom to create space between the image and the rest of the content
+                mb: 4, 
               }}
             >
               <Box sx={{ position: 'relative', width: '100%', height: 'auto' }}>
                 <img
-                  src="/img/map.png" // Your image map
+                  src="/img/map.png"
                   useMap="#image-map"
                   alt="Interactive Map"
                   style={{ width: '100%', height: 'auto', maxWidth: '1200px' }}
@@ -153,7 +152,7 @@ const App = () => {
                 <map name="image-map">
                   <area
                     shape="rect"
-                    coords="34,44,270,350" // Adjust coordinates as needed
+                    coords="34,44,270,350"
                     href="/location1"
                     alt="Location 1"
                   />

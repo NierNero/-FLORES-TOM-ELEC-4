@@ -1,39 +1,51 @@
-'use client'
+"use client";
 
-import React from 'react';
-import { TextField, Button, Checkbox, FormControlLabel, Typography, Link, Box, Container, CssBaseline } from '@mui/material';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import React from "react";
+import {
+  TextField,
+  Button,
+  Checkbox,
+  FormControlLabel,
+  Typography,
+  Link,
+  Box,
+  Container,
+  CssBaseline,
+} from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 const theme = createTheme();
 
 function Login() {
   return (
     <>
-      
-        <CssBaseline />
-        <Box
+      <CssBaseline />
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          backgroundColor: "#ffffff",
+          padding: 3,
+          borderRadius: 2,
+          boxShadow: 3,
+          minHeight: "100vh",
+        }}
+      >
+        <Container
+          maxWidth="xs"
           sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            backgroundColor: '#ffffff', 
+            mt: 8,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            backgroundColor: "#ffffff",
             padding: 3,
-            borderRadius: 2, 
-            boxShadow: 3, 
-            minHeight: '100vh',
+            borderRadius: 2,
+            boxShadow: 3,
+            width: "100%",
           }}
         >
-          <Container  maxWidth="xs" sx={{
-            mt: 8, 
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            backgroundColor: '#ffffff',
-            padding: 3,
-            borderRadius: 2, 
-            boxShadow: 3, 
-            width: '100%', 
-          }}>
           <Typography component="h1" variant="h5" textAlign="center">
             Welcome Back!
           </Typography>
@@ -67,10 +79,11 @@ function Login() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-              href="/dashboard">
+              href="/dashboard"
+            >
               Log In
             </Button>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
               <Link href="/register" variant="body2">
                 Don’t have an account?
               </Link>
@@ -78,13 +91,17 @@ function Login() {
                 Forgot Password?
               </Link>
             </Box>
-            <Typography variant="body2" color="textSecondary" align="center" sx={{ mt: 5 }}>
+            <Typography
+              variant="body2"
+              color="textSecondary"
+              align="center"
+              sx={{ mt: 5 }}
+            >
               © CARCARE
             </Typography>
           </Box>
         </Container>
-        </Box>
-      
+      </Box>
     </>
   );
 }

@@ -75,7 +75,6 @@ function App() {
             aria-label="menu"
             sx={{ mr: 2 }}
           >
-            {/* Menu icon can be added here if needed */}
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Carcare
@@ -172,11 +171,11 @@ function App() {
       color: 'red',
     },
     '&:active': {
-      color: 'darkred', // Darker color when button is pressed
+      color: 'darkred', 
     },
     fontFamily: 'Arial, sans-serif',
     textAlign: 'left',
-    fontSize: '1.5rem',
+    fontSize: '1.1rem',
     textTransform: 'none',
     marginLeft: '6%'
   }}
@@ -193,11 +192,11 @@ function App() {
       color: 'red',
     },
     '&:active': {
-      color: 'darkred', // Darker color when button is pressed
+      color: 'darkred', 
     },
     fontFamily: 'Arial, sans-serif',
     textAlign: 'left',
-    fontSize: '1.5rem',
+    fontSize: '1.1rem',
     textTransform: 'none',
     marginLeft: '3%'
   }}
@@ -214,11 +213,11 @@ function App() {
       color: 'red',
     },
     '&:active': {
-      color: 'darkred', // Darker color when button is pressed
+      color: 'darkred', 
     },
     fontFamily: 'Arial, sans-serif',
     textAlign: 'left',
-    fontSize: '1.5rem',
+    fontSize: '1.1rem',
     textTransform: 'none',
     marginLeft: '3%'
   }}
@@ -228,18 +227,18 @@ function App() {
 </Button>
         <Divider sx={{
     mb: 2,
-    width: '88%', // Same width as the Card
-    margin: 'auto', // Center horizontally
+    width: '88%', 
+    margin: 'auto', 
   }}/>
 
         <Card sx={{
-            mt: { xs: 2, sm: 3, md: 3 }, // Responsive spacing above the Card
+            mt: { xs: 2, sm: 3, md: 3 }, 
             borderRadius: '15px',
             boxShadow: '0 6px 12px rgba(0, 0, 0, 0.1)',
             transition: 'transform 0.3s',
             '&:hover': { transform: 'scale(1.02)' },
             width: '88%',
-            margin: 'auto', // Center horizontally
+            margin: 'auto', 
 
             
           }}>
@@ -249,8 +248,8 @@ function App() {
                 <Avatar
                   alt="Nelson's Automotive Shop"
                   src="/logo.png" 
-                  sx={{ width: { xs: 40, sm: 50 }, // Responsive width
-                  height: { xs: 40, sm: 50 }, // Responsive height
+                  sx={{ width: { xs: 40, sm: 50 }, 
+                  height: { xs: 40, sm: 50 }, 
                   borderRadius: '8px'  }}
                 />
               </Grid>

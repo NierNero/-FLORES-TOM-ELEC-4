@@ -1,31 +1,43 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import { 
-  Container, 
-  Card, 
-  CardContent, 
-  Typography, 
-  Grid, 
-  Box, 
-  AppBar, 
-  Toolbar, 
+import React, { useState, useEffect } from "react";
+import {
+  Container,
+  Card,
+  CardContent,
+  Typography,
+  Grid,
+  Box,
+  AppBar,
+  Toolbar,
   Divider,
-  Menu,  
+  Menu,
   MenuItem,
   Avatar,
   TextField,
   IconButton,
   InputAdornment,
-  Button
-} from '@mui/material';
-import SearchIcon from '@mui/icons-material/Search';
-import DeleteIcon from '@mui/icons-material/Delete';
+  Button,
+} from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 // Dummy data
 const cartItems = [
-  { id: 1, name: 'Belt', price: 50, image: '/img/belt1.jpg', shop: "Nelson's Automotive Shop" },
-  { id: 2, name: 'Oil Filter', price: 15, image: '/img/oilfilter.jpg', shop: "Nelson's Automotive Shop" }
+  {
+    id: 1,
+    name: "Belt",
+    price: 50,
+    image: "/img/belt1.jpg",
+    shop: "Nelson's Automotive Shop",
+  },
+  {
+    id: 2,
+    name: "Oil Filter",
+    price: 15,
+    image: "/img/oilfilter.jpg",
+    shop: "Nelson's Automotive Shop",
+  },
 ];
 
 function cart() {
@@ -39,24 +51,23 @@ function cart() {
       setScrolled(window.scrollY > 50);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const handleQuantityChange = (id, value) => {
-    const updatedCart = cart.map(item =>
+    const updatedCart = cart.map((item) =>
       item.id === id ? { ...item, quantity: parseInt(value) || 1 } : item
     );
     setCart(updatedCart);
   };
 
   const handleRemoveItem = (id) => {
-    setCart(cart.filter(item => item.id !== id));
+    setCart(cart.filter((item) => item.id !== id));
   };
 
   const handleClick = () => {
-    // Placeholder function for search icon button click
-    console.log('Search icon clicked');
+    console.log("Search icon clicked");
   };
 
   const handleMenuOpen = (event) => {
@@ -68,40 +79,45 @@ function cart() {
   };
 
   const handlePlaceOrder = () => {
-    // Placeholder function for place order button click
-    console.log('Place Order(s) clicked');
+    console.log("Place Order(s) clicked");
   };
 
   const handleCancelPurchase = () => {
-    setCart([]); // Clears the cart
-    console.log('Cart cleared');
+    setCart([]); 
+    console.log("Cart cleared");
   };
 
   const calculateTotal = () => {
-    return cart.reduce((total, item) => total + (item.price * (item.quantity || 1)), 0).toFixed(2);
+    return cart
+      .reduce((total, item) => total + item.price * (item.quantity || 1), 0)
+      .toFixed(2);
   };
 
   return (
-    <Box sx={{
-      backgroundColor: '#f0f0f0', 
-      minHeight: '100vh', 
-    }}>
-      <AppBar 
-        position="fixed" 
+    <Box
+      sx={{
+        backgroundColor: "#f0f0f0",
+        minHeight: "100vh",
+      }}
+    >
+      <AppBar
+        position="fixed"
         sx={{
-          backgroundColor: scrolled ? 'rgba(0, 0, 0, 1)' : 'rgba(13, 71, 161, 1)', 
-          boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-          height: '70px',
-          display: 'flex',
-          justifyContent: 'center',
-          transition: 'background-color 0.3s ease', 
+          backgroundColor: scrolled
+            ? "rgba(0, 0, 0, 1)"
+            : "rgba(13, 71, 161, 1)",
+          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+          height: "70px",
+          display: "flex",
+          justifyContent: "center",
+          transition: "background-color 0.3s ease",
         }}
       >
-        <Toolbar 
+        <Toolbar
           sx={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
           }}
         >
           <IconButton
@@ -111,7 +127,6 @@ function cart() {
             aria-label="menu"
             sx={{ mr: 2 }}
           >
-            {/* Menu icon can be added here if needed */}
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Carcare - To Pay
@@ -119,53 +134,56 @@ function cart() {
           <Button
             color="inherit"
             sx={{
-              '&:hover': {
-                color: 'red',
+              "&:hover": {
+                color: "red",
               },
-              fontWeight: 'bold', 
-              fontFamily: 'Arial, sans-serif'
+              fontWeight: "bold",
+              fontFamily: "Arial, sans-serif",
             }}
-            href="/dashboard">
+            href="/dashboard"
+          >
             Home
           </Button>
           <Button
             color="inherit"
             sx={{
-              '&:hover': {
-                color: 'red',
+              "&:hover": {
+                color: "red",
               },
-              fontWeight: 'bold', 
-              fontFamily: 'Arial, sans-serif'
+              fontWeight: "bold",
+              fontFamily: "Arial, sans-serif",
             }}
-            href="/booking">
+            href="/booking"
+          >
             Booking
           </Button>
           <Button
             color="inherit"
             sx={{
-              '&:hover': {
-                color: 'red',
+              "&:hover": {
+                color: "red",
               },
-              fontWeight: 'bold', 
-              fontFamily: 'Arial, sans-serif'
+              fontWeight: "bold",
+              fontFamily: "Arial, sans-serif",
             }}
-            href="/cart">
+            href="/cart"
+          >
             Cart
           </Button>
           <TextField
             sx={{
-              width: '200px',
-              '& fieldset': {
-                border: 'none',
+              width: "200px",
+              "& fieldset": {
+                border: "none",
               },
-              '& .MuiInputLabel-root': {
-                color: 'black',
+              "& .MuiInputLabel-root": {
+                color: "black",
               },
-              '& .MuiInputBase-input': {
-                color: 'white', 
+              "& .MuiInputBase-input": {
+                color: "white",
               },
-              '& .MuiInputAdornment-root': {
-                color: 'white', 
+              "& .MuiInputAdornment-root": {
+                color: "white",
               },
             }}
             size="small"
@@ -174,16 +192,16 @@ function cart() {
               startAdornment: (
                 <InputAdornment position="end">
                   <IconButton onClick={handleClick}>
-                    <SearchIcon sx={{ color: 'white' }} />
+                    <SearchIcon sx={{ color: "white" }} />
                   </IconButton>
                 </InputAdornment>
               ),
             }}
           />
-          <Avatar 
-            src="/profile.png" 
-            sx={{ ml: 1, cursor: 'pointer' }} 
-            onClick={handleMenuOpen} 
+          <Avatar
+            src="/profile.png"
+            sx={{ ml: 1, cursor: "pointer" }}
+            onClick={handleMenuOpen}
           />
           <Menu
             anchorEl={anchorEl}
@@ -191,151 +209,171 @@ function cart() {
             onClose={handleMenuClose}
             PaperProps={{
               sx: {
-                width: '200px',
+                width: "200px",
               },
             }}
           >
-            <MenuItem onClick={handleMenuClose} href="/profile">Profile</MenuItem>
-            <MenuItem onClick={handleMenuClose} href="/settings">Settings</MenuItem>
-            <MenuItem onClick={handleMenuClose} href="/login">Logout</MenuItem>
+            <MenuItem onClick={handleMenuClose} href="/profile">
+              Profile
+            </MenuItem>
+            <MenuItem onClick={handleMenuClose} href="/settings">
+              Settings
+            </MenuItem>
+            <MenuItem onClick={handleMenuClose} href="/login">
+              Logout
+            </MenuItem>
           </Menu>
         </Toolbar>
       </AppBar>
 
-      <Container sx={{ mt: '70px', padding: 2 }}>
-      <Button
-  variant="text"
-  color="white"
-  sx={{
-    '&:hover': {
-      color: 'red',
-    },
-    '&:active': {
-      color: 'darkred', // Darker color when button is pressed
-    },
-    fontFamily: 'Arial, sans-serif',
-    textAlign: 'left',
-    fontSize: '1.5rem',
-    textTransform: 'none',
-  }}
-  href="/cart"
->
-  My Cart
-</Button>
+      <Container sx={{ mt: "70px", padding: 2 }}>
+        <Button
+          variant="text"
+          color="white"
+          sx={{
+            "&:hover": {
+              color: "red",
+            },
+            "&:active": {
+              color: "darkred", 
+            },
+            fontFamily: "Arial, sans-serif",
+            textAlign: "left",
+            fontSize: "1.1rem",
+            textTransform: "none",
+          }}
+          href="/cart"
+        >
+          My Cart
+        </Button>
 
-<Button
-  variant="text"
-  color="white"
-  sx={{
-    '&:hover': {
-      color: 'red',
-    },
-    '&:active': {
-      color: 'darkred', // Darker color when button is pressed
-    },
-    ml: 3,
-    fontFamily: 'Arial, sans-serif',
-    textAlign: 'left',
-    fontSize: '1.5rem',
-    textTransform: 'none',
-  }}
-  href="/pending"
->
-  Pending Order
-</Button>
-<Button
-  variant="text"
-  color="white"
-  sx={{
-    '&:hover': {
-      color: 'red',
-    },
-    '&:active': {
-      color: 'darkred', // Darker color when button is pressed
-    },
-    ml: 3,
-    fontFamily: 'Arial, sans-serif',
-    textAlign: 'left',
-    fontSize: '1.5rem',
-    textTransform: 'none',
-  }}
-  href="/topay"
->
-  To Pay
-</Button>
-<Button
-  variant="text"
-  color="white"
-  sx={{
-    '&:hover': {
-      color: 'red',
-    },
-    '&:active': {
-      color: 'darkred', // Darker color when button is pressed
-    },
-    ml: 3,
-    fontFamily: 'Arial, sans-serif',
-    textAlign: 'left',
-    fontSize: '1.5rem',
-    textTransform: 'none',
-  }}
-  href="/cart"
->
-  To Ship
-</Button>
-<Button
-  variant="text"
-  color="white"
-  sx={{
-    '&:hover': {
-      color: 'red',
-    },
-    '&:active': {
-      color: 'darkred', // Darker color when button is pressed
-    },
-    ml: 3,
-    fontFamily: 'Arial, sans-serif',
-    textAlign: 'left',
-    fontSize: '1.5rem',
-    textTransform: 'none',
-  }}
-  href="/cart"
->
-  To Receive
-</Button>
+        <Button
+          variant="text"
+          color="white"
+          sx={{
+            "&:hover": {
+              color: "red",
+            },
+            "&:active": {
+              color: "darkred", 
+            },
+            ml: 3,
+            fontFamily: "Arial, sans-serif",
+            textAlign: "left",
+            fontSize: "1.1rem",
+            textTransform: "none",
+          }}
+          href="/pending"
+        >
+          Pending Order
+        </Button>
+        <Button
+          variant="text"
+          color="white"
+          sx={{
+            "&:hover": {
+              color: "red",
+            },
+            "&:active": {
+              color: "darkred", 
+            },
+            ml: 3,
+            fontFamily: "Arial, sans-serif",
+            textAlign: "left",
+            fontSize: "1.1rem",
+            textTransform: "none",
+          }}
+          href="/topay"
+        >
+          To Pay
+        </Button>
+        <Button
+          variant="text"
+          color="white"
+          sx={{
+            "&:hover": {
+              color: "red",
+            },
+            "&:active": {
+              color: "darkred", 
+            },
+            ml: 3,
+            fontFamily: "Arial, sans-serif",
+            textAlign: "left",
+            fontSize: "1.1rem",
+            textTransform: "none",
+          }}
+          href="/cart"
+        >
+          To Ship
+        </Button>
+        <Button
+          variant="text"
+          color="white"
+          sx={{
+            "&:hover": {
+              color: "red",
+            },
+            "&:active": {
+              color: "darkred", 
+            },
+            ml: 3,
+            fontFamily: "Arial, sans-serif",
+            textAlign: "left",
+            fontSize: "1.1rem",
+            textTransform: "none",
+          }}
+          href="/cart"
+        >
+          To Receive
+        </Button>
 
-        <Divider sx={{ mb: 2 }}/>
+        <Divider sx={{ mb: 2 }} />
 
-        {cart.map(item => (
-          <Card key={item.id} sx={{
-            mb: 2,
-            borderRadius: '15px',
-            boxShadow: '0 6px 12px rgba(0, 0, 0, 0.1)',
-            transition: 'transform 0.3s',
-            '&:hover': { transform: 'scale(1.02)' },
-          }}>
+        {cart.map((item) => (
+          <Card
+            key={item.id}
+            sx={{
+              mb: 2,
+              borderRadius: "15px",
+              boxShadow: "0 6px 12px rgba(0, 0, 0, 0.1)",
+              transition: "transform 0.3s",
+              "&:hover": { transform: "scale(1.02)" },
+            }}
+          >
             <CardContent>
               <Grid container spacing={2} alignItems="center">
                 <Grid item xs={2}>
-                  <img src={item.image} alt={item.name} width="80" style={{ borderRadius: '8px' }} />
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    width="80"
+                    style={{ borderRadius: "8px" }}
+                  />
                 </Grid>
                 <Grid item xs={5}>
                   <Typography variant="h6">{item.name}</Typography>
-                  <Typography variant="body2" color="textSecondary">{item.shop}</Typography>
+                  <Typography variant="body2" color="textSecondary">
+                    {item.shop}
+                  </Typography>
                 </Grid>
                 <Grid item xs={2}>
-                  <Typography variant="body1" color="primary">${item.price.toFixed(2)}</Typography>
+                  <Typography variant="body1" color="primary">
+                    ${item.price.toFixed(2)}
+                  </Typography>
                 </Grid>
                 <Grid item xs={2}>
                   <TextField
                     type="number"
                     label="Quantity"
                     value={item.quantity || 1}
-                    onChange={(e) => handleQuantityChange(item.id, e.target.value)}
+                    onChange={(e) =>
+                      handleQuantityChange(item.id, e.target.value)
+                    }
                     size="small"
-                    sx={{ width: '100px' }}
+                    sx={{ width: "100px" }}
                     InputProps={{
-                      inputProps: { min: 1 }
+                      inputProps: { min: 1 },
                     }}
                   />
                 </Grid>
@@ -351,18 +389,35 @@ function cart() {
 
         <Grid container justifyContent="flex-end" spacing={2} sx={{ mb: 3 }}>
           <Grid item>
-            <Button variant="contained" color="primary" onClick={handlePlaceOrder} sx={{ marginRight: 2 }}>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handlePlaceOrder}
+              sx={{ marginRight: 2 }}
+            >
               Place Order(s)
             </Button>
           </Grid>
           <Grid item>
-            <Button variant="outlined" color="error" onClick={handleCancelPurchase}>
+            <Button
+              variant="outlined"
+              color="error"
+              onClick={handleCancelPurchase}
+            >
               Clear Cart
             </Button>
           </Grid>
         </Grid>
 
-        <Box sx={{ mt: 3, p: 2, border: '1px solid #ddd', borderRadius: '8px', backgroundColor: '#fff' }}>
+        <Box
+          sx={{
+            mt: 3,
+            p: 2,
+            border: "1px solid #ddd",
+            borderRadius: "8px",
+            backgroundColor: "#fff",
+          }}
+        >
           <Typography variant="h6" component="div" gutterBottom>
             Total Amount
           </Typography>
