@@ -1,42 +1,64 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import {
-  Menu,
-  MenuItem,
-  Container,
-  Avatar,
-  Typography,
-  Card,
-  CardContent,
-  CardMedia,
-  Button,
-  Grid,
   AppBar,
   Toolbar,
-  Box,
+  Typography,
   IconButton,
+  Avatar,
+  Menu,
+  MenuItem,
+  Box,
+  CardMedia,
+  Container,
+  Grid,
+  CardContent,
+  Button,
   List,
   ListItem,
+  Drawer,
+  ListItemIcon,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+import HomeIcon from "@mui/icons-material/Home";
+import BookIcon from "@mui/icons-material/Book";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import MapIcon from "@mui/icons-material/Map";
+import SettingsIcon from "@mui/icons-material/Settings";
+import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 
 function App() {
+  const [scrolled, setScrolled] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const open = Boolean(anchorEl);
+
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
+
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const [scrolled, setScrolled] = useState(false);
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
-
   const handleMenuOpen = (event) => setAnchorEl(event.currentTarget);
   const handleMenuClose = () => setAnchorEl(null);
+  const handleDrawerToggle = () => setDrawerOpen(!drawerOpen);
 
   const menuItems = [
-    { text: "Profile", href: "/profile" },
-    { text: "Settings", href: "/settings" },
-    { text: "Logout", href: "/login" },
+    { text: "Profile", href: "/profile", icon: <SettingsIcon /> },
+    { text: "Settings", href: "/settings", icon: <SettingsIcon /> },
+    { text: "Logout", href: "/login", icon: <ExitToAppIcon /> },
+  ];
+
+  const navLinks = [
+    { text: "Home", href: "/dashboard", icon: <HomeIcon /> },
+    { text: "Booking", href: "/booking", icon: <BookIcon /> },
+    { text: "Cart", href: "/cart", icon: <ShoppingCartIcon /> },
+    { text: "Map", href: "/map", icon: <MapIcon /> },
   ];
 
   return (
@@ -61,56 +83,94 @@ function App() {
             justifyContent: "space-between",
           }}
         >
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          />
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            CARCARE
-          </Typography>
-          <Box sx={{ display: "flex", gap: 2 }}>
-            {["/dashboard", "/booking", "/cart", "/map"].map((href, index) => (
-              <Button
-                key={href}
+          {isSmallScreen ? (
+            <>
+              <IconButton
+                size="large"
+                edge="start"
                 color="inherit"
-                sx={{
-                  fontSize: "14px",
-                  "&:hover": { color: "red" },
-                  fontWeight: "bold",
-                  fontFamily: "Arial, sans-serif",
-                }}
-                href={href}
+                aria-label="menu"
+                onClick={handleDrawerToggle}
+                sx={{ mr: 2 }}
               >
-                {["Home", "Booking", "Cart", "Map"][index]}
-              </Button>
-            ))}
-            <Avatar
-              src="/profile.png"
-              sx={{ ml: 1, cursor: "pointer" }}
-              onClick={handleMenuOpen}
-            />
-            <Menu
-              anchorEl={anchorEl}
-              open={open}
-              onClose={handleMenuClose}
-              PaperProps={{ sx: { width: "200px" } }}
-            >
-              {menuItems.map((item) => (
-                <MenuItem
-                  key={item.text}
-                  onClick={handleMenuClose}
-                  href={item.href}
+                <MenuIcon />
+              </IconButton>
+              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                CARCARE
+              </Typography>
+            </>
+          ) : (
+            <>
+              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                CARCARE
+              </Typography>
+              <Box sx={{ display: "flex", gap: 2 }}>
+                {navLinks.map((link) => (
+                  <Button
+                    key={link.href}
+                    color="inherit"
+                    sx={{
+                      fontSize: "14px",
+                      "&:hover": { color: "red" },
+                      fontWeight: "bold",
+                      fontFamily: "Arial, sans-serif",
+                    }}
+                    href={link.href}
+                  >
+                    {link.text}
+                  </Button>
+                ))}
+                
+                <Avatar
+                  src="/profile.png"
+                  sx={{ ml: 1, cursor: "pointer" }}
+                  onClick={handleMenuOpen}
+                />
+                <Menu
+                  anchorEl={anchorEl}
+                  open={open}
+                  onClose={handleMenuClose}
+                  PaperProps={{ sx: { width: "200px" } }}
                 >
-                  {item.text}
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
+                  {menuItems.map((item) => (
+                    <MenuItem
+                      key={item.text}
+                      onClick={handleMenuClose}
+                      href={item.href}
+                      sx={{ display: 'flex', alignItems: 'center' }}
+                    >
+                      {item.icon}
+                      <Typography sx={{ ml: 1 }}>{item.text}</Typography>
+                    </MenuItem>
+                  ))}
+                </Menu>
+              </Box>
+            </>
+          )}
         </Toolbar>
       </AppBar>
+
+      <Drawer
+        anchor="left"
+        open={drawerOpen}
+        onClose={handleDrawerToggle}
+      >
+        <Box
+          sx={{ width: 250 }}
+          role="presentation"
+          onClick={handleDrawerToggle}
+          onKeyDown={handleDrawerToggle}
+        >
+          <List>
+            {navLinks.map((link) => (
+              <ListItem button key={link.href} component="a" href={link.href}>
+                <ListItemIcon>{link.icon}</ListItemIcon>
+                <Typography>{link.text}</Typography>
+              </ListItem>
+            ))}
+          </List>
+        </Box>
+      </Drawer>
 
       <Box position="relative">
         <CardMedia
@@ -146,7 +206,7 @@ function App() {
             ml={7}
             sx={{
               fontSize: { xs: "1rem", sm: "2rem", md: "3rem", lg: "4rem" },
-            }} 
+            }}
           >
             HEATING AND AIR
           </Typography>
@@ -157,7 +217,7 @@ function App() {
             ml={7}
             sx={{
               fontSize: { xs: "1rem", sm: "2rem", md: "3rem", lg: "4rem" },
-            }} 
+            }}
           >
             CONDITIONING
           </Typography>
@@ -313,10 +373,10 @@ function App() {
                     "&:hover": {
                       backgroundColor: "darkred",
                     },
-                    fontSize: "1rem", 
-                    minWidth: "150px", 
+                    fontSize: "1rem",
+                    minWidth: "150px",
                   }}
-                  href="/booking"
+                  href="/booknow"
                 >
                   Book Now
                 </Button>

@@ -18,9 +18,21 @@ import {
   IconButton,
   InputAdornment,
   Button,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemIcon,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import DeleteIcon from "@mui/icons-material/Delete";
+import MenuIcon from "@mui/icons-material/Menu";
+import HomeIcon from "@mui/icons-material/Home";
+import BookIcon from "@mui/icons-material/Book";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import MapIcon from "@mui/icons-material/Map";
+import { useTheme } from "@mui/material/styles";
+import { useMediaQuery } from "@mui/material";
 
 // Dummy data
 const cartItems = [
@@ -40,11 +52,15 @@ const cartItems = [
   },
 ];
 
-function cart() {
+function Cart() {
   const [cart, setCart] = useState(cartItems);
   const [scrolled, setScrolled] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [drawerOpen, setDrawerOpen] = useState(false);
   const open = Boolean(anchorEl);
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   useEffect(() => {
     const handleScroll = () => {
@@ -93,13 +109,16 @@ function cart() {
       .toFixed(2);
   };
 
+  const handleDrawerOpen = () => {
+    setDrawerOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setDrawerOpen(false);
+  };
+
   return (
-    <Box
-      sx={{
-        backgroundColor: "#f0f0f0",
-        minHeight: "100vh",
-      }}
-    >
+    <Box sx={{ backgroundColor: "#f0f0f0", minHeight: "100vh" }}>
       <AppBar
         position="fixed"
         sx={{
@@ -113,78 +132,61 @@ function cart() {
           transition: "background-color 0.3s ease",
         }}
       >
-        <Toolbar
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-          </IconButton>
+        <Toolbar sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          {isMobile && (
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              sx={{ mr: 2 }}
+              onClick={handleDrawerOpen}
+            >
+              <MenuIcon />
+            </IconButton>
+          )}
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Carcare - To Pay
+            Carcare
           </Typography>
-          <Button
-            color="inherit"
-            sx={{
-              "&:hover": {
-                color: "red",
-              },
-              fontWeight: "bold",
-              fontFamily: "Arial, sans-serif",
-            }}
-            href="/dashboard"
-          >
-            Home
-          </Button>
-          <Button
-            color="inherit"
-            sx={{
-              "&:hover": {
-                color: "red",
-              },
-              fontWeight: "bold",
-              fontFamily: "Arial, sans-serif",
-            }}
-            href="/booking"
-          >
-            Booking
-          </Button>
-          <Button
-            color="inherit"
-            sx={{
-              "&:hover": {
-                color: "red",
-              },
-              fontWeight: "bold",
-              fontFamily: "Arial, sans-serif",
-            }}
-            href="/cart"
-          >
-            Cart
-          </Button>
+          {!isMobile && (
+            <Box sx={{ display: "flex" }}>
+              <Button
+                color="inherit"
+                sx={{ "&:hover": { color: "red" }, fontWeight: "bold", fontFamily: "Arial, sans-serif" }}
+                href="/dashboard"
+              >
+                Home
+              </Button>
+              <Button
+                color="inherit"
+                sx={{ "&:hover": { color: "red" }, fontWeight: "bold", fontFamily: "Arial, sans-serif" }}
+                href="/booking"
+              >
+                Booking
+              </Button>
+              <Button
+                color="inherit"
+                sx={{ "&:hover": { color: "red" }, fontWeight: "bold", fontFamily: "Arial, sans-serif" }}
+                href="/cart"
+              >
+                Cart
+              </Button>
+              <Button
+                color="inherit"
+                sx={{ "&:hover": { color: "red" }, fontWeight: "bold", fontFamily: "Arial, sans-serif" }}
+                href="/map"
+              >
+                Map
+              </Button>
+            </Box>
+          )}
           <TextField
             sx={{
               width: "200px",
-              "& fieldset": {
-                border: "none",
-              },
-              "& .MuiInputLabel-root": {
-                color: "black",
-              },
-              "& .MuiInputBase-input": {
-                color: "white",
-              },
-              "& .MuiInputAdornment-root": {
-                color: "white",
-              },
+              "& fieldset": { border: "none" },
+              "& .MuiInputLabel-root": { color: "black" },
+              "& .MuiInputBase-input": { color: "white" },
+              "& .MuiInputAdornment-root": { color: "white" },
             }}
             size="small"
             placeholder="Search here..."
@@ -207,36 +209,56 @@ function cart() {
             anchorEl={anchorEl}
             open={open}
             onClose={handleMenuClose}
-            PaperProps={{
-              sx: {
-                width: "200px",
-              },
-            }}
+            PaperProps={{ sx: { width: "200px" } }}
           >
-            <MenuItem onClick={handleMenuClose} href="/profile">
-              Profile
-            </MenuItem>
-            <MenuItem onClick={handleMenuClose} href="/settings">
-              Settings
-            </MenuItem>
-            <MenuItem onClick={handleMenuClose} href="/login">
-              Logout
-            </MenuItem>
+            <MenuItem onClick={handleMenuClose} href="/profile">Profile</MenuItem>
+            <MenuItem onClick={handleMenuClose} href="/settings">Settings</MenuItem>
+            <MenuItem onClick={handleMenuClose} href="/login">Logout</MenuItem>
           </Menu>
         </Toolbar>
       </AppBar>
+
+      <Drawer
+        anchor="left"
+        open={drawerOpen}
+        onClose={handleDrawerClose}
+        PaperProps={{ sx: { width: 240 } }}
+      >
+        <List>
+          <ListItem button onClick={handleDrawerClose} component="a" href="/dashboard">
+            <ListItemIcon>
+              <HomeIcon />
+            </ListItemIcon>
+            <ListItemText primary="Home" />
+          </ListItem>
+          <ListItem button onClick={handleDrawerClose} component="a" href="/booking">
+            <ListItemIcon>
+              <BookIcon />
+            </ListItemIcon>
+            <ListItemText primary="Booking" />
+          </ListItem>
+          <ListItem button onClick={handleDrawerClose} component="a" href="/cart">
+            <ListItemIcon>
+              <ShoppingCartIcon />
+            </ListItemIcon>
+            <ListItemText primary="Cart" />
+          </ListItem>
+          <ListItem button onClick={handleDrawerClose} component="a" href="/map">
+            <ListItemIcon>
+              <MapIcon />
+            </ListItemIcon>
+            <ListItemText primary="Map" />
+          </ListItem>
+        </List>
+      </Drawer>
 
       <Container sx={{ mt: "70px", padding: 2 }}>
         <Button
           variant="text"
           color="white"
           sx={{
-            "&:hover": {
-              color: "red",
-            },
-            "&:active": {
-              color: "darkred", 
-            },
+            "&:hover": { color: "red" },
+            "&:active": { color: "darkred" },
             fontFamily: "Arial, sans-serif",
             textAlign: "left",
             fontSize: "1.1rem",
@@ -246,17 +268,12 @@ function cart() {
         >
           My Cart
         </Button>
-
         <Button
           variant="text"
           color="white"
           sx={{
-            "&:hover": {
-              color: "red",
-            },
-            "&:active": {
-              color: "darkred", 
-            },
+            "&:hover": { color: "red" },
+            "&:active": { color: "darkred" },
             ml: 3,
             fontFamily: "Arial, sans-serif",
             textAlign: "left",
@@ -271,12 +288,8 @@ function cart() {
           variant="text"
           color="white"
           sx={{
-            "&:hover": {
-              color: "red",
-            },
-            "&:active": {
-              color: "darkred", 
-            },
+            "&:hover": { color: "red" },
+            "&:active": { color: "darkred" },
             ml: 3,
             fontFamily: "Arial, sans-serif",
             textAlign: "left",
@@ -291,19 +304,15 @@ function cart() {
           variant="text"
           color="white"
           sx={{
-            "&:hover": {
-              color: "red",
-            },
-            "&:active": {
-              color: "darkred", 
-            },
+            "&:hover": { color: "red" },
+            "&:active": { color: "darkred" },
             ml: 3,
             fontFamily: "Arial, sans-serif",
             textAlign: "left",
             fontSize: "1.1rem",
             textTransform: "none",
           }}
-          href="/cart"
+          href="/toship"
         >
           To Ship
         </Button>
@@ -311,19 +320,15 @@ function cart() {
           variant="text"
           color="white"
           sx={{
-            "&:hover": {
-              color: "red",
-            },
-            "&:active": {
-              color: "darkred", 
-            },
+            "&:hover": { color: "red" },
+            "&:active": { color: "darkred" },
             ml: 3,
             fontFamily: "Arial, sans-serif",
             textAlign: "left",
             fontSize: "1.1rem",
             textTransform: "none",
           }}
-          href="/cart"
+          href="/toreceive"
         >
           To Receive
         </Button>
@@ -367,9 +372,7 @@ function cart() {
                     type="number"
                     label="Quantity"
                     value={item.quantity || 1}
-                    onChange={(e) =>
-                      handleQuantityChange(item.id, e.target.value)
-                    }
+                    onChange={(e) => handleQuantityChange(item.id, e.target.value)}
                     size="small"
                     sx={{ width: "100px" }}
                     InputProps={{
@@ -430,4 +433,4 @@ function cart() {
   );
 }
 
-export default cart;
+export default Cart;

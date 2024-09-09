@@ -17,14 +17,30 @@ import {
   InputAdornment,
   Menu,
   MenuItem,
+  Drawer,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  useMediaQuery,
+  useTheme
 } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import SearchIcon from "@mui/icons-material/Search";
+import HomeIcon from "@mui/icons-material/Home";
+import BookingIcon from "@mui/icons-material/Assignment";
+import CartIcon from "@mui/icons-material/ShoppingCart";
+import MapIcon from "@mui/icons-material/Map";
 
 function App() {
   const [scrolled, setScrolled] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [drawerOpen, setDrawerOpen] = useState(false);
   const open = Boolean(anchorEl);
+  
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
 
   useEffect(() => {
     const handleScroll = () => {
@@ -47,9 +63,20 @@ function App() {
     setAnchorEl(null);
   };
 
+  const handleDrawerToggle = () => {
+    setDrawerOpen(!drawerOpen);
+  };
+
   const handleAcceptBooking = () => {
     console.log("Booking Accepted");
   };
+
+  const menuItems = [
+    { text: 'Home', icon: <HomeIcon />, href: '/dashboard' },
+    { text: 'Booking', icon: <BookingIcon />, href: '/booking' },
+    { text: 'Cart', icon: <CartIcon />, href: '/cart' },
+    { text: 'Map', icon: <MapIcon />, href: '/map' }
+  ];
 
   return (
     <Box sx={{ backgroundColor: "#f0f0f0", minHeight: "100vh" }}>
@@ -73,111 +100,131 @@ function App() {
             justifyContent: "space-between",
           }}
         >
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-          </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Carcare
-          </Typography>
-          <Button
-            color="inherit"
-            sx={{
-              "&:hover": {
-                color: "red",
-              },
-              fontWeight: "bold",
-              fontFamily: "Arial, sans-serif",
-            }}
-            href="/dashboard"
-          >
-            Home
-          </Button>
-          <Button
-            color="inherit"
-            sx={{
-              "&:hover": {
-                color: "red",
-              },
-              fontWeight: "bold",
-              fontFamily: "Arial, sans-serif",
-            }}
-            href="/booking"
-          >
-            Booking
-          </Button>
-          <Button
-            color="inherit"
-            sx={{
-              "&:hover": {
-                color: "red",
-              },
-              fontWeight: "bold",
-              fontFamily: "Arial, sans-serif",
-            }}
-            href="/cart"
-          >
-            Cart
-          </Button>
-          <TextField
-            sx={{
-              width: "200px",
-              "& fieldset": {
-                border: "none",
-              },
-              "& .MuiInputLabel-root": {
-                color: "black",
-              },
-              "& .MuiInputBase-input": {
-                color: "white",
-              },
-              "& .MuiInputAdornment-root": {
-                color: "white",
-              },
-            }}
-            size="small"
-            placeholder="Search here..."
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="end">
-                  <IconButton onClick={handleClick}>
-                    <SearchIcon sx={{ color: "white" }} />
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-          />
-          <Avatar
-            src="/profile.png"
-            sx={{ ml: 1, cursor: "pointer" }}
-            onClick={handleMenuOpen}
-          />
-          <Menu
-            anchorEl={anchorEl}
-            open={open}
-            onClose={handleMenuClose}
-            PaperProps={{
-              sx: {
-                width: "200px",
-              },
-            }}
-          >
-            <MenuItem onClick={handleMenuClose} href="/profile">
-              Profile
-            </MenuItem>
-            <MenuItem onClick={handleMenuClose} href="/settings">
-              Settings
-            </MenuItem>
-            <MenuItem onClick={handleMenuClose} href="/login">
-              Logout
-            </MenuItem>
-          </Menu>
+          {isSmallScreen ? (
+            <>
+              <IconButton
+                size="large"
+                edge="start"
+                color="inherit"
+                aria-label="menu"
+                onClick={handleDrawerToggle}
+                sx={{ mr: 2 }}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                Carcare
+              </Typography>
+            </>
+          ) : (
+            <>
+              <IconButton
+                size="large"
+                edge="start"
+                color="inherit"
+                aria-label="menu"
+                sx={{ mr: 2 }}
+              >
+                {/* Add menu icon here if needed */}
+              </IconButton>
+              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                Carcare
+              </Typography>
+              {menuItems.map((item) => (
+                <Button
+                  key={item.text}
+                  color="inherit"
+                  sx={{
+                    "&:hover": {
+                      color: "red",
+                    },
+                    fontWeight: "bold",
+                    fontFamily: "Arial, sans-serif",
+                  }}
+                  href={item.href}
+                >
+                  {item.text}
+                </Button>
+              ))}
+              <TextField
+                sx={{
+                  width: "200px",
+                  "& fieldset": {
+                    border: "none",
+                  },
+                  "& .MuiInputLabel-root": {
+                    color: "black",
+                  },
+                  "& .MuiInputBase-input": {
+                    color: "white",
+                  },
+                  "& .MuiInputAdornment-root": {
+                    color: "white",
+                  },
+                }}
+                size="small"
+                placeholder="Search here..."
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton onClick={handleClick}>
+                        <SearchIcon sx={{ color: "white" }} />
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+              />
+              <Avatar
+                src="/profile.png"
+                sx={{ ml: 1, cursor: "pointer" }}
+                onClick={handleMenuOpen}
+              />
+              <Menu
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleMenuClose}
+                PaperProps={{
+                  sx: {
+                    width: "200px",
+                  },
+                }}
+              >
+                <MenuItem onClick={handleMenuClose} href="/profile">
+                  Profile
+                </MenuItem>
+                <MenuItem onClick={handleMenuClose} href="/settings">
+                  Settings
+                </MenuItem>
+                <MenuItem onClick={handleMenuClose} href="/login">
+                  Logout
+                </MenuItem>
+              </Menu>
+            </>
+          )}
         </Toolbar>
       </AppBar>
+
+      <Drawer
+        anchor="left"
+        open={drawerOpen}
+        onClose={handleDrawerToggle}
+      >
+        <Box
+          sx={{ width: 250 }}
+          role="presentation"
+          onClick={handleDrawerToggle}
+          onKeyDown={handleDrawerToggle}
+        >
+          <List>
+            {menuItems.map((item) => (
+              <ListItem button key={item.text} component="a" href={item.href}>
+                <ListItemIcon>{item.icon}</ListItemIcon>
+                <ListItemText primary={item.text} />
+              </ListItem>
+            ))}
+          </List>
+        </Box>
+      </Drawer>
 
       <Box sx={{ marginTop: "70px", padding: 2 }}>
         <Button
@@ -188,7 +235,7 @@ function App() {
               color: "red",
             },
             "&:active": {
-              color: "darkred", 
+              color: "darkred",
             },
             fontFamily: "Arial, sans-serif",
             textAlign: "left",
@@ -209,7 +256,7 @@ function App() {
               color: "red",
             },
             "&:active": {
-              color: "darkred", 
+              color: "darkred",
             },
             fontFamily: "Arial, sans-serif",
             textAlign: "left",
@@ -246,20 +293,20 @@ function App() {
         <Divider
           sx={{
             mb: 2,
-            width: "88%", 
-            margin: "auto", 
+            width: "88%",
+            margin: "auto",
           }}
         />
 
         <Card
           sx={{
-            mt: { xs: 2, sm: 3, md: 3 }, 
+            mt: { xs: 2, sm: 3, md: 3 },
             borderRadius: "15px",
             boxShadow: "0 6px 12px rgba(0, 0, 0, 0.1)",
             transition: "transform 0.3s",
             "&:hover": { transform: "scale(1.02)" },
             width: "88%",
-            margin: "auto", 
+            margin: "auto",
           }}
         >
           <CardContent>
@@ -269,8 +316,8 @@ function App() {
                   alt="Nelson's Automotive Shop"
                   src="/logo.png"
                   sx={{
-                    width: { xs: 40, sm: 50 }, 
-                    height: { xs: 40, sm: 50 }, 
+                    width: { xs: 40, sm: 50 },
+                    height: { xs: 40, sm: 50 },
                     borderRadius: "8px",
                   }}
                 />
@@ -328,7 +375,7 @@ function App() {
               <Button
                 variant="contained"
                 color="success"
-                disabled 
+                disabled
               >
                 Booking Accepted
               </Button>

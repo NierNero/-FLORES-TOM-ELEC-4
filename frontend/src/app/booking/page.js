@@ -17,14 +17,28 @@ import {
   InputAdornment,
   Menu,
   MenuItem,
+  Drawer,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  useMediaQuery,
 } from '@mui/material';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import SearchIcon from '@mui/icons-material/Search';
+import MenuIcon from '@mui/icons-material/Menu';
+import HomeIcon from '@mui/icons-material/Home';
+import BookingIcon from '@mui/icons-material/Book';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import MapIcon from '@mui/icons-material/Map';
+import { useTheme } from '@mui/material/styles';
 
 function App() {
   const [scrolled, setScrolled] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   useEffect(() => {
     const handleScroll = () => {
@@ -47,9 +61,22 @@ function App() {
     setAnchorEl(null);
   };
 
+  const toggleDrawer = (open) => (event) => {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+    setDrawerOpen(open);
+  };
+
+  const menuItems = [
+    { text: 'Home', icon: <HomeIcon />, link: '/dashboard' },
+    { text: 'Booking', icon: <BookingIcon />, link: '/booking' },
+    { text: 'Cart', icon: <ShoppingCartIcon />, link: '/cart' },
+    { text: 'Map', icon: <MapIcon />, link: '/map' },
+  ];
+
   return (
-    <Box sx={{ backgroundColor: '#f0f0f0', minHeight: '100vh',
- }}>
+    <Box sx={{ backgroundColor: '#f0f0f0', minHeight: '100vh' }}>
       <AppBar 
         position="fixed" 
         sx={{
@@ -68,50 +95,76 @@ function App() {
             justifyContent: 'space-between',
           }}
         >
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-          </IconButton>
+          {isMobile && (
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              onClick={toggleDrawer(true)}
+            >
+              <MenuIcon />
+            </IconButton>
+          )}
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Carcare
           </Typography>
-          <Button
-            color="inherit"
-            sx={{
-              '&:hover': {
-                color: 'red',
-              }, fontWeight: 'bold', fontFamily: 'Arial, sans-serif'
-            }}
-            href="/dashboard"
-          >
-            Home
-          </Button>
-          <Button
-            color="inherit"
-            sx={{
-              '&:hover': {
-                color: 'red',
-              },fontWeight: 'bold', fontFamily: 'Arial, sans-serif'
-            }}
-            href="/booking"
-          >
-            Booking
-          </Button>
-          <Button
-            color="inherit"
-            sx={{
-              '&:hover': {
-                color: 'red',
-              }, fontWeight: 'bold', fontFamily: 'Arial, sans-serif'
-            }}
-            href="/cart"
-          >
-            Cart
-          </Button>
+          {!isMobile && (
+            <>
+              <Button
+                color="inherit"
+                sx={{
+                  '&:hover': {
+                    color: 'red',
+                  },
+                  fontWeight: 'bold',
+                  fontFamily: 'Arial, sans-serif'
+                }}
+                href="/dashboard"
+              >
+                Home
+              </Button>
+              <Button
+                color="inherit"
+                sx={{
+                  '&:hover': {
+                    color: 'red',
+                  },
+                  fontWeight: 'bold',
+                  fontFamily: 'Arial, sans-serif'
+                }}
+                href="/booking"
+              >
+                Booking
+              </Button>
+              <Button
+                color="inherit"
+                sx={{
+                  '&:hover': {
+                    color: 'red',
+                  },
+                  fontWeight: 'bold',
+                  fontFamily: 'Arial, sans-serif'
+                }}
+                href="/cart"
+              >
+                Cart
+              </Button>
+              <Button
+                color="inherit"
+                sx={{
+                  '&:hover': {
+                    color: 'red',
+                  },
+                  fontWeight: 'bold',
+                  fontFamily: 'Arial, sans-serif'
+                }}
+                href="/map"
+              >
+                Map
+              </Button>
+            </>
+          )}
           <TextField
             sx={{
               width: '200px',
@@ -147,7 +200,7 @@ function App() {
           />
           <Menu
             anchorEl={anchorEl}
-            open={open}
+            open={Boolean(anchorEl)}
             onClose={handleMenuClose}
             PaperProps={{
               sx: {
@@ -162,86 +215,99 @@ function App() {
         </Toolbar>
       </AppBar>
 
+      <Drawer
+        anchor="left"
+        open={drawerOpen}
+        onClose={toggleDrawer(false)}
+      >
+        <List>
+          {menuItems.map((item) => (
+            <ListItem button key={item.text} onClick={() => window.location.href = item.link}>
+              <ListItemIcon>{item.icon}</ListItemIcon>
+              <ListItemText primary={item.text} />
+            </ListItem>
+          ))}
+        </List>
+      </Drawer>
+
       <Box sx={{ marginTop: '70px', padding: 2 }}>
-      <Button
-  variant="text"
-  color="white"
-  sx={{
-    '&:hover': {
-      color: 'red',
-    },
-    '&:active': {
-      color: 'darkred', 
-    },
-    fontFamily: 'Arial, sans-serif',
-    textAlign: 'left',
-    fontSize: '1.1rem',
-    textTransform: 'none',
-    marginLeft: '6%'
-  }}
-  href="/booking"
->
-  Pending Book
-</Button>
+        <Button
+          variant="text"
+          color="white"
+          sx={{
+            '&:hover': {
+              color: 'red',
+            },
+            '&:active': {
+              color: 'darkred', 
+            },
+            fontFamily: 'Arial, sans-serif',
+            textAlign: 'left',
+            fontSize: '1.1rem',
+            textTransform: 'none',
+            marginLeft: '6%'
+          }}
+          href="/booking"
+        >
+          Pending Book
+        </Button>
 
-<Button
-  variant="text"
-  color="white"
-  sx={{
-    '&:hover': {
-      color: 'red',
-    },
-    '&:active': {
-      color: 'darkred', 
-    },
-    fontFamily: 'Arial, sans-serif',
-    textAlign: 'left',
-    fontSize: '1.1rem',
-    textTransform: 'none',
-    marginLeft: '3%'
-  }}
-  href="/acceptbook"
->
-  Accepted Book
-</Button>
+        <Button
+          variant="text"
+          color="white"
+          sx={{
+            '&:hover': {
+              color: 'red',
+            },
+            '&:active': {
+              color: 'darkred', 
+            },
+            fontFamily: 'Arial, sans-serif',
+            textAlign: 'left',
+            fontSize: '1.1rem',
+            textTransform: 'none',
+            marginLeft: '3%'
+          }}
+          href="/acceptbook"
+        >
+          Accepted Book
+        </Button>
 
-<Button
-  variant="text"
-  color="white"
-  sx={{
-    '&:hover': {
-      color: 'red',
-    },
-    '&:active': {
-      color: 'darkred', 
-    },
-    fontFamily: 'Arial, sans-serif',
-    textAlign: 'left',
-    fontSize: '1.1rem',
-    textTransform: 'none',
-    marginLeft: '3%'
-  }}
-  href="/cancelbook"
->
-  Canceled Book
-</Button>
+        <Button
+          variant="text"
+          color="white"
+          sx={{
+            '&:hover': {
+              color: 'red',
+            },
+            '&:active': {
+              color: 'darkred', 
+            },
+            fontFamily: 'Arial, sans-serif',
+            textAlign: 'left',
+            fontSize: '1.1rem',
+            textTransform: 'none',
+            marginLeft: '3%'
+          }}
+          href="/cancelbook"
+        >
+          Canceled Book
+        </Button>
         <Divider sx={{
-    mb: 2,
-    width: '88%', 
-    margin: 'auto', 
-  }}/>
+          mb: 2,
+          width: '88%', 
+          margin: 'auto', 
+        }}/>
 
         <Card sx={{
-            mt: { xs: 2, sm: 3, md: 3 }, 
-            borderRadius: '15px',
-            boxShadow: '0 6px 12px rgba(0, 0, 0, 0.1)',
-            transition: 'transform 0.3s',
-            '&:hover': { transform: 'scale(1.02)' },
-            width: '88%',
-            margin: 'auto', 
-
-            
-          }}>
+          mt: { xs: 2, sm: 3, md: 3 }, 
+          borderRadius: '15px',
+          boxShadow: '0 6px 12px rgba(0, 0, 0, 0.1)',
+          transition: 'transform 0.3s',
+          '&:hover': { transform: 'scale(1.02)' },
+          width: '88%',
+          margin: 'auto', 
+        }}>
           <CardContent>
             <Grid container spacing={2} alignItems="center" >
               <Grid item xs={2} sm="auto">

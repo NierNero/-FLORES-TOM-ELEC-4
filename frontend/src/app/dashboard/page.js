@@ -17,57 +17,72 @@ import {
   InputAdornment,
   Menu,
   MenuItem,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemIcon,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import Star from "@mui/icons-material/Star";
 import StarBorder from "@mui/icons-material/StarBorder";
+import LocationOn from "@mui/icons-material/LocationOn";
+import MenuIcon from "@mui/icons-material/Menu";
+import HomeIcon from "@mui/icons-material/Home";
+import BookIcon from "@mui/icons-material/Book";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import MapIcon from "@mui/icons-material/Map";
+import { useTheme } from "@mui/material/styles";
+import { useMediaQuery } from "@mui/material";
+import StorefrontIcon from '@mui/icons-material/Storefront';
+import StarRateIcon from '@mui/icons-material/StarRate';
 
 const repairShops = [
   {
     name: "My Repair Shop",
-    description: "Simple Shop",
+    description: "Likoan Margindon Cebu",
     imageUrl: "/img/1.jpg",
     rating: 4,
   },
   {
     name: "Our Repair Shop",
-    description: "Simple Shop",
+    description: "Likoan Margindon Cebu",
     imageUrl: "/img/2.jpg",
     rating: 5,
   },
   {
     name: "Wala Repair Shop",
-    description: "Simple Shop",
+    description: "Likoan Margindon Cebu",
     imageUrl: "/img/3.jpg",
     rating: 4,
   },
   {
     name: "Another Repair Shop",
-    description: "Simple Shop",
+    description: "Likoan Margindon Cebu",
     imageUrl: "/img/4.jpg",
     rating: 3,
   },
   {
     name: "Another Repair Shop",
-    description: "Simple Shop",
+    description: "Likoan Margindon Cebu",
     imageUrl: "/img/4.jpg",
     rating: 2,
   },
   {
     name: "My Repair Shop",
-    description: "Simple Shop",
+    description: "Likoan Margindon Cebu",
     imageUrl: "/img/1.jpg",
     rating: 4,
   },
   {
     name: "Our Repair Shop",
-    description: "Simple Shop",
+    description: "Likoan Margindon Cebu",
     imageUrl: "/img/2.jpg",
     rating: 1,
   },
   {
     name: "Wala Repair Shop",
-    description: "Simple Shop",
+    description: "Likoan Margindon Cebu",
     imageUrl: "/img/3.jpg",
     rating: 4,
   },
@@ -75,13 +90,26 @@ const repairShops = [
 
 const RepairShopCard = ({ shop }) => {
   const renderStars = () => {
-    return Array.from({ length: 5 }, (_, index) =>
-      index < shop.rating ? (
-        <Star key={index} sx={{ color: "gold" }} />
-      ) : (
-        <StarBorder key={index} sx={{ color: "gold" }} />
-      )
-    );
+    const fullStars = Array.from({ length: shop.rating }, (_, index) => (
+      <Star key={index} sx={{ color: 'gold' }} />
+    ));
+    const emptyStars = Array.from({ length: 5 - shop.rating }, (_, index) => (
+      <StarBorder key={index + shop.rating} sx={{ color: 'gold' }} />
+    ));
+    return [...fullStars, ...emptyStars];
+  };
+
+  const getShopIcon = (shopName) => {
+    switch (shopName) {
+      case 'My Repair Shop':
+        return <ShopIcon />;
+      case 'Our Repair Shop':
+        return <ShopIcon />;
+      case 'Wala Repair Shop':
+        return <ShopIcon />;
+      default:
+        return <ShopIcon />;
+    }
   };
 
   return (
@@ -91,7 +119,7 @@ const RepairShopCard = ({ shop }) => {
         display: "flex",
         flexDirection: "column",
         marginTop: 2,
-        borderRadius: "10px",
+        borderRadius: "13px",
       }}
     >
       <CardMedia
@@ -101,28 +129,37 @@ const RepairShopCard = ({ shop }) => {
         alt={shop.name}
       />
       <CardContent sx={{ flexGrow: 1 }}>
-        <Typography variant="h6" component="div">
-          {shop.name}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          {shop.description}
-        </Typography>
-        <Box sx={{ display: "flex", alignItems: "center", marginTop: 1 }}>
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <StorefrontIcon sx={{ marginRight: 1, color: 'text.secondary' }} />
+          <Typography variant="h6" component="div">
+            {shop.name}
+          </Typography>
+        </Box>
+        <Box sx={{ display: 'flex', alignItems: 'center', marginTop: 1 }}>
+          <LocationOn sx={{ marginRight: 1, color: 'text.secondary' }} />
+          <Typography variant="body2" color="text.secondary">
+            {shop.description}
+          </Typography>
+        </Box>
+        <Box sx={{ display: 'flex', alignItems: 'center', marginTop: 1 }}>
           {renderStars()}
+          <Typography variant="body2" sx={{ marginLeft: 1 }}>
+            {shop.rating} Ratings
+          </Typography>
         </Box>
       </CardContent>
       <Box
         sx={{
           padding: 2,
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
         }}
       >
         <Button
           variant="contained"
           color="primary"
-          sx={{ margin: "auto" }}
+          sx={{ margin: 'auto' }}
           href="/service"
         >
           Visit Now
@@ -131,12 +168,12 @@ const RepairShopCard = ({ shop }) => {
           variant="outlined"
           color="error"
           sx={{
-            margin: "auto",
-            borderColor: "red",
-            color: "red",
-            "&:hover": {
-              borderColor: "darkred",
-              color: "darkred",
+            margin: 'auto',
+            borderColor: 'red',
+            color: 'red',
+            '&:hover': {
+              borderColor: 'darkred',
+              color: 'darkred',
             },
           }}
           href="/product"
@@ -151,15 +188,15 @@ const RepairShopCard = ({ shop }) => {
 const App = () => {
   const [scrolled, setScrolled] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [drawerOpen, setDrawerOpen] = useState(false);
   const open = Boolean(anchorEl);
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+      setScrolled(window.scrollY > 50);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -178,8 +215,16 @@ const App = () => {
     setAnchorEl(null);
   };
 
+  const handleDrawerOpen = () => {
+    setDrawerOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setDrawerOpen(false);
+  };
+
   return (
-    <Box sx={{ backgroundColor: "#f0f0f0", minHeight: "100vh" }}>
+    <>
       <AppBar
         position="fixed"
         sx={{
@@ -200,72 +245,81 @@ const App = () => {
             justifyContent: "space-between",
           }}
         >
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          ></IconButton>
+          {isMobile && (
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              sx={{ mr: 2 }}
+              onClick={handleDrawerOpen}
+            >
+              <MenuIcon />
+            </IconButton>
+          )}
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Carcare
           </Typography>
-          <Button
-            color="inherit"
-            sx={{
-              fontSize: "14px",
-              "&:hover": {
-                color: "red",
-              },
-              fontWeight: "bold",
-              fontFamily: "Arial, sans-serif",
-            }}
-            href="/dashboard"
-          >
-            Home
-          </Button>
-          <Button
-            color="inherit"
-            sx={{
-              fontSize: "14px",
-              "&:hover": {
-                color: "red",
-              },
-              fontWeight: "bold",
-              fontFamily: "Arial, sans-serif",
-            }}
-            href="/booking"
-          >
-            Booking
-          </Button>
-          <Button
-            color="inherit"
-            sx={{
-              fontSize: "14px",
-              "&:hover": {
-                color: "red",
-              },
-              fontWeight: "bold",
-              fontFamily: "Arial, sans-serif",
-            }}
-            href="/cart"
-          >
-            Cart
-          </Button>
-          <Button
-            color="inherit"
-            sx={{
-              fontSize: "14px",
-              "&:hover": {
-                color: "red",
-              },
-              fontWeight: "bold",
-              fontFamily: "Arial, sans-serif",
-            }}
-            href="/map"
-          >
-            Map
-          </Button>
+          {!isMobile && (
+            <Box sx={{ display: "flex" }}>
+              <Button
+                color="inherit"
+                sx={{
+                  fontSize: "14px",
+                  "&:hover": {
+                    color: "red",
+                  },
+                  fontWeight: "bold",
+                  fontFamily: "Arial, sans-serif",
+                }}
+                href="/dashboard"
+              >
+                Home
+              </Button>
+              <Button
+                color="inherit"
+                sx={{
+                  fontSize: "14px",
+                  "&:hover": {
+                    color: "red",
+                  },
+                  fontWeight: "bold",
+                  fontFamily: "Arial, sans-serif",
+                }}
+                href="/booking"
+              >
+                Booking
+              </Button>
+              <Button
+                color="inherit"
+                sx={{
+                  fontSize: "14px",
+                  "&:hover": {
+                    color: "red",
+                  },
+                  fontWeight: "bold",
+                  fontFamily: "Arial, sans-serif",
+                }}
+                href="/cart"
+              >
+                Cart
+              </Button>
+              <Button
+                color="inherit"
+                sx={{
+                  fontSize: "14px",
+                  "&:hover": {
+                    color: "red",
+                  },
+                  fontWeight: "bold",
+                  fontFamily: "Arial, sans-serif",
+                }}
+                href="/map"
+              >
+                Map
+              </Button>
+            </Box>
+          )}
           <TextField
             sx={{
               width: "200px",
@@ -322,9 +376,35 @@ const App = () => {
         </Toolbar>
       </AppBar>
 
+      <Drawer
+        anchor="left"
+        open={drawerOpen}
+        onClose={handleDrawerClose}
+      >
+        <List>
+          <ListItem button component="a" href="/dashboard">
+            <ListItemIcon><HomeIcon /></ListItemIcon>
+            <ListItemText primary="Home" />
+          </ListItem>
+          <ListItem button component="a" href="/booking">
+            <ListItemIcon><BookIcon /></ListItemIcon>
+            <ListItemText primary="Booking" />
+          </ListItem>
+          <ListItem button component="a" href="/cart">
+            <ListItemIcon><ShoppingCartIcon /></ListItemIcon>
+            <ListItemText primary="Cart" />
+          </ListItem>
+          <ListItem button component="a" href="/map">
+            <ListItemIcon><MapIcon /></ListItemIcon>
+            <ListItemText primary="Map" />
+          </ListItem>
+        </List>
+      </Drawer>
+
       <Container
         sx={{
-          marginTop: "70px",
+          marginTop: "100px",
+          marginBottom: "30px",
           padding: 2,
           border: "1px solid #ccc",
           backgroundColor: "white",
@@ -356,7 +436,7 @@ const App = () => {
           ))}
         </Grid>
       </Container>
-    </Box>
+    </>
   );
 };
 

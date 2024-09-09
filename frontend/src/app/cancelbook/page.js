@@ -17,14 +17,30 @@ import {
   InputAdornment,
   Menu,
   MenuItem,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemIcon,
+  useMediaQuery,
 } from "@mui/material";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import SearchIcon from "@mui/icons-material/Search";
+import MenuIcon from "@mui/icons-material/Menu";
+import HomeIcon from "@mui/icons-material/Home";
+import BookIcon from "@mui/icons-material/Book";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import MapIcon from "@mui/icons-material/Map";
+import { useTheme } from "@mui/material/styles";
 
 function App() {
   const [scrolled, setScrolled] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [drawerOpen, setDrawerOpen] = useState(false);
   const open = Boolean(anchorEl);
+  
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   useEffect(() => {
     const handleScroll = () => {
@@ -45,6 +61,14 @@ function App() {
 
   const handleMenuClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleDrawerOpen = () => {
+    setDrawerOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setDrawerOpen(false);
   };
 
   return (
@@ -69,56 +93,77 @@ function App() {
             justifyContent: "space-between",
           }}
         >
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-          </IconButton>
+          {isMobile && (
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              sx={{ mr: 2 }}
+              onClick={handleDrawerOpen}
+            >
+              <MenuIcon />
+            </IconButton>
+          )}
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Carcare
           </Typography>
-          <Button
-            color="inherit"
-            sx={{
-              "&:hover": {
-                color: "red",
-              },
-              fontWeight: "bold",
-              fontFamily: "Arial, sans-serif",
-            }}
-            href="/dashboard"
-          >
-            Home
-          </Button>
-          <Button
-            color="inherit"
-            sx={{
-              "&:hover": {
-                color: "red",
-              },
-              fontWeight: "bold",
-              fontFamily: "Arial, sans-serif",
-            }}
-            href="/booking"
-          >
-            Booking
-          </Button>
-          <Button
-            color="inherit"
-            sx={{
-              "&:hover": {
-                color: "red",
-              },
-              fontWeight: "bold",
-              fontFamily: "Arial, sans-serif",
-            }}
-            href="/cart"
-          >
-            Cart
-          </Button>
+          {!isMobile && (
+            <Box sx={{ display: "flex" }}>
+              <Button
+                color="inherit"
+                sx={{
+                  "&:hover": {
+                    color: "red",
+                  },
+                  fontWeight: "bold",
+                  fontFamily: "Arial, sans-serif",
+                }}
+                href="/dashboard"
+              >
+                Home
+              </Button>
+              <Button
+                color="inherit"
+                sx={{
+                  "&:hover": {
+                    color: "red",
+                  },
+                  fontWeight: "bold",
+                  fontFamily: "Arial, sans-serif",
+                }}
+                href="/booking"
+              >
+                Booking
+              </Button>
+              <Button
+                color="inherit"
+                sx={{
+                  "&:hover": {
+                    color: "red",
+                  },
+                  fontWeight: "bold",
+                  fontFamily: "Arial, sans-serif",
+                }}
+                href="/cart"
+              >
+                Cart
+              </Button>
+              <Button
+                color="inherit"
+                sx={{
+                  "&:hover": {
+                    color: "red",
+                  },
+                  fontWeight: "bold",
+                  fontFamily: "Arial, sans-serif",
+                }}
+                href="/map"
+              >
+                Map
+              </Button>
+            </Box>
+          )}
           <TextField
             sx={{
               width: "200px",
@@ -174,6 +219,40 @@ function App() {
           </Menu>
         </Toolbar>
       </AppBar>
+
+      <Drawer
+        anchor="left"
+        open={drawerOpen}
+        onClose={handleDrawerClose}
+        PaperProps={{ sx: { width: 240 } }}
+      >
+        <List>
+          <ListItem button onClick={handleDrawerClose} component="a" href="/dashboard" sx={{ py: 1.5 }}>
+            <ListItemIcon sx={{ minWidth: "35px" }}>
+              <HomeIcon />
+            </ListItemIcon>
+            <ListItemText primary="Home" sx={{ ml: 1 }} />
+          </ListItem>
+          <ListItem button onClick={handleDrawerClose} component="a" href="/booking" sx={{ py: 1.5 }}>
+            <ListItemIcon sx={{ minWidth: "35px" }}>
+              <BookIcon />
+            </ListItemIcon>
+            <ListItemText primary="Booking" sx={{ ml: 1 }} />
+          </ListItem>
+          <ListItem button onClick={handleDrawerClose} component="a" href="/cart" sx={{ py: 1.5 }}>
+            <ListItemIcon sx={{ minWidth: "35px" }}>
+              <ShoppingCartIcon />
+            </ListItemIcon>
+            <ListItemText primary="Cart" sx={{ ml: 1 }} />
+          </ListItem>
+          <ListItem button onClick={handleDrawerClose} component="a" href="/map" sx={{ py: 1.5 }}>
+            <ListItemIcon sx={{ minWidth: "35px" }}>
+              <MapIcon />
+            </ListItemIcon>
+            <ListItemText primary="Map" sx={{ ml: 1 }} />
+          </ListItem>
+        </List>
+      </Drawer>
 
       <Box sx={{ marginTop: "70px", padding: 2 }}>
         <Button
