@@ -74,8 +74,6 @@ function App() {
           display: "flex",
           justifyContent: "center",
           transition: "background-color 0.3s ease",
-          borderBottomLeftRadius: "35px", 
-          borderBottomRightRadius: "35px",
         }}
       >
         <Toolbar
@@ -112,12 +110,13 @@ function App() {
                     key={link.href}
                     color="white"
                     sx={{
+                      mr: 2,
                       fontSize: "14px",
                       "&:hover": { color: "red" },
-                      fontWeight: "bold",
                       fontFamily: "Arial, sans-serif",
                     }}
                     href={link.href}
+                    startIcon={link.icon}
                   >
                     {link.text}
                   </Button>

@@ -18,9 +18,14 @@ import {
   Button,
   TextField,
   InputAdornment,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import DeleteIcon from "@mui/icons-material/Delete";
+import HomeIcon from "@mui/icons-material/Home";
+import BookIcon from "@mui/icons-material/Book";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import MapIcon from "@mui/icons-material/Map";
 
 // Dummy data
 const cartItems = [
@@ -45,6 +50,8 @@ function ToPayPage() {
   const [scrolled, setScrolled] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   useEffect(() => {
     const handleScroll = () => {
@@ -72,28 +79,20 @@ function ToPayPage() {
   };
 
   const calculateTotal = () => {
-    return cart.reduce((total, item) => total + item.price * 1, 0).toFixed(2); 
+    return cart.reduce((total, item) => total + item.price * 1, 0).toFixed(2);
   };
 
   return (
-    <Box
-      sx={{
-        minHeight: "100vh",
-      }}
-    >
+    <Box sx={{ minHeight: "100vh" }}>
       <AppBar
         position="fixed"
         sx={{
-          backgroundColor: scrolled
-            ? "rgba(0, 0, 0, 1)"
-            : "rgba(13, 71, 161, 1)",
-            boxShadow: "0 3px 5px rgba(0, 0, 0, 0.4)",
-            height: "70px",
+          backgroundColor: scrolled ? "rgba(0, 0, 0, 1)" : "rgba(13, 71, 161, 1)",
+          boxShadow: "0 3px 5px rgba(0, 0, 0, 0.4)",
+          height: "70px",
           display: "flex",
           justifyContent: "center",
           transition: "background-color 0.3s ease",
-          borderBottomLeftRadius: "35px", 
-          borderBottomRightRadius: "35px",
         }}
       >
         <Toolbar
@@ -101,73 +100,78 @@ function ToPayPage() {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
+            width: "100%",
           }}
         >
-          <IconButton
-            size="large"
-            edge="start"
-            color="white"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
+          <IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
+            {/* Add Menu icon if needed */}
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Carcare - To Pay
           </Typography>
-          <Button
-            color="white"
-            sx={{
-              "&:hover": {
-                color: "white",
-              },
-              fontWeight: "bold",
-              fontFamily: "Arial, sans-serif",
-            }}
-            href="/dashboard"
-          >
-            Home
-          </Button>
-          <Button
-            color="white"
-            sx={{
-              "&:hover": {
-                color: "white",
-              },
-              fontWeight: "bold",
-              fontFamily: "Arial, sans-serif",
-            }}
-            href="/booking"
-          >
-            Booking
-          </Button>
-          <Button
-            color="white"
-            sx={{
-              "&:hover": {
-                color: "white",
-              },
-              fontWeight: "bold",
-              fontFamily: "Arial, sans-serif",
-            }}
-            href="/cart"
-          >
-            Cart
-          </Button>
+          {!isMobile && (
+            <Box sx={{ display: "flex", gap: 2, mr: 2 }}>
+              <Button
+                color="inherit"
+                sx={{
+                  mr: 2,
+                  fontSize: "14px",
+                  "&:hover": { color: "red" },
+                  fontFamily: "Arial, sans-serif",
+                }}
+                href="/dashboard"
+                startIcon={<HomeIcon />}
+              >
+                Home
+              </Button>
+              <Button
+                color="inherit"
+                sx={{
+                  mr: 2,
+                  fontSize: "14px",
+                  "&:hover": { color: "red" },
+                  fontFamily: "Arial, sans-serif",
+                }}
+                href="/booking"
+                startIcon={<BookIcon />}
+              >
+                Booking
+              </Button>
+              <Button
+                color="inherit"
+                sx={{
+                  mr: 2,
+                  fontSize: "14px",
+                  "&:hover": { color: "red" },
+                  fontFamily: "Arial, sans-serif",
+                }}
+                href="/cart"
+                startIcon={<ShoppingCartIcon />}
+              >
+                Cart
+              </Button>
+              <Button
+                color="inherit"
+                sx={{
+                  mr: 2,
+                  fontSize: "14px",
+                  "&:hover": { color: "red" },
+                  fontFamily: "Arial, sans-serif",
+                }}
+                href="/map"
+                startIcon={<MapIcon />}
+              >
+                Map
+              </Button>
+            </Box>
+          )}
           <TextField
             sx={{
               width: "200px",
-              "& fieldset": {
-                border: "none",
-              },
-              "& .MuiInputLabel-root": {
-                color: "black",
-              },
-              "& .MuiInputBase-input": {
-                color: "white",
-              },
-              "& .MuiInputAdornment-root": {
-                color: "white",
-              },
+              "& fieldset": { border: "none" },
+              "& .MuiInputLabel-root": { color: "black" },
+              "& .MuiInputBase-input": { color: "white" },
+              "& .MuiInputAdornment-root": { color: "white" },
             }}
             size="small"
             placeholder="Search here..."
@@ -190,21 +194,11 @@ function ToPayPage() {
             anchorEl={anchorEl}
             open={open}
             onClose={handleMenuClose}
-            PaperProps={{
-              sx: {
-                width: "200px",
-              },
-            }}
+            PaperProps={{ sx: { width: "200px" } }}
           >
-            <MenuItem onClick={handleMenuClose} href="/profile">
-              Profile
-            </MenuItem>
-            <MenuItem onClick={handleMenuClose} href="/settings">
-              Settings
-            </MenuItem>
-            <MenuItem onClick={handleMenuClose} href="/login">
-              Logout
-            </MenuItem>
+            <MenuItem onClick={handleMenuClose} href="/profile">Profile</MenuItem>
+            <MenuItem onClick={handleMenuClose} href="/settings">Settings</MenuItem>
+            <MenuItem onClick={handleMenuClose} href="/login">Logout</MenuItem>
           </Menu>
         </Toolbar>
       </AppBar>
@@ -212,14 +206,10 @@ function ToPayPage() {
       <Container sx={{ mt: "70px", padding: 2 }}>
         <Button
           variant="text"
-          color="white"
+          color="inherit"
           sx={{
-            "&:hover": {
-              color: "white",
-            },
-            "&:active": {
-              color: "darkred", 
-            },
+            "&:hover": { color: "white" },
+            "&:active": { color: "darkred" },
             fontFamily: "Arial, sans-serif",
             textAlign: "left",
             fontSize: "1.1rem",
@@ -232,14 +222,10 @@ function ToPayPage() {
 
         <Button
           variant="text"
-          color="white"
+          color="inherit"
           sx={{
-            "&:hover": {
-              color: "white",
-            },
-            "&:active": {
-              color: "darkred", 
-            },
+            "&:hover": { color: "white" },
+            "&:active": { color: "darkred" },
             ml: 3,
             fontFamily: "Arial, sans-serif",
             textAlign: "left",
@@ -252,14 +238,10 @@ function ToPayPage() {
         </Button>
         <Button
           variant="text"
-          color="white"
+          color="inherit"
           sx={{
-            "&:hover": {
-              color: "white",
-            },
-            "&:active": {
-              color: "darkred", 
-            },
+            "&:hover": { color: "white" },
+            "&:active": { color: "darkred" },
             ml: 3,
             fontFamily: "Arial, sans-serif",
             textAlign: "left",
@@ -272,43 +254,51 @@ function ToPayPage() {
         </Button>
         <Button
           variant="text"
-          color="white"
+          color="inherit"
           sx={{
-            "&:hover": {
-              color: "white",
-            },
-            "&:active": {
-              color: "darkred", 
-            },
+            "&:hover": { color: "white" },
+            "&:active": { color: "darkred" },
             ml: 3,
             fontFamily: "Arial, sans-serif",
             textAlign: "left",
             fontSize: "1.1rem",
             textTransform: "none",
           }}
-          href="/cart"
+          href="/toshop"
         >
           To Ship
         </Button>
         <Button
           variant="text"
-          color="white"
+          color="inherit"
           sx={{
-            "&:hover": {
-              color: "white",
-            },
-            "&:active": {
-              color: "darkred", 
-            },
+            "&:hover": { color: "white" },
+            "&:active": { color: "darkred" },
             ml: 3,
             fontFamily: "Arial, sans-serif",
             textAlign: "left",
             fontSize: "1.1rem",
             textTransform: "none",
           }}
-          href="/cart"
+          href="/toreceive"
         >
           To Receive
+        </Button>
+        <Button
+          variant="text"
+          color="white"
+          sx={{
+            "&:hover": { color: "white" },
+            "&:active": { color: "darkred" },
+            ml: 3,
+            fontFamily: "Arial, sans-serif",
+            textAlign: "left",
+            fontSize: "1.1rem",
+            textTransform: "none",
+          }}
+          href="/cancelorder"
+        >
+          Canceled
         </Button>
 
         <Divider sx={{ mb: 2 }} />
@@ -321,7 +311,6 @@ function ToPayPage() {
               borderRadius: "15px",
               boxShadow: "0 6px 12px rgba(0, 0, 0, 0.1)",
               transition: "transform 0.3s",
-              "&:hover": { transform: "scale(1.02)" },
             }}
           >
             <CardContent>
@@ -346,9 +335,11 @@ function ToPayPage() {
                   </Typography>
                 </Grid>
                 <Grid item xs={2}>
-                  <Typography variant="body1">Quantity: 1</Typography>{" "}
+                  <Typography variant="body1">Quantity: 1</Typography>
                 </Grid>
-                <Grid item xs={1}></Grid>
+                <Grid item xs={1}>
+                 
+                </Grid>
               </Grid>
             </CardContent>
           </Card>

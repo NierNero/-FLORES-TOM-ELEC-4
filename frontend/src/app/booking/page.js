@@ -28,7 +28,7 @@ import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import SearchIcon from '@mui/icons-material/Search';
 import MenuIcon from '@mui/icons-material/Menu';
 import HomeIcon from '@mui/icons-material/Home';
-import BookingIcon from '@mui/icons-material/Book';
+import BookIcon from "@mui/icons-material/Book";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import MapIcon from '@mui/icons-material/Map';
 import { useTheme } from '@mui/material/styles';
@@ -70,7 +70,7 @@ function App() {
 
   const menuItems = [
     { text: 'Home', icon: <HomeIcon />, link: '/dashboard' },
-    { text: 'Booking', icon: <BookingIcon />, link: '/booking' },
+    { text: 'Booking', icon: <BookIcon />, link: '/booking' },
     { text: 'Cart', icon: <ShoppingCartIcon />, link: '/cart' },
     { text: 'Map', icon: <MapIcon />, link: '/map' },
   ];
@@ -86,8 +86,6 @@ function App() {
           display: 'flex',
           justifyContent: 'center',
           transition: 'background-color 0.3s ease', 
-          borderBottomLeftRadius: "35px", 
-          borderBottomRightRadius: "35px",
         }}
       >
         <Toolbar 
@@ -112,60 +110,60 @@ function App() {
             Carcare
           </Typography>
           {!isMobile && (
-            <>
+            <Box sx={{ display: "flex", gap: 2, mr: 2 }}>
               <Button
                 color="white"
                 sx={{
-                  '&:hover': {
-                    color: 'red',
-                  },
-                  fontWeight: 'bold',
-                  fontFamily: 'Arial, sans-serif'
+                  mr: 2,
+                  fontSize: "14px",
+                  "&:hover": { color: "red" },
+                  fontFamily: "Arial, sans-serif",
                 }}
                 href="/dashboard"
+                startIcon={<HomeIcon />}
               >
                 Home
               </Button>
               <Button
                 color="white"
                 sx={{
-                  '&:hover': {
-                    color: 'red',
-                  },
-                  fontWeight: 'bold',
-                  fontFamily: 'Arial, sans-serif'
+                  mr: 2,
+                  fontSize: "14px",
+                  "&:hover": { color: "red" },
+                  fontFamily: "Arial, sans-serif",
                 }}
                 href="/booking"
+                startIcon={<BookIcon />}
               >
                 Booking
               </Button>
               <Button
                 color="white"
                 sx={{
-                  '&:hover': {
-                    color: 'red',
-                  },
-                  fontWeight: 'bold',
-                  fontFamily: 'Arial, sans-serif'
+                  mr: 2,
+                  fontSize: "14px",
+                  "&:hover": { color: "red" },
+                  fontFamily: "Arial, sans-serif",
                 }}
                 href="/cart"
+                startIcon={<ShoppingCartIcon />}
               >
                 Cart
               </Button>
               <Button
                 color="white"
                 sx={{
-                  '&:hover': {
-                    color: 'red',
-                  },
-                  fontWeight: 'bold',
-                  fontFamily: 'Arial, sans-serif'
+                  mr: 2,
+                  fontSize: "14px",
+                  "&:hover": { color: "red" },
+                  fontFamily: "Arial, sans-serif",
                 }}
                 href="/map"
+                startIcon={<MapIcon />}
               >
                 Map
               </Button>
-            </>
+            </Box>
           )}
           <TextField
             sx={{
@@ -306,7 +304,6 @@ function App() {
           borderRadius: '15px',
           boxShadow: '0 6px 12px rgba(0, 0, 0, 0.1)',
           transition: 'transform 0.3s',
-          '&:hover': { transform: 'scale(1.02)' },
           width: '88%',
           margin: 'auto', 
         }}>

@@ -32,12 +32,36 @@ import HomeIcon from "@mui/icons-material/Home";
 import BookIcon from "@mui/icons-material/Book";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import MapIcon from "@mui/icons-material/Map";
+import StorefrontIcon from '@mui/icons-material/Storefront';
 import { useTheme } from "@mui/material/styles";
 import { useMediaQuery } from "@mui/material";
-import StorefrontIcon from '@mui/icons-material/Storefront';
-import StarRateIcon from '@mui/icons-material/StarRate';
+import Footer from '../../components/Footer'; // Adjust the path as needed
 
 const repairShops = [
+  {
+    name: "My Repair Shop",
+    description: "Likoan Margindon Cebu",
+    imageUrl: "/img/1.jpg",
+    rating: 4,
+  },
+  {
+    name: "Our Repair Shop",
+    description: "Likoan Margindon Cebu",
+    imageUrl: "/img/2.jpg",
+    rating: 5,
+  },
+  {
+    name: "Wala Repair Shop",
+    description: "Likoan Margindon Cebu",
+    imageUrl: "/img/3.jpg",
+    rating: 4,
+  },
+  {
+    name: "Another Repair Shop",
+    description: "Likoan Margindon Cebu",
+    imageUrl: "/img/4.jpg",
+    rating: 3,
+  },
   {
     name: "My Repair Shop",
     description: "Likoan Margindon Cebu",
@@ -163,7 +187,7 @@ const RepairShopCard = ({ shop }) => {
               color: 'darkred',
             },
           }}
-          href="/product"
+          href="/shop"
         >
           Shop
         </Button>
@@ -171,6 +195,81 @@ const RepairShopCard = ({ shop }) => {
     </Card>
   );
 };
+
+const BackgroundOverlay = () => (
+  <Box
+  sx={{
+    position: 'relative',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '90vh',
+    backgroundColor: 'white', // Fallback color
+    backgroundImage: 'url(/img/1.jpg)', // Correct syntax for background image
+    opacity: 0.8, // Adjust opacity here
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    zIndex: -1,
+    pointerEvents: 'none',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    // Responsive adjustments
+    '@media (max-width: 600px)': {
+      height: '40vh',
+    },
+  }}
+  >
+    
+    <Typography
+      variant="h4"
+      color="white"
+      sx={{
+        marginTop: 3,
+        textAlign: 'center',
+        '@media (max-width: 600px)': {
+          fontSize: '1.5rem',
+        },
+      }}
+    >
+      Pangita Diri!
+    </Typography>
+    <TextField
+      variant="outlined"
+      placeholder="Search for repair shops..."
+      sx={{
+        backgroundColor: 'white',
+        width: '80%',
+        maxWidth: '600px',
+        borderRadius: '25px',
+        '& .MuiOutlinedInput-root': {
+          borderRadius: '25px',
+        },
+      }}
+      InputProps={{
+        startAdornment: (
+          <InputAdornment position="start">
+            <SearchIcon />
+          </InputAdornment>
+        ),
+      }}
+    />
+    <Typography
+      variant="h4"
+      color="white"
+      sx={{
+        marginTop: 3,
+        textAlign: 'center',
+        '@media (max-width: 600px)': {
+          fontSize: '1.5rem',
+        },
+      }}
+    >
+      Affordable ra kaayo dri!
+    </Typography>
+  </Box>
+);
 
 const App = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -212,6 +311,8 @@ const App = () => {
 
   return (
     <>
+      <BackgroundOverlay />
+      
       <AppBar
         position="fixed"
         sx={{
@@ -223,8 +324,7 @@ const App = () => {
           display: "flex",
           justifyContent: "center",
           transition: "background-color 0.3s ease",
-          borderBottomLeftRadius: "35px", 
-          borderBottomRightRadius: "35px",
+          zIndex: 1, // Ensure the AppBar is above the background
         }}
       >
         <Toolbar
@@ -232,6 +332,7 @@ const App = () => {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
+            width: '100%',
           }}
         >
           {isMobile && (
@@ -249,53 +350,63 @@ const App = () => {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Carcare
           </Typography>
+          {/* Navigation Buttons */}
           {!isMobile && (
-            <Box sx={{ display: "flex", gap: 2 }}>
-              {["/dashboard", "/booking", "/cart", "/map"].map((href, index) => (
-                <Button
-                  key={href}
-                  color="white"
-                  sx={{
-                    fontSize: "14px",
-                    "&:hover": { color: "white" },
-                    fontWeight: "bold",
-                    fontFamily: "Arial, sans-serif",
-                  }}
-                  href={href}
-                >
-                  {["Home", "Booking", "Cart", "Map"][index]}
-                </Button>
-              ))}
+            <Box sx={{ display: "flex", gap: 2, mr: 2 }}>
+              <Button
+                color="white"
+                sx={{
+                  mr: 2,
+                  fontSize: "14px",
+                  "&:hover": { color: "red" },
+                  fontFamily: "Arial, sans-serif",
+                }}
+                href="/dashboard"
+                startIcon={<HomeIcon />}
+              >
+                Home
+              </Button>
+              <Button
+                color="white"
+                sx={{
+                  mr: 2,
+                  fontSize: "14px",
+                  "&:hover": { color: "red" },
+                  fontFamily: "Arial, sans-serif",
+                }}
+                href="/booking"
+                startIcon={<BookIcon />}
+              >
+                Booking
+              </Button>
+              <Button
+                color="white"
+                sx={{
+                  mr: 2,
+                  fontSize: "14px",
+                  "&:hover": { color: "red" },
+                  fontFamily: "Arial, sans-serif",
+                }}
+                href="/cart"
+                startIcon={<ShoppingCartIcon />}
+              >
+                Cart
+              </Button>
+              <Button
+                color="white"
+                sx={{
+                  mr: 2,
+                  fontSize: "14px",
+                  "&:hover": { color: "red" },
+                  fontFamily: "Arial, sans-serif",
+                }}
+                href="/map"
+                startIcon={<MapIcon />}
+              >
+                Map
+              </Button>
             </Box>
           )}
-          <TextField
-            sx={{
-              width: "200px",
-              "& fieldset": {
-                border: "none",
-              },
-              "& .MuiInputLabel-root": {
-                color: "black",
-              },
-              "& .MuiInputBase-input": {
-                color: "white",
-              },
-              "& .MuiInputAdornment-root": {
-                color: "white",
-              },
-            }}
-            size="small"
-            placeholder="Search here..."
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <IconButton onClick={handleClick}>
-                    <SearchIcon sx={{ color: "white" }} />
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-          />
           <Avatar
             src="/profile.png"
             sx={{ ml: 1, cursor: "pointer" }}
@@ -351,21 +462,21 @@ const App = () => {
 
       <Container
         sx={{
-          marginTop: "90px",
+          marginTop: "-12%",
           marginBottom: "30px",
           padding: 2,
-          backgroundColor: "white",
-          borderRadius: "10px",
-          boxShadow: "0 3px 6px rgba(0, 0, 0, 0.1)",
+          backgroundColor: "white ",
+          borderRadius: "4px",
+          boxShadow: "0 3px 6px rgba(0, 0, 0, 0.4)",
         }}
       >
         <Typography
           variant="h4"
           align="center"
           gutterBottom
-          sx={{ marginBottom: 2 }}
+          sx={{ marginBottom: 2, mt: 2 }}
         >
-          Available Repair Shops
+          Our <span style={{  color: 'blue', fontSize: '3rem' }}>Repair Shops</span>
         </Typography>
         <Grid container spacing={3} justifyContent="center">
           {repairShops.map((shop, index) => (
@@ -383,6 +494,7 @@ const App = () => {
           ))}
         </Grid>
       </Container>
+      <Footer /> {/* Add the Footer component */}
     </>
   );
 };

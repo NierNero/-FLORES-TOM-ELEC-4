@@ -19,6 +19,14 @@ import {
   Container
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
+import HomeIcon from '@mui/icons-material/Home';
+import BookIcon from '@mui/icons-material/Book';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import BuildIcon from '@mui/icons-material/Build'; // Example alternative for "Service"
+import MapIcon from '@mui/icons-material/Map';
+
+// Dummy function to determine if the screen size is mobile
+const isMobile = window.innerWidth <= 600;
 
 const products = [
   { id: 1, name: 'Engine Belt', price: 50, image: '/img/belt1.jpg' },
@@ -26,8 +34,6 @@ const products = [
   { id: 3, name: 'Oil Filter (New)', price: 50, image: '/img/oilfilter1.jpg' },
   { id: 4, name: 'Engine Belt', price: 50, image: '/img/belt1.jpg' },
   { id: 5, name: 'Oil Filter (New)', price: 50, image: '/img/oilfilter1.jpg' },
-
-
 ];
 
 const ProductPage = () => {
@@ -53,7 +59,7 @@ const ProductPage = () => {
   };
 
   return (
-    <Box sx={{  minHeight: '100vh' }}>
+    <Box sx={{ minHeight: '100vh' }}>
       <AppBar 
         position="fixed" 
         sx={{
@@ -63,25 +69,88 @@ const ProductPage = () => {
           display: 'flex',
           justifyContent: 'center',
           transition: 'background-color 0.3s ease',
-          borderBottomLeftRadius: "35px",
-          borderBottomRightRadius: "35px",
         }}
       >
         <Toolbar sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
           <IconButton
             size="large"
             edge="start"
-            color="white"
+            color="inherit"
             aria-label="menu"
             sx={{ mr: 2 }}
-          >
-          </IconButton>
+          />
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Carcare
           </Typography>
-          <Button color="white" sx={{ '&:hover': { color: 'white' }, fontWeight: 'bold' }} href="/dashboard">Home</Button>
-          <Button color="white" sx={{ '&:hover': { color: 'white' }, fontWeight: 'bold' }} href="/booking">Booking</Button>
-          <Button color="white" sx={{ '&:hover': { color: 'white' }, fontWeight: 'bold' }} href="/cart">Cart</Button>
+          {!isMobile && (
+            <Box sx={{ display: "flex", gap: 2, mr: 2 }}>
+              <Button
+                color="inherit"
+                sx={{
+                  mr: 2,
+                  fontSize: "14px",
+                  "&:hover": { color: "red" },
+                  fontFamily: "Arial, sans-serif",
+                }}
+                href="/dashboard"
+                startIcon={<HomeIcon />}
+              >
+                Home
+              </Button>
+              <Button
+                color="inherit"
+                sx={{
+                  mr: 2,
+                  fontSize: "14px",
+                  "&:hover": { color: "red" },
+                  fontFamily: "Arial, sans-serif",
+                }}
+                href="/booking"
+                startIcon={<BookIcon />}
+              >
+                Booking
+              </Button>
+              <Button
+                color="inherit"
+                sx={{
+                  mr: 2,
+                  fontSize: "14px",
+                  "&:hover": { color: "red" },
+                  fontFamily: "Arial, sans-serif",
+                }}
+                href="/cart"
+                startIcon={<ShoppingCartIcon />}
+              >
+                Cart
+              </Button>
+              <Button
+                color="inherit"
+                sx={{
+                  mr: 2,
+                  fontSize: "14px",
+                  "&:hover": { color: "red" },
+                  fontFamily: "Arial, sans-serif",
+                }}
+                href="/service"
+                startIcon={<BuildIcon />}
+              >
+                Service
+              </Button>
+              <Button
+                color="inherit"
+                sx={{
+                  mr: 2,
+                  fontSize: "14px",
+                  "&:hover": { color: "red" },
+                  fontFamily: "Arial, sans-serif",
+                }}
+                href="/map"
+                startIcon={<MapIcon />}
+              >
+                Map
+              </Button>
+            </Box>
+          )}
           <Avatar src="/profile.png" sx={{ ml: 1, cursor: 'pointer' }} onClick={handleMenuOpen} />
           <Menu
             anchorEl={anchorEl}
@@ -123,17 +192,17 @@ const ProductPage = () => {
                 border: 'none', 
               },
             },
-          }}        />
+          }}
+        />
       </Box>
 
       <Container
         sx={{
           marginTop: '15px',
           padding: 2,
-          border: '1px solid #ccc',
           backgroundColor: 'white',
           borderRadius: '10px',
-          boxShadow: "0 3px 5px rgba(0, 0, 0, 0.4)",
+          boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
           marginBottom: '12px'
         }}
       >
@@ -176,8 +245,7 @@ const ProductPage = () => {
                       </Button>
                     </Grid>
                     <Grid item xs={6}>
-                      <Button variant="outlined" color="primary" fullWidth href="/cart"   sx={{ fontSize: '0.690rem', height: '100%' }} // Adjust font size here
-                      >
+                      <Button variant="outlined" color="primary" fullWidth href="/cart" sx={{ fontSize: '0.690rem' }}>
                         Add to Cart
                       </Button>
                     </Grid>

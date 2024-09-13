@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState, useEffect } from "react";
 import {
   Menu,
@@ -16,6 +17,12 @@ import {
   Box,
   IconButton,
 } from "@mui/material";
+import HomeIcon from "@mui/icons-material/Home";
+import BookingIcon from "@mui/icons-material/Assignment";
+import CartIcon from "@mui/icons-material/ShoppingCart";
+import MapIcon from "@mui/icons-material/Map";
+import ShopIcon from "@mui/icons-material/Shop";
+import Footer from '../../components/Footer'; // Adjust the path as needed
 
 function App() {
   useEffect(() => {
@@ -37,6 +44,14 @@ function App() {
     { text: "Logout", href: "/login" },
   ];
 
+  const menuItem = [
+    { text: "Home", icon: <HomeIcon />, href: "/dashboard" },
+    { text: "Booking", icon: <BookingIcon />, href: "/booking" },
+    { text: "Cart", icon: <CartIcon />, href: "/cart" },
+    { text: "Shop", icon: <ShopIcon />, href: "/shop" },
+    { text: "Map", icon: <MapIcon />, href: "/map" },
+  ];
+
   const serviceItems = [
     {
       image: "/img/aircon.jpg",
@@ -46,22 +61,22 @@ function App() {
     {
       image: "/img/engine.jpg",
       text: "Engine Repair/Replacement",
-      link: "link-to-engine-repair-replacement-page",
+      link: "/engine-repair",
     },
     {
       image: "/img/tire.jpg",
       text: "Tire Repair/Replacement",
-      link: "link-to-tire-repair-replacement-page",
+      link: "/tire-repair",
     },
     {
       image: "/img/aircon.jpg",
       text: "Air Conditioning Repair",
-      link: "link-to-air-conditioning-repair-page",
+      link: "/airconrepair",
     },
     {
       image: "/img/tire.jpg",
       text: "Tire Conditioning Repair",
-      link: "link-to-air-conditioning-repair-page",
+      link: "/tire-conditioning-repair",
     },
   ];
 
@@ -73,13 +88,11 @@ function App() {
           backgroundColor: scrolled
             ? "rgba(0, 0, 0, 1)"
             : "rgba(13, 71, 161, 1)",
-            boxShadow: "0 3px 5px rgba(0, 0, 0, 0.4)",
-            height: "70px",
+          boxShadow: "0 3px 5px rgba(0, 0, 0, 0.4)",
+          height: "70px",
           display: "flex",
           justifyContent: "center",
           transition: "background-color 0.3s ease",
-          borderBottomLeftRadius: "35px", 
-          borderBottomRightRadius: "35px",
         }}
       >
         <Toolbar
@@ -89,30 +102,24 @@ function App() {
             justifyContent: "space-between",
           }}
         >
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          />
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             CARCARE
           </Typography>
           <Box sx={{ display: "flex", gap: 2 }}>
-            {["/dashboard", "/booking", "/cart", "/product", "/map"].map((href, index) => (
+            {menuItem.map((item) => (
               <Button
-                key={href}
-                color="white"
+                key={item.text}
+                color="inherit"
                 sx={{
+                  mr: 2,
                   fontSize: "14px",
-                  "&:hover": { color: "white" },
-                  fontWeight: "bold",
+                  "&:hover": { color: "red" },
                   fontFamily: "Arial, sans-serif",
                 }}
-                href={href}
+                href={item.href}
+                startIcon={item.icon}
               >
-                {["Home", "Booking", "Cart", "Shop", "Map", ][index]}
+                {item.text}
               </Button>
             ))}
             <Avatar
@@ -154,10 +161,10 @@ function App() {
         />
         <Box
           position="absolute"
-          bottom={0}
-          left={0}
+          bottom={20}
+          left={20}
           bgcolor="rgba(0, 0, 0, 0.0)"
-          color="black"
+          color="white"
           p={2}
           sx={{
             display: "flex",
@@ -167,13 +174,12 @@ function App() {
             maxWidth: "80%",
           }}
         >
-          <Typography variant="h2" fontWeight="bold" mb={2} ml={3}>
+          <Typography variant="h2" fontWeight="bold" mb={2}>
             OUR SERVICE
           </Typography>
           <Typography
             variant="h6"
             mt={2}
-            ml={3}
             sx={{ fontSize: { xs: "1rem", sm: "1.2rem", md: "1.5rem" } }}
           >
             Get total care for your car. We offer a range of services provided
@@ -181,7 +187,6 @@ function App() {
           <Typography
             variant="h6"
             mb={2}
-            ml={3}
             sx={{ fontSize: { xs: "1rem", sm: "1.2rem", md: "1.5rem" } }}
           >
             by skilled and ASE-certified auto technicians.
@@ -196,9 +201,7 @@ function App() {
           padding: 4,
           display: "flex",
           justifyContent: "center",
-          backgroundColor: "white",
           borderRadius: "6px",
-          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.3)",
           maxWidth: "900px",
         }}
       >
@@ -212,7 +215,7 @@ function App() {
                 fontWeight="bold"
                 textAlign="center"
               >
-                Repair + Maintenance Services Offered:
+                Repair + Maintenance Services Offered
               </Typography>
               <Box
                 sx={{
@@ -220,7 +223,6 @@ function App() {
                   flexWrap: "wrap",
                   gap: 1,
                   justifyContent: "center",
-                  mb: "2%",
                 }}
               >
                 {serviceItems.map((item) => (
@@ -228,6 +230,7 @@ function App() {
                     key={item.text}
                     sx={{
                       display: "flex",
+                      ml: 2,
                       flexDirection: "column",
                       alignItems: "center",
                       cursor: "pointer",
@@ -237,7 +240,6 @@ function App() {
                       boxShadow: "0px 4px 8px rgba(0,0,0,0.1)",
                       transition: "0.3s",
                       width: "200px",
-                      mr: "1%",
                       "&:hover": {
                         boxShadow: "0px 8px 16px rgba(0,0,0,0.2)",
                         transform: "scale(1.02)",
@@ -267,6 +269,7 @@ function App() {
           </Grid>
         </Grid>
       </Container>
+      <Footer /> {/* Add the Footer component */}
     </Box>
   );
 }

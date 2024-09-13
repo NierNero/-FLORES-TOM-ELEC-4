@@ -17,6 +17,11 @@ import {
   Menu,
   MenuItem,
 } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+import HomeIcon from "@mui/icons-material/Home";
+import BookingIcon from "@mui/icons-material/Assignment";
+import CartIcon from "@mui/icons-material/ShoppingCart";
+import MapIcon from "@mui/icons-material/Map";
 
 const App = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -53,8 +58,6 @@ const App = () => {
           display: "flex",
           justifyContent: "center",
           transition: "background-color 0.3s ease",
-          borderBottomLeftRadius: "30px", 
-          borderBottomRightRadius: "30px",
         }}
       >
         <Toolbar
@@ -68,19 +71,25 @@ const App = () => {
             Carcare
           </Typography>
           <Box sx={{ display: "flex", gap: 2 }}>
-          {["/dashboard", "/booking", "/cart", "/map"].map((href, index) => (
+            {[
+              { href: "/dashboard", text: "Home", icon: <HomeIcon /> },
+              { href: "/booking", text: "Booking", icon: <BookingIcon /> },
+              { href: "/cart", text: "Cart", icon: <CartIcon /> },
+              { href: "/map", text: "Map", icon: <MapIcon /> }
+            ].map((item, index) => (
               <Button
-                key={href}
-                color="white"
+                key={item.href}
+                color="inherit" // Use 'inherit' for correct color
                 sx={{
+                  mr: 2,
                   fontSize: "14px",
-                  "&:hover": { color: "white" },
-                  fontWeight: "bold",
+                  "&:hover": { color: "red" },
                   fontFamily: "Arial, sans-serif",
                 }}
-                href={href}
+                href={item.href}
+                startIcon={item.icon}
               >
-                {["Home", "Booking", "Cart", "Map", ][index]}
+                {item.text}
               </Button>
             ))}
           <Avatar
@@ -130,7 +139,7 @@ const App = () => {
                   padding: 2,
                   margin: "auto",
                   borderRadius: "10px",
-                  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+                  boxShadow: "0 1px 2px rgba(0, 0, 0, 0.1)",
                   mb: 1,
                 }}
               >

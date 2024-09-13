@@ -2,45 +2,55 @@
 
 import React, { useState, useEffect } from "react";
 import {
-  Box,
+  Container,
   Card,
   CardContent,
   Typography,
-  Button,
   Grid,
-  Avatar,
-  Divider,
+  Box,
   AppBar,
   Toolbar,
-  IconButton,
-  TextField,
-  InputAdornment,
+  Divider,
   Menu,
   MenuItem,
-  Drawer,
-  List,
-  ListItem,
-  ListItemText,
-  ListItemIcon,
+  Avatar,
+  IconButton,
+  Button,
+  TextField,
+  InputAdornment,
   useMediaQuery,
 } from "@mui/material";
-import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import SearchIcon from "@mui/icons-material/Search";
 import MenuIcon from "@mui/icons-material/Menu";
 import HomeIcon from "@mui/icons-material/Home";
 import BookIcon from "@mui/icons-material/Book";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import MapIcon from "@mui/icons-material/Map";
-import { useTheme } from "@mui/material/styles";
 
-function App() {
+const cartItems = [
+  {
+    id: 1,
+    name: "Belt",
+    price: 50,
+    image: "/img/belt1.jpg",
+    shop: "Nelson's Automotive Shop",
+  },
+  {
+    id: 2,
+    name: "Oil Filter",
+    price: 15,
+    image: "/img/oilfilter.jpg",
+    shop: "Nelson's Automotive Shop",
+  },
+];
+
+function Pending() {
+  const [cart, setCart] = useState(cartItems);
   const [scrolled, setScrolled] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const open = Boolean(anchorEl);
-  
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const isMobile = useMediaQuery("(max-width:600px)");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -51,8 +61,12 @@ function App() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const handleRemoveItem = (id) => {
+    setCart(cart.filter((item) => item.id !== id));
+  };
+
   const handleClick = () => {
-    console.log("Icon clicked");
+    console.log("Search icon clicked");
   };
 
   const handleMenuOpen = (event) => {
@@ -71,33 +85,33 @@ function App() {
     setDrawerOpen(false);
   };
 
+  const calculateTotal = () => {
+    return cart.reduce((total, item) => total + item.price, 0).toFixed(2);
+  };
+
+  const handleCancel = () => {
+    console.log("Cancel button clicked");
+  };
+
   return (
     <Box sx={{ minHeight: "100vh" }}>
       <AppBar
         position="fixed"
         sx={{
-          backgroundColor: scrolled
-            ? "rgba(0, 0, 0, 1)"
-            : "rgba(13, 71, 161, 1)",
-            boxShadow: "0 3px 5px rgba(0, 0, 0, 0.4)",
-            height: "70px",
+          backgroundColor: scrolled ? "rgba(0, 0, 0, 1)" : "rgba(13, 71, 161, 1)",
+          boxShadow: "0 3px 5px rgba(0, 0, 0, 0.4)",
+          height: "70px",
           display: "flex",
           justifyContent: "center",
           transition: "background-color 0.3s ease",
         }}
       >
-        <Toolbar
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
+        <Toolbar sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           {isMobile && (
             <IconButton
               size="large"
               edge="start"
-              color="inherit"
+              color="white"
               aria-label="menu"
               sx={{ mr: 2 }}
               onClick={handleDrawerOpen}
@@ -167,18 +181,8 @@ function App() {
           <TextField
             sx={{
               width: "200px",
-              "& fieldset": {
-                border: "none",
-              },
-              "& .MuiInputLabel-root": {
-                color: "black",
-              },
-              "& .MuiInputBase-input": {
-                color: "white",
-              },
-              "& .MuiInputAdornment-root": {
-                color: "white",
-              },
+              "& fieldset": { border: "none" },
+              "& .MuiInputBase-input": { color: "white" },
             }}
             size="small"
             placeholder="Search here..."
@@ -201,11 +205,7 @@ function App() {
             anchorEl={anchorEl}
             open={open}
             onClose={handleMenuClose}
-            PaperProps={{
-              sx: {
-                width: "200px",
-              },
-            }}
+            PaperProps={{ sx: { width: "200px" } }}
           >
             <MenuItem onClick={handleMenuClose} href="/profile">
               Profile
@@ -220,186 +220,169 @@ function App() {
         </Toolbar>
       </AppBar>
 
-      <Drawer
-        anchor="left"
-        open={drawerOpen}
-        onClose={handleDrawerClose}
-        PaperProps={{ sx: { width: 240 } }}
-      >
-        <List>
-          <ListItem button onClick={handleDrawerClose} component="a" href="/dashboard" sx={{ py: 1.5 }}>
-            <ListItemIcon sx={{ minWidth: "35px" }}>
-              <HomeIcon />
-            </ListItemIcon>
-            <ListItemText primary="Home" sx={{ ml: 1 }} />
-          </ListItem>
-          <ListItem button onClick={handleDrawerClose} component="a" href="/booking" sx={{ py: 1.5 }}>
-            <ListItemIcon sx={{ minWidth: "35px" }}>
-              <BookIcon />
-            </ListItemIcon>
-            <ListItemText primary="Booking" sx={{ ml: 1 }} />
-          </ListItem>
-          <ListItem button onClick={handleDrawerClose} component="a" href="/cart" sx={{ py: 1.5 }}>
-            <ListItemIcon sx={{ minWidth: "35px" }}>
-              <ShoppingCartIcon />
-            </ListItemIcon>
-            <ListItemText primary="Cart" sx={{ ml: 1 }} />
-          </ListItem>
-          <ListItem button onClick={handleDrawerClose} component="a" href="/map" sx={{ py: 1.5 }}>
-            <ListItemIcon sx={{ minWidth: "35px" }}>
-              <MapIcon />
-            </ListItemIcon>
-            <ListItemText primary="Map" sx={{ ml: 1 }} />
-          </ListItem>
-        </List>
-      </Drawer>
-
-      <Box sx={{ marginTop: "70px", padding: 2 }}>
+      <Container sx={{ mt: "70px", padding: 2 }}>
         <Button
           variant="text"
           color="white"
           sx={{
-            "&:hover": {
-              color: "red",
-            },
-            "&:active": {
-              color: "darkred", 
-            },
+            "&:hover": { color: "white" },
+            "&:active": { color: "darkred" },
             fontFamily: "Arial, sans-serif",
             textAlign: "left",
             fontSize: "1.1rem",
             textTransform: "none",
-            marginLeft: "6%",
           }}
-          href="/booking"
+          href="/cart"
         >
-          Pending Book
+          My Cart
         </Button>
 
         <Button
           variant="text"
           color="white"
           sx={{
-            "&:hover": {
-              color: "red",
-            },
-            "&:active": {
-              color: "darkred", 
-            },
+            "&:hover": { color: "white" },
+            "&:active": { color: "darkred" },
+            ml: 3,
             fontFamily: "Arial, sans-serif",
             textAlign: "left",
             fontSize: "1.1rem",
             textTransform: "none",
-            marginLeft: "3%",
           }}
-          href="/acceptbook"
+          href="/pending"
         >
-          Accepted Book
+          Pending Order
         </Button>
-
         <Button
           variant="text"
           color="white"
           sx={{
-            "&:hover": {
-              color: "red",
-            },
-            "&:active": {
-              color: "darkred", 
-            },
+            "&:hover": { color: "white" },
+            "&:active": { color: "darkred" },
+            ml: 3,
             fontFamily: "Arial, sans-serif",
             textAlign: "left",
             fontSize: "1.1rem",
             textTransform: "none",
-            marginLeft: "3%",
           }}
-          href="/cancelbook"
+          href="/topay"
         >
-          Canceled Book
+          To Pay
+        </Button>
+        <Button
+          variant="text"
+          color="white"
+          sx={{
+            "&:hover": { color: "white" },
+            "&:active": { color: "darkred" },
+            ml: 3,
+            fontFamily: "Arial, sans-serif",
+            textAlign: "left",
+            fontSize: "1.1rem",
+            textTransform: "none",
+          }}
+          href="/toship"
+        >
+          To Ship
+        </Button>
+        <Button
+          variant="text"
+          color="white"
+          sx={{
+            "&:hover": { color: "white" },
+            "&:active": { color: "darkred" },
+            ml: 3,
+            fontFamily: "Arial, sans-serif",
+            textAlign: "left",
+            fontSize: "1.1rem",
+            textTransform: "none",
+          }}
+          href="/toreceive"
+        >
+          To Receive
+        </Button>
+        <Button
+          variant="text"
+          color="white"
+          sx={{
+            "&:hover": { color: "white" },
+            "&:active": { color: "darkred" },
+            ml: 3,
+            fontFamily: "Arial, sans-serif",
+            textAlign: "left",
+            fontSize: "1.1rem",
+            textTransform: "none",
+          }}
+          href="/cancelorder"
+        >
+          Canceled
         </Button>
 
-        <Divider
-          sx={{
-            mb: 2,
-            width: "88%", 
-            margin: "auto", 
-          }}
-        />
+        <Divider sx={{ mb: 2 }} />
 
-        <Card
+        {cart.map((item) => (
+          <Card
+            key={item.id}
+            sx={{
+              mb: 2,
+              borderRadius: "15px",
+              boxShadow: "0 6px 12px rgba(0, 0, 0, 0.1)",
+              transition: "transform 0.3s",
+            }}
+          >
+            <CardContent>
+              <Grid container spacing={2} alignItems="center">
+                <Grid item xs={3} md={2}>
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    width="80"
+                    style={{ borderRadius: "8px" }}
+                  />
+                </Grid>
+                <Grid item xs={6} md={5}>
+                  <Typography variant="h6">{item.name}</Typography>
+                  <Typography variant="body2" color="textSecondary">
+                    {item.shop}
+                  </Typography>
+                </Grid>
+                <Grid item xs={3} md={2}>
+                  <Typography variant="body1" color="primary">
+                    ${item.price.toFixed(2)}
+                  </Typography>
+                </Grid>
+                <Grid item xs={3} md={2}>
+                  <Typography variant="body1">
+                    Quantity: <span style={{ color: "red" }}>1</span>
+                  </Typography>
+                </Grid>
+                <Grid item xs={1} md={1}>
+                  
+                </Grid>
+              </Grid>
+            </CardContent>
+          </Card>
+        ))}
+
+        <Box
           sx={{
-            mt: { xs: 2, sm: 3, md: 3 }, 
-            borderRadius: "15px",
-            boxShadow: "0 6px 12px rgba(0, 0, 0, 0.1)",
-            transition: "transform 0.3s",
-            width: "88%",
-            margin: "auto", 
+            mt: 3,
+            p: 2,
+            border: "1px solid #ddd",
+            borderRadius: "8px",
+            backgroundColor: "#fff",
           }}
         >
-          <CardContent>
-            <Grid container spacing={2} alignItems="center">
-              <Grid item xs={2} sm="auto">
-                <Avatar
-                  alt="Nelson's Automotive Shop"
-                  src="/logo.png"
-                  sx={{
-                    width: { xs: 40, sm: 50 },
-                    height: { xs: 40, sm: 50 }, 
-                    borderRadius: "8px",
-                  }}
-                />
-              </Grid>
-              <Grid item xs>
-                <Typography variant="h6" component="div">
-                  Nelson's Automotive Shop
-                </Typography>
-                <Typography color="text.secondary">John Doe</Typography>
-              </Grid>
-            </Grid>
+          <Typography variant="h6" component="div" gutterBottom>
+            Total Amount
+          </Typography>
+          <Typography variant="h4" color="primary">
+            ${calculateTotal()}
+          </Typography>
+        </Box>
 
-            <Divider sx={{ my: 2 }} />
-
-            <Grid container spacing={2} alignItems="center">
-              <Grid
-                item
-                xs={12}
-                sm={6}
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "flex-start",
-                }}
-              >
-                <Typography variant="body1" component="div">
-                  Service:
-                </Typography>
-                <Typography variant="h6" component="div">
-                  Belts Repair
-                </Typography>
-              </Grid>
-
-              <Grid
-                item
-                xs={10}
-                sm={4}
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "flex-start",
-                }}
-              >
-                <CalendarTodayIcon
-                  fontSize="small"
-                  sx={{ verticalAlign: "middle", mr: 1 }}
-                />
-                <Typography variant="body1" component="span">
-                  Fri, December 29
-                </Typography>
-              </Grid>
-            </Grid>
-
-            <Box textAlign="right" mt={-5}>
-              <Button
+        <Box sx={{ mt: 3, display: "flex", justifyContent: "flex-end" }}>
+        <Button
                 variant="contained"
                 sx={{
                   backgroundColor: "rgba(255, 0, 0, 0.5)", 
@@ -413,14 +396,12 @@ function App() {
                 }}
                 disabled
               >
-                Booking Canceled
+                Order Canceled
               </Button>
-            </Box>
-          </CardContent>
-        </Card>
-      </Box>
+        </Box>
+      </Container>
     </Box>
   );
 }
 
-export default App;
+export default Pending;

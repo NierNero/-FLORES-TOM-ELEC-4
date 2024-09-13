@@ -24,8 +24,12 @@ import {
   ConfirmationNumber,
   Cake,
   CameraAlt,
-  Menu as MenuIcon
 } from '@mui/icons-material';
+import MenuIcon from "@mui/icons-material/Menu";
+import HomeIcon from "@mui/icons-material/Home";
+import BookIcon from "@mui/icons-material/Book";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import MapIcon from "@mui/icons-material/Map";
 
 const ProfilePage = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -85,8 +89,6 @@ const ProfilePage = () => {
           display: "flex",
           justifyContent: "center",
           transition: "background-color 0.3s ease",
-          borderBottomLeftRadius: "35px", 
-          borderBottomRightRadius: "35px",
 
         }}
       >
@@ -113,52 +115,56 @@ const ProfilePage = () => {
             Carcare
           </Typography>
           {!isMobile && (
-            <Box sx={{ display: "flex" }}>
+            <Box sx={{ display: "flex", gap: 2, mr: 2 }}>
               <Button
                 color="white"
                 sx={{
+                  mr: 2,
                   fontSize: "14px",
-                  "&:hover": { color: "white" },
-                  fontWeight: "bold",
+                  "&:hover": { color: "red" },
                   fontFamily: "Arial, sans-serif",
                 }}
                 href="/dashboard"
+                startIcon={<HomeIcon />}
               >
                 Home
               </Button>
               <Button
                 color="white"
                 sx={{
+                  mr: 2,
                   fontSize: "14px",
-                  "&:hover": { color: "white" },
-                  fontWeight: "bold",
+                  "&:hover": { color: "red" },
                   fontFamily: "Arial, sans-serif",
                 }}
                 href="/booking"
+                startIcon={<BookIcon />}
               >
                 Booking
               </Button>
               <Button
                 color="white"
                 sx={{
+                  mr: 2,
                   fontSize: "14px",
-                  "&:hover": { color: "white" },
-                  fontWeight: "bold",
+                  "&:hover": { color: "red" },
                   fontFamily: "Arial, sans-serif",
                 }}
                 href="/cart"
+                startIcon={<ShoppingCartIcon />}
               >
                 Cart
               </Button>
               <Button
                 color="white"
                 sx={{
+                  mr: 2,
                   fontSize: "14px",
-                  "&:hover": { color: "white" },
-                  fontWeight: "bold",
+                  "&:hover": { color: "red" },
                   fontFamily: "Arial, sans-serif",
                 }}
                 href="/map"
+                startIcon={<MapIcon />}
               >
                 Map
               </Button>

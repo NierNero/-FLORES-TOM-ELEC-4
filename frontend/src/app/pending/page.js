@@ -18,11 +18,15 @@ import {
   Button,
   TextField,
   InputAdornment,
+  useMediaQuery,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import DeleteIcon from "@mui/icons-material/Delete";
+import MenuIcon from "@mui/icons-material/Menu";
+import HomeIcon from "@mui/icons-material/Home";
+import BookIcon from "@mui/icons-material/Book";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import MapIcon from "@mui/icons-material/Map";
 
-// Dummy data
 const cartItems = [
   {
     id: 1,
@@ -40,11 +44,13 @@ const cartItems = [
   },
 ];
 
-function pending() {
+function Pending() {
   const [cart, setCart] = useState(cartItems);
   const [scrolled, setScrolled] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [drawerOpen, setDrawerOpen] = useState(false);
   const open = Boolean(anchorEl);
+  const isMobile = useMediaQuery("(max-width:600px)");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -71,8 +77,16 @@ function pending() {
     setAnchorEl(null);
   };
 
+  const handleDrawerOpen = () => {
+    setDrawerOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setDrawerOpen(false);
+  };
+
   const calculateTotal = () => {
-    return cart.reduce((total, item) => total + item.price * 1, 0).toFixed(2); 
+    return cart.reduce((total, item) => total + item.price, 0).toFixed(2);
   };
 
   const handleCancel = () => {
@@ -80,98 +94,95 @@ function pending() {
   };
 
   return (
-    <Box
-      sx={{
-        minHeight: "100vh",
-      }}
-    >
+    <Box sx={{ minHeight: "100vh" }}>
       <AppBar
         position="fixed"
         sx={{
-          backgroundColor: scrolled
-            ? "rgba(0, 0, 0, 1)"
-            : "rgba(13, 71, 161, 1)",
-            boxShadow: "0 3px 5px rgba(0, 0, 0, 0.4)",
-            height: "70px",
+          backgroundColor: scrolled ? "rgba(0, 0, 0, 1)" : "rgba(13, 71, 161, 1)",
+          boxShadow: "0 3px 5px rgba(0, 0, 0, 0.4)",
+          height: "70px",
           display: "flex",
           justifyContent: "center",
           transition: "background-color 0.3s ease",
-          borderBottomLeftRadius: "35px", 
-          borderBottomRightRadius: "35px",
         }}
       >
-        <Toolbar
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-          </IconButton>
+        <Toolbar sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          {isMobile && (
+            <IconButton
+              size="large"
+              edge="start"
+              color="white"
+              aria-label="menu"
+              sx={{ mr: 2 }}
+              onClick={handleDrawerOpen}
+            >
+              <MenuIcon />
+            </IconButton>
+          )}
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Carcare - To Pay
+            Carcare
           </Typography>
-          <Button
-            color="white"
-            sx={{
-              "&:hover": {
-                color: "white",
-              },
-              fontWeight: "bold",
-              fontFamily: "Arial, sans-serif",
-            }}
-            href="/dashboard"
-          >
-            Home
-          </Button>
-          <Button
-            color="white"
-            sx={{
-              "&:hover": {
-                color: "white",
-              },
-              fontWeight: "bold",
-              fontFamily: "Arial, sans-serif",
-            }}
-            href="/booking"
-          >
-            Booking
-          </Button>
-          <Button
-            color="white"
-            sx={{
-              "&:hover": {
-                color: "white",
-              },
-              fontWeight: "bold",
-              fontFamily: "Arial, sans-serif",
-            }}
-            href="/cart"
-          >
-            Cart
-          </Button>
+          {!isMobile && (
+            <Box sx={{ display: "flex", gap: 2, mr: 2 }}>
+              <Button
+                color="white"
+                sx={{
+                  mr: 2,
+                  fontSize: "14px",
+                  "&:hover": { color: "red" },
+                  fontFamily: "Arial, sans-serif",
+                }}
+                href="/dashboard"
+                startIcon={<HomeIcon />}
+              >
+                Home
+              </Button>
+              <Button
+                color="white"
+                sx={{
+                  mr: 2,
+                  fontSize: "14px",
+                  "&:hover": { color: "red" },
+                  fontFamily: "Arial, sans-serif",
+                }}
+                href="/booking"
+                startIcon={<BookIcon />}
+              >
+                Booking
+              </Button>
+              <Button
+                color="white"
+                sx={{
+                  mr: 2,
+                  fontSize: "14px",
+                  "&:hover": { color: "red" },
+                  fontFamily: "Arial, sans-serif",
+                }}
+                href="/cart"
+                startIcon={<ShoppingCartIcon />}
+              >
+                Cart
+              </Button>
+              <Button
+                color="white"
+                sx={{
+                  mr: 2,
+                  fontSize: "14px",
+                  "&:hover": { color: "red" },
+                  fontFamily: "Arial, sans-serif",
+                }}
+                href="/map"
+                startIcon={<MapIcon />}
+              >
+                Map
+              </Button>
+            </Box>
+          )}
           <TextField
             sx={{
               width: "200px",
-              "& fieldset": {
-                border: "none",
-              },
-              "& .MuiInputLabel-root": {
-                color: "black",
-              },
-              "& .MuiInputBase-input": {
-                color: "white",
-              },
-              "& .MuiInputAdornment-root": {
-                color: "white",
-              },
+              "& fieldset": { border: "none" },
+              "& .MuiInputBase-input": { color: "white" },
             }}
             size="small"
             placeholder="Search here..."
@@ -194,11 +205,7 @@ function pending() {
             anchorEl={anchorEl}
             open={open}
             onClose={handleMenuClose}
-            PaperProps={{
-              sx: {
-                width: "200px",
-              },
-            }}
+            PaperProps={{ sx: { width: "200px" } }}
           >
             <MenuItem onClick={handleMenuClose} href="/profile">
               Profile
@@ -218,12 +225,8 @@ function pending() {
           variant="text"
           color="white"
           sx={{
-            "&:hover": {
-              color: "white",
-            },
-            "&:active": {
-              color: "darkred", 
-            },
+            "&:hover": { color: "white" },
+            "&:active": { color: "darkred" },
             fontFamily: "Arial, sans-serif",
             textAlign: "left",
             fontSize: "1.1rem",
@@ -238,12 +241,8 @@ function pending() {
           variant="text"
           color="white"
           sx={{
-            "&:hover": {
-              color: "white",
-            },
-            "&:active": {
-              color: "darkred", 
-            },
+            "&:hover": { color: "white" },
+            "&:active": { color: "darkred" },
             ml: 3,
             fontFamily: "Arial, sans-serif",
             textAlign: "left",
@@ -258,12 +257,8 @@ function pending() {
           variant="text"
           color="white"
           sx={{
-            "&:hover": {
-              color: "white",
-            },
-            "&:active": {
-              color: "darkred", 
-            },
+            "&:hover": { color: "white" },
+            "&:active": { color: "darkred" },
             ml: 3,
             fontFamily: "Arial, sans-serif",
             textAlign: "left",
@@ -278,19 +273,15 @@ function pending() {
           variant="text"
           color="white"
           sx={{
-            "&:hover": {
-              color: "white",
-            },
-            "&:active": {
-              color: "darkred", 
-            },
+            "&:hover": { color: "white" },
+            "&:active": { color: "darkred" },
             ml: 3,
             fontFamily: "Arial, sans-serif",
             textAlign: "left",
             fontSize: "1.1rem",
             textTransform: "none",
           }}
-          href="/cart"
+          href="/toship"
         >
           To Ship
         </Button>
@@ -298,21 +289,33 @@ function pending() {
           variant="text"
           color="white"
           sx={{
-            "&:hover": {
-              color: "white",
-            },
-            "&:active": {
-              color: "darkred", 
-            },
+            "&:hover": { color: "white" },
+            "&:active": { color: "darkred" },
             ml: 3,
             fontFamily: "Arial, sans-serif",
             textAlign: "left",
             fontSize: "1.1rem",
             textTransform: "none",
           }}
-          href="/cart"
+          href="/toreceive"
         >
           To Receive
+        </Button>
+        <Button
+          variant="text"
+          color="white"
+          sx={{
+            "&:hover": { color: "white" },
+            "&:active": { color: "darkred" },
+            ml: 3,
+            fontFamily: "Arial, sans-serif",
+            textAlign: "left",
+            fontSize: "1.1rem",
+            textTransform: "none",
+          }}
+          href="/cancelorder"
+        >
+          Canceled
         </Button>
 
         <Divider sx={{ mb: 2 }} />
@@ -325,12 +328,11 @@ function pending() {
               borderRadius: "15px",
               boxShadow: "0 6px 12px rgba(0, 0, 0, 0.1)",
               transition: "transform 0.3s",
-              "&:hover": { transform: "scale(1.02)" },
             }}
           >
             <CardContent>
               <Grid container spacing={2} alignItems="center">
-                <Grid item xs={2}>
+                <Grid item xs={3} md={2}>
                   <img
                     src={item.image}
                     alt={item.name}
@@ -338,23 +340,25 @@ function pending() {
                     style={{ borderRadius: "8px" }}
                   />
                 </Grid>
-                <Grid item xs={5}>
+                <Grid item xs={6} md={5}>
                   <Typography variant="h6">{item.name}</Typography>
                   <Typography variant="body2" color="textSecondary">
                     {item.shop}
                   </Typography>
                 </Grid>
-                <Grid item xs={2}>
+                <Grid item xs={3} md={2}>
                   <Typography variant="body1" color="primary">
                     ${item.price.toFixed(2)}
                   </Typography>
                 </Grid>
-                <Grid item xs={2}>
+                <Grid item xs={3} md={2}>
                   <Typography variant="body1">
                     Quantity: <span style={{ color: "red" }}>1</span>
-                  </Typography>{" "}
+                  </Typography>
                 </Grid>
-                <Grid item xs={1}></Grid>
+                <Grid item xs={1} md={1}>
+                  
+                </Grid>
               </Grid>
             </CardContent>
           </Card>
@@ -382,9 +386,7 @@ function pending() {
             variant="contained"
             color="error"
             sx={{
-              "&:hover": {
-                backgroundColor: "darkred",
-              },
+              "&:hover": { backgroundColor: "darkred" },
               fontFamily: "Arial, sans-serif",
             }}
             onClick={handleCancel}
@@ -397,4 +399,4 @@ function pending() {
   );
 }
 
-export default pending;
+export default Pending;

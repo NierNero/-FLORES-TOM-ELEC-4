@@ -130,8 +130,6 @@ function Cart() {
           display: "flex",
           justifyContent: "center",
           transition: "background-color 0.3s ease",
-          borderBottomLeftRadius: "35px", 
-          borderBottomRightRadius: "35px",
         }}
       >
         <Toolbar sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
@@ -148,35 +146,59 @@ function Cart() {
             </IconButton>
           )}
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Carcare
+            Carcare - My Cart
           </Typography>
           {!isMobile && (
-            <Box sx={{ display: "flex" }}>
+            <Box sx={{ display: "flex", gap: 2, mr: 2 }}>
               <Button
                 color="white"
-                sx={{ "&:hover": { color: "white" }, fontWeight: "bold", fontFamily: "Arial, sans-serif" }}
+                sx={{
+                  mr: 2,
+                  fontSize: "14px",
+                  "&:hover": { color: "red" },
+                  fontFamily: "Arial, sans-serif",
+                }}
                 href="/dashboard"
+                startIcon={<HomeIcon />}
               >
                 Home
               </Button>
               <Button
                 color="white"
-                sx={{ "&:hover": { color: "white" }, fontWeight: "bold", fontFamily: "Arial, sans-serif" }}
+                sx={{
+                  mr: 2,
+                  fontSize: "14px",
+                  "&:hover": { color: "red" },
+                  fontFamily: "Arial, sans-serif",
+                }}
                 href="/booking"
+                startIcon={<BookIcon />}
               >
                 Booking
               </Button>
               <Button
                 color="white"
-                sx={{ "&:hover": { color: "white" }, fontWeight: "bold", fontFamily: "Arial, sans-serif" }}
+                sx={{
+                  mr: 2,
+                  fontSize: "14px",
+                  "&:hover": { color: "red" },
+                  fontFamily: "Arial, sans-serif",
+                }}
                 href="/cart"
+                startIcon={<ShoppingCartIcon />}
               >
                 Cart
               </Button>
               <Button
                 color="white"
-                sx={{ "&:hover": { color: "white" }, fontWeight: "bold", fontFamily: "Arial, sans-serif" }}
+                sx={{
+                  mr: 2,
+                  fontSize: "14px",
+                  "&:hover": { color: "red" },
+                  fontFamily: "Arial, sans-serif",
+                }}
                 href="/map"
+                startIcon={<MapIcon />}
               >
                 Map
               </Button>
@@ -334,7 +356,23 @@ function Cart() {
         >
           To Receive
         </Button>
-
+        <Button
+          variant="text"
+          color="white"
+          sx={{
+            "&:hover": { color: "white" },
+            "&:active": { color: "darkred" },
+            ml: 3,
+            fontFamily: "Arial, sans-serif",
+            textAlign: "left",
+            fontSize: "1.1rem",
+            textTransform: "none",
+          }}
+          href="/cancelorder"
+        >
+          Canceled
+        </Button>
+        
         <Divider sx={{ mb: 2 }} />
 
         {cart.map((item) => (
@@ -345,7 +383,6 @@ function Cart() {
               borderRadius: "15px",
               boxShadow: "0 6px 12px rgba(0, 0, 0, 0.1)",
               transition: "transform 0.3s",
-              "&:hover": { transform: "scale(1.02)" },
             }}
           >
             <CardContent>

@@ -91,8 +91,6 @@ function App() {
           display: "flex",
           justifyContent: "center",
           transition: "background-color 0.3s ease",
-          borderBottomLeftRadius: "35px",
-          borderBottomRightRadius: "35px",
         }}
       >
         <Toolbar
@@ -137,13 +135,13 @@ function App() {
                   key={item.text}
                   color="white"
                   sx={{
-                    "&:hover": {
-                      color: "red",
-                    },
-                    fontWeight: "bold",
+                    mr: 2,
+                    fontSize: "14px",
+                    "&:hover": { color: "red" },
                     fontFamily: "Arial, sans-serif",
                   }}
                   href={item.href}
+                  startIcon={item.icon}
                 >
                   {item.text}
                 </Button>
@@ -302,7 +300,6 @@ function App() {
             borderRadius: "15px",
             boxShadow: "0 6px 12px rgba(0, 0, 0, 0.1)",
             transition: "transform 0.3s",
-            "&:hover": { transform: "scale(1.02)" },
             width: "88%",
             margin: "auto",
           }}

@@ -112,8 +112,6 @@ function BookingPage() {
           display: "flex",
           justifyContent: "center",
           transition: "background-color 0.3s ease",
-         borderBottomLeftRadius: "35px", 
-          borderBottomRightRadius: "35px",
         }}
       >
         <Toolbar
@@ -139,52 +137,56 @@ function BookingPage() {
             Carcare
           </Typography>
           {!isMobile && (
-            <Box sx={{ display: "flex" }}>
+            <Box sx={{ display: "flex", gap: 2, mr: 2 }}>
               <Button
                 color="white"
                 sx={{
+                  mr: 2,
                   fontSize: "14px",
                   "&:hover": { color: "red" },
-                  fontWeight: "bold",
                   fontFamily: "Arial, sans-serif",
                 }}
                 href="/dashboard"
+                startIcon={<HomeIcon />}
               >
                 Home
               </Button>
               <Button
                 color="white"
                 sx={{
+                  mr: 2,
                   fontSize: "14px",
                   "&:hover": { color: "red" },
-                  fontWeight: "bold",
                   fontFamily: "Arial, sans-serif",
                 }}
                 href="/booking"
+                startIcon={<BookIcon />}
               >
                 Booking
               </Button>
               <Button
                 color="white"
                 sx={{
+                  mr: 2,
                   fontSize: "14px",
                   "&:hover": { color: "red" },
-                  fontWeight: "bold",
                   fontFamily: "Arial, sans-serif",
                 }}
                 href="/cart"
+                startIcon={<ShoppingCartIcon />}
               >
                 Cart
               </Button>
               <Button
                 color="white"
                 sx={{
+                  mr: 2,
                   fontSize: "14px",
                   "&:hover": { color: "red" },
-                  fontWeight: "bold",
                   fontFamily: "Arial, sans-serif",
                 }}
                 href="/map"
+                startIcon={<MapIcon />}
               >
                 Map
               </Button>
