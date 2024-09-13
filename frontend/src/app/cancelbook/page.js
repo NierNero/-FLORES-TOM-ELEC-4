@@ -130,6 +130,8 @@ function App() {
                   fontSize: "14px",
                   "&:hover": { color: "red" },
                   fontFamily: "Arial, sans-serif",
+                  textTransform: "none",
+                      color: "#FF6600",
                 }}
                 href="/booking"
                 startIcon={<BookIcon />}
@@ -164,34 +166,6 @@ function App() {
               </Button>
             </Box>
           )}
-          <TextField
-            sx={{
-              width: "200px",
-              "& fieldset": {
-                border: "none",
-              },
-              "& .MuiInputLabel-root": {
-                color: "black",
-              },
-              "& .MuiInputBase-input": {
-                color: "white",
-              },
-              "& .MuiInputAdornment-root": {
-                color: "white",
-              },
-            }}
-            size="small"
-            placeholder="Search here..."
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="end">
-                  <IconButton onClick={handleClick}>
-                    <SearchIcon sx={{ color: "white" }} />
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-          />
           <Avatar
             src="/profile.png"
             sx={{ ml: 1, cursor: "pointer" }}
@@ -207,15 +181,20 @@ function App() {
               },
             }}
           >
-            <MenuItem onClick={handleMenuClose} href="/profile">
-              Profile
-            </MenuItem>
-            <MenuItem onClick={handleMenuClose} href="/settings">
-              Settings
-            </MenuItem>
-            <MenuItem onClick={handleMenuClose} href="/login">
-              Logout
-            </MenuItem>
+            <MenuItem onClick={handleMenuClose}>
+                  <Button href="/profile" passHref>
+                    <a style={{ textDecoration: "none", color: "inherit" }}>
+                      Profile
+                    </a>
+                  </Button>
+                </MenuItem>
+                <MenuItem onClick={handleMenuClose}>
+                  <Button href="/login" passHref>
+                    <a style={{ textDecoration: "none", color: "inherit" }}>
+                      Logout
+                    </a>
+                  </Button>
+                </MenuItem>
           </Menu>
         </Toolbar>
       </AppBar>
@@ -311,6 +290,8 @@ function App() {
             textAlign: "left",
             fontSize: "1.1rem",
             textTransform: "none",
+            textTransform: "none",
+                      color: "#FF6600",
             marginLeft: "3%",
           }}
           href="/cancelbook"

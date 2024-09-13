@@ -157,6 +157,8 @@ function Pending() {
                   fontSize: "14px",
                   "&:hover": { color: "red" },
                   fontFamily: "Arial, sans-serif",
+                  textTransform: "none",
+                      color: "#FF6600",
                 }}
                 href="/cart"
                 startIcon={<ShoppingCartIcon />}
@@ -207,15 +209,20 @@ function Pending() {
             onClose={handleMenuClose}
             PaperProps={{ sx: { width: "200px" } }}
           >
-            <MenuItem onClick={handleMenuClose} href="/profile">
-              Profile
-            </MenuItem>
-            <MenuItem onClick={handleMenuClose} href="/settings">
-              Settings
-            </MenuItem>
-            <MenuItem onClick={handleMenuClose} href="/login">
-              Logout
-            </MenuItem>
+            <MenuItem onClick={handleMenuClose}>
+                  <Button href="/profile" passHref>
+                    <a style={{ textDecoration: "none", color: "inherit" }}>
+                      Profile
+                    </a>
+                  </Button>
+                </MenuItem>
+                <MenuItem onClick={handleMenuClose}>
+                  <Button href="/login" passHref>
+                    <a style={{ textDecoration: "none", color: "inherit" }}>
+                      Logout
+                    </a>
+                  </Button>
+                </MenuItem>
           </Menu>
         </Toolbar>
       </AppBar>
@@ -312,6 +319,7 @@ function Pending() {
             textAlign: "left",
             fontSize: "1.1rem",
             textTransform: "none",
+            color: "#FF6600",
           }}
           href="/cancelorder"
         >

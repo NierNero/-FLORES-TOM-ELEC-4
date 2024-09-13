@@ -110,61 +110,63 @@ function App() {
             Carcare
           </Typography>
           {!isMobile && (
-            <Box sx={{ display: "flex", gap: 2, mr: 2 }}>
-              <Button
-                color="white"
-                sx={{
-                  mr: 2,
-                  fontSize: "14px",
-                  "&:hover": { color: "red" },
-                  fontFamily: "Arial, sans-serif",
-                }}
-                href="/dashboard"
-                startIcon={<HomeIcon />}
-              >
-                Home
-              </Button>
-              <Button
-                color="white"
-                sx={{
-                  mr: 2,
-                  fontSize: "14px",
-                  "&:hover": { color: "red" },
-                  fontFamily: "Arial, sans-serif",
-                }}
-                href="/booking"
-                startIcon={<BookIcon />}
-              >
-                Booking
-              </Button>
-              <Button
-                color="white"
-                sx={{
-                  mr: 2,
-                  fontSize: "14px",
-                  "&:hover": { color: "red" },
-                  fontFamily: "Arial, sans-serif",
-                }}
-                href="/cart"
-                startIcon={<ShoppingCartIcon />}
-              >
-                Cart
-              </Button>
-              <Button
-                color="white"
-                sx={{
-                  mr: 2,
-                  fontSize: "14px",
-                  "&:hover": { color: "red" },
-                  fontFamily: "Arial, sans-serif",
-                }}
-                href="/map"
-                startIcon={<MapIcon />}
-              >
-                Map
-              </Button>
-            </Box>
-          )}
+                <Box sx={{ display: "flex", gap: 2, mr: 2 }}>
+                  <Button
+                    color="white"
+                    sx={{
+                      mr: 2,
+                      fontSize: "14px",
+                      "&:hover": { color: "red" },
+                      fontFamily: "Arial, sans-serif",
+                    }}
+                    href="/dashboard"
+                    startIcon={<HomeIcon />}
+                  >
+                    Home
+                  </Button>
+                  <Button
+                    color="white"
+                    sx={{
+                      mr: 2,
+                      fontSize: "14px",
+                      "&:hover": { color: "red" },
+                      fontFamily: "Arial, sans-serif",
+                      textTransform: "none",
+                      color: "#FF6600",
+                    }}
+                    href="/booking"
+                    startIcon={<BookIcon />}
+                  >
+                    Booking
+                  </Button>
+                  <Button
+                    color="white"
+                    sx={{
+                      mr: 2,
+                      fontSize: "14px",
+                      "&:hover": { color: "red" },
+                      fontFamily: "Arial, sans-serif",
+                    }}
+                    href="/cart"
+                    startIcon={<ShoppingCartIcon />}
+                  >
+                    Cart
+                  </Button>
+                  <Button
+                    color="white"
+                    sx={{
+                      mr: 2,
+                      fontSize: "14px",
+                      "&:hover": { color: "red" },
+                      fontFamily: "Arial, sans-serif",
+                    }}
+                    href="/map"
+                    startIcon={<MapIcon />}
+                  >
+                    Map
+                  </Button>
+                </Box>
+              )}
           <TextField
             sx={{
               width: '200px',
@@ -208,9 +210,20 @@ function App() {
               },
             }}
           >
-            <MenuItem onClick={handleMenuClose} href="/profile">Profile</MenuItem>
-            <MenuItem onClick={handleMenuClose} href="/settings">Settings</MenuItem>
-            <MenuItem onClick={handleMenuClose} href="/login">Logout</MenuItem>
+            <MenuItem onClick={handleMenuClose}>
+                  <Button href="/profile" passHref>
+                    <a style={{ textDecoration: "none", color: "inherit" }}>
+                      Profile
+                    </a>
+                  </Button>
+                </MenuItem>
+                <MenuItem onClick={handleMenuClose}>
+                  <Button href="/login" passHref>
+                    <a style={{ textDecoration: "none", color: "inherit" }}>
+                      Logout
+                    </a>
+                  </Button>
+                </MenuItem>
           </Menu>
         </Toolbar>
       </AppBar>
@@ -245,6 +258,8 @@ function App() {
             textAlign: 'left',
             fontSize: '1.1rem',
             textTransform: 'none',
+            textTransform: "none",
+                      color: "#FF6600",
             marginLeft: '6%'
           }}
           href="/booking"

@@ -29,9 +29,10 @@ import MenuIcon from "@mui/icons-material/Menu";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import SearchIcon from "@mui/icons-material/Search";
 import HomeIcon from "@mui/icons-material/Home";
-import BookingIcon from "@mui/icons-material/Assignment";
+import BookIcon from "@mui/icons-material/Book";
 import CartIcon from "@mui/icons-material/ShoppingCart";
 import MapIcon from "@mui/icons-material/Map";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 function App() {
   const [scrolled, setScrolled] = useState(false);
@@ -41,6 +42,7 @@ function App() {
 
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   useEffect(() => {
     const handleScroll = () => {
@@ -73,7 +75,7 @@ function App() {
 
   const menuItems = [
     { text: "Home", icon: <HomeIcon />, href: "/dashboard" },
-    { text: "Booking", icon: <BookingIcon />, href: "/booking" },
+    { text: "Booking", icon: <BookIcon />, href: "/booking" },
     { text: "Cart", icon: <CartIcon />, href: "/cart" },
     { text: "Map", icon: <MapIcon />, href: "/map" },
   ];
@@ -130,50 +132,64 @@ function App() {
               <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                 Carcare
               </Typography>
-              {menuItems.map((item) => (
-                <Button
-                  key={item.text}
-                  color="white"
-                  sx={{
-                    mr: 2,
-                    fontSize: "14px",
-                    "&:hover": { color: "red" },
-                    fontFamily: "Arial, sans-serif",
-                  }}
-                  href={item.href}
-                  startIcon={item.icon}
-                >
-                  {item.text}
-                </Button>
-              ))}
-              <TextField
-                sx={{
-                  width: "200px",
-                  "& fieldset": {
-                    border: "none",
-                  },
-                  "& .MuiInputLabel-root": {
-                    color: "black",
-                  },
-                  "& .MuiInputBase-input": {
-                    color: "white",
-                  },
-                  "& .MuiInputAdornment-root": {
-                    color: "white",
-                  },
-                }}
-                size="small"
-                placeholder="Search here..."
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton onClick={handleClick}>
-                        <SearchIcon sx={{ color: "white" }} />
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-              />
+              {!isMobile && (
+                <Box sx={{ display: "flex", gap: 2, mr: 2 }}>
+                  <Button
+                    color="white"
+                    sx={{
+                      mr: 2,
+                      fontSize: "14px",
+                      "&:hover": { color: "red" },
+                      fontFamily: "Arial, sans-serif",
+                    }}
+                    href="/dashboard"
+                    startIcon={<HomeIcon />}
+                  >
+                    Home
+                  </Button>
+                  <Button
+                    color="white"
+                    sx={{
+                      mr: 2,
+                      fontSize: "14px",
+                      "&:hover": { color: "red" },
+                      fontFamily: "Arial, sans-serif",
+                      textTransform: "none",
+                      color: "#FF6600",
+                    }}
+                    href="/booking"
+                    startIcon={<BookIcon />}
+                  >
+                    Booking
+                  </Button>
+                  <Button
+                    color="white"
+                    sx={{
+                      mr: 2,
+                      fontSize: "14px",
+                      "&:hover": { color: "red" },
+                      fontFamily: "Arial, sans-serif",
+                    }}
+                    href="/cart"
+                    startIcon={<ShoppingCartIcon />}
+                  >
+                    Cart
+                  </Button>
+                  <Button
+                    color="white"
+                    sx={{
+                      mr: 2,
+                      fontSize: "14px",
+                      "&:hover": { color: "red" },
+                      fontFamily: "Arial, sans-serif",
+                    }}
+                    href="/map"
+                    startIcon={<MapIcon />}
+                  >
+                    Map
+                  </Button>
+                </Box>
+              )}
               <Avatar
                 src="/profile.png"
                 sx={{ ml: 1, cursor: "pointer" }}
@@ -189,14 +205,19 @@ function App() {
                   },
                 }}
               >
-                <MenuItem onClick={handleMenuClose} href="/profile">
-                  Profile
+                <MenuItem onClick={handleMenuClose}>
+                  <Button href="/profile" passHref>
+                    <a style={{ textDecoration: "none", color: "inherit" }}>
+                      Profile
+                    </a>
+                  </Button>
                 </MenuItem>
-                <MenuItem onClick={handleMenuClose} href="/settings">
-                  Settings
-                </MenuItem>
-                <MenuItem onClick={handleMenuClose} href="/login">
-                  Logout
+                <MenuItem onClick={handleMenuClose}>
+                  <Button href="/login" passHref>
+                    <a style={{ textDecoration: "none", color: "inherit" }}>
+                      Logout
+                    </a>
+                  </Button>
                 </MenuItem>
               </Menu>
             </>
@@ -258,6 +279,8 @@ function App() {
             textAlign: "left",
             fontSize: "1.1rem",
             textTransform: "none",
+            textTransform: "none",
+                      color: "#FF6600",
             marginLeft: "3%",
           }}
           href="/acceptbook"

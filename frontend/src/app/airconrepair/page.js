@@ -37,6 +37,8 @@ function App() {
 
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -47,12 +49,6 @@ function App() {
   const handleMenuOpen = (event) => setAnchorEl(event.currentTarget);
   const handleMenuClose = () => setAnchorEl(null);
   const handleDrawerToggle = () => setDrawerOpen(!drawerOpen);
-
-  const menuItems = [
-    { text: "Profile", href: "/profile", icon: <SettingsIcon /> },
-    { text: "Settings", href: "/settings", icon: <SettingsIcon /> },
-    { text: "Logout", href: "/login", icon: <ExitToAppIcon /> },
-  ];
 
   const navLinks = [
     { text: "Home", href: "/dashboard", icon: <HomeIcon /> },
@@ -104,10 +100,38 @@ function App() {
               <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                 CARCARE
               </Typography>
-              <Box sx={{ display: "flex", gap: 2 }}>
-                {navLinks.map((link) => (
+              {!isMobile && (
+                <Box sx={{ display: "flex", gap: 2, mr: 2 }}>
                   <Button
-                    key={link.href}
+                    color="white"
+                    sx={{
+                      mr: 2,
+                      fontSize: "14px",
+                      "&:hover": { color: "red" },
+                      fontFamily: "Arial, sans-serif",
+                      textTransform: "none",
+                      color: "#FF6600",
+                    }}
+                    href="/dashboard"
+                    startIcon={<HomeIcon />}
+                  >
+                    Home
+                  </Button>
+                  <Button
+                    color="white"
+                    sx={{
+                      mr: 2,
+                      fontSize: "14px",
+                      "&:hover": { color: "red" },
+                      fontFamily: "Arial, sans-serif",
+                      
+                    }}
+                    href="/booking"
+                    startIcon={<BookIcon />}
+                  >
+                    Booking
+                  </Button>
+                  <Button
                     color="white"
                     sx={{
                       mr: 2,
@@ -115,12 +139,26 @@ function App() {
                       "&:hover": { color: "red" },
                       fontFamily: "Arial, sans-serif",
                     }}
-                    href={link.href}
-                    startIcon={link.icon}
+                    href="/cart"
+                    startIcon={<ShoppingCartIcon />}
                   >
-                    {link.text}
+                    Cart
                   </Button>
-                ))}
+                  <Button
+                    color="white"
+                    sx={{
+                      mr: 2,
+                      fontSize: "14px",
+                      "&:hover": { color: "red" },
+                      fontFamily: "Arial, sans-serif",
+                    }}
+                    href="/map"
+                    startIcon={<MapIcon />}
+                  >
+                    Map
+                  </Button>
+                </Box>
+              )}
                 
                 <Avatar
                   src="/profile.png"
@@ -133,19 +171,21 @@ function App() {
                   onClose={handleMenuClose}
                   PaperProps={{ sx: { width: "200px" } }}
                 >
-                  {menuItems.map((item) => (
-                    <MenuItem
-                      key={item.text}
-                      onClick={handleMenuClose}
-                      href={item.href}
-                      sx={{ display: 'flex', alignItems: 'center' }}
-                    >
-                      {item.icon}
-                      <Typography sx={{ ml: 1 }}>{item.text}</Typography>
-                    </MenuItem>
-                  ))}
+                  <MenuItem onClick={handleMenuClose}>
+                  <Button href="/profile" passHref>
+                    <a style={{ textDecoration: "none", color: "inherit" }}>
+                      Profile
+                    </a>
+                  </Button>
+                </MenuItem>
+                <MenuItem onClick={handleMenuClose}>
+                  <Button href="/login" passHref>
+                    <a style={{ textDecoration: "none", color: "inherit" }}>
+                      Logout
+                    </a>
+                  </Button>
+                </MenuItem>
                 </Menu>
-              </Box>
             </>
           )}
         </Toolbar>

@@ -39,14 +39,15 @@ import { useTheme } from "@mui/material/styles";
 function BookingPage() {
   const [formData, setFormData] = useState({
     firstName: "James",
-    lastName: "Crispe",
-    email: "Crispe@gmail.com",
+    lastName: "Mijares",
+    email: "Deticio@gmail.com",
     phone: "09123456789",
-    address: "Diri Sa Amoa Lapu-Lapu City",
+    address: "Diri Sa Amoa Ila Suazo Lapu-Lapu City",
     vehicleName: "Toyota Supra",
     plateNo: "8",
     service: "",
     message: "",
+    date: "", // New field for date
   });
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -54,7 +55,7 @@ function BookingPage() {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const [scrolled, setScrolled] = useState(false);
-  
+
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -87,7 +88,14 @@ function BookingPage() {
 
   if (submitted) {
     return (
-      <Container sx={{ mt: 4, display: "flex", flexDirection: "column", alignItems: "center" }}>
+      <Container
+        sx={{
+          mt: 4,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
         <Typography variant="h4" mb={2}>
           Thank You!
         </Typography>
@@ -106,7 +114,9 @@ function BookingPage() {
       <AppBar
         position="fixed"
         sx={{
-          backgroundColor: scrolled ? "rgba(0, 0, 0, 1)" : "rgba(13, 71, 161, 1)",
+          backgroundColor: scrolled
+            ? "rgba(0, 0, 0, 1)"
+            : "rgba(13, 71, 161, 1)",
           boxShadow: "0 3px 5px rgba(0, 0, 0, 0.4)",
           height: "70px",
           display: "flex",
@@ -133,7 +143,11 @@ function BookingPage() {
               <MenuIcon />
             </IconButton>
           )}
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1, display: { xs: "none", md: "block" } }}>
+          <Typography
+            variant="h6"
+            component="div"
+            sx={{ flexGrow: 1, display: { xs: "none", md: "block" } }}
+          >
             Carcare
           </Typography>
           {!isMobile && (
@@ -145,6 +159,8 @@ function BookingPage() {
                   fontSize: "14px",
                   "&:hover": { color: "red" },
                   fontFamily: "Arial, sans-serif",
+                  textTransform: "none",
+                  color: "#FF6600",
                 }}
                 href="/dashboard"
                 startIcon={<HomeIcon />}
@@ -203,9 +219,20 @@ function BookingPage() {
             onClose={handleMenuClose}
             PaperProps={{ sx: { width: "200px" } }}
           >
-            <MenuItem onClick={handleMenuClose} href="/profile">Profile</MenuItem>
-            <MenuItem onClick={handleMenuClose} href="/settings">Settings</MenuItem>
-            <MenuItem onClick={handleMenuClose} href="/login">Logout</MenuItem>
+            <MenuItem onClick={handleMenuClose}>
+              <Button href="/profile" passHref>
+                <a style={{ textDecoration: "none", color: "inherit" }}>
+                  Profile
+                </a>
+              </Button>
+            </MenuItem>
+            <MenuItem onClick={handleMenuClose}>
+              <Button href="/login" passHref>
+                <a style={{ textDecoration: "none", color: "inherit" }}>
+                  Logout
+                </a>
+              </Button>
+            </MenuItem>
           </Menu>
         </Toolbar>
       </AppBar>
@@ -217,25 +244,49 @@ function BookingPage() {
         PaperProps={{ sx: { width: 240 } }}
       >
         <List>
-          <ListItem button onClick={handleDrawerClose} component="a" href="/dashboard" sx={{ py: 1.5 }}>
+          <ListItem
+            button
+            onClick={handleDrawerClose}
+            component="a"
+            href="/dashboard"
+            sx={{ py: 1.5 }}
+          >
             <ListItemIcon sx={{ minWidth: "35px" }}>
               <HomeIcon />
             </ListItemIcon>
             <ListItemText primary="Home" sx={{ ml: 1 }} />
           </ListItem>
-          <ListItem button onClick={handleDrawerClose} component="a" href="/booking" sx={{ py: 1.5 }}>
+          <ListItem
+            button
+            onClick={handleDrawerClose}
+            component="a"
+            href="/booking"
+            sx={{ py: 1.5 }}
+          >
             <ListItemIcon sx={{ minWidth: "35px" }}>
               <BookIcon />
             </ListItemIcon>
             <ListItemText primary="Booking" sx={{ ml: 1 }} />
           </ListItem>
-          <ListItem button onClick={handleDrawerClose} component="a" href="/cart" sx={{ py: 1.5 }}>
+          <ListItem
+            button
+            onClick={handleDrawerClose}
+            component="a"
+            href="/cart"
+            sx={{ py: 1.5 }}
+          >
             <ListItemIcon sx={{ minWidth: "35px" }}>
               <ShoppingCartIcon />
             </ListItemIcon>
             <ListItemText primary="Cart" sx={{ ml: 1 }} />
           </ListItem>
-          <ListItem button onClick={handleDrawerClose} component="a" href="/map" sx={{ py: 1.5 }}>
+          <ListItem
+            button
+            onClick={handleDrawerClose}
+            component="a"
+            href="/map"
+            sx={{ py: 1.5 }}
+          >
             <ListItemIcon sx={{ minWidth: "35px" }}>
               <MapIcon />
             </ListItemIcon>
@@ -350,6 +401,22 @@ function BookingPage() {
                 <Grid item xs={12}>
                   <TextField
                     fullWidth
+                    label="Date"
+                    name="date"
+                    type="date"
+                    value={formData.date}
+                    onChange={handleChange}
+                    sx={{ bgcolor: "background.paper", borderRadius: "5px" }}
+                    InputLabelProps={{ shrink: true }}
+                    required
+                  />
+                  <FormHelperText sx={{ml:2}}>
+                    Select the Date for Service
+                  </FormHelperText>
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    fullWidth
                     label="Message"
                     name="message"
                     multiline
@@ -359,6 +426,7 @@ function BookingPage() {
                     sx={{ bgcolor: "background.paper", borderRadius: "5px" }}
                   />
                 </Grid>
+
                 <Grid item xs={12}>
                   <Box display="flex" justifyContent="center" mt={2}>
                     <Button

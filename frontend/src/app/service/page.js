@@ -14,39 +14,38 @@ import {
   Grid,
   AppBar,
   Toolbar,
+  useMediaQuery,
   Box,
-  IconButton,
+  useTheme
 } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
-import BookingIcon from "@mui/icons-material/Assignment";
+import BookIcon from "@mui/icons-material/Book";
 import CartIcon from "@mui/icons-material/ShoppingCart";
 import MapIcon from "@mui/icons-material/Map";
 import ShopIcon from "@mui/icons-material/Shop";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Footer from '../../components/Footer'; // Adjust the path as needed
 
 function App() {
+  const [scrolled, setScrolled] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const [scrolled, setScrolled] = useState(false);
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
-
   const handleMenuOpen = (event) => setAnchorEl(event.currentTarget);
   const handleMenuClose = () => setAnchorEl(null);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
-  const menuItems = [
-    { text: "Profile", href: "/profile" },
-    { text: "Settings", href: "/settings" },
-    { text: "Logout", href: "/login" },
-  ];
 
   const menuItem = [
     { text: "Home", icon: <HomeIcon />, href: "/dashboard" },
-    { text: "Booking", icon: <BookingIcon />, href: "/booking" },
+    { text: "Booking", icon: <BookIcon />, href: "/booking" },
     { text: "Cart", icon: <CartIcon />, href: "/cart" },
     { text: "Shop", icon: <ShopIcon />, href: "/shop" },
     { text: "Map", icon: <MapIcon />, href: "/map" },
@@ -105,45 +104,100 @@ function App() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             CARCARE
           </Typography>
-          <Box sx={{ display: "flex", gap: 2 }}>
-            {menuItem.map((item) => (
-              <Button
-                key={item.text}
-                color="inherit"
-                sx={{
-                  mr: 2,
-                  fontSize: "14px",
-                  "&:hover": { color: "red" },
-                  fontFamily: "Arial, sans-serif",
-                }}
-                href={item.href}
-                startIcon={item.icon}
-              >
-                {item.text}
+          {!isMobile && (
+                <Box sx={{ display: "flex", gap: 2, mr: 2 }}>
+                  <Button
+                    color="white"
+                    sx={{
+                      mr: 2,
+                      fontSize: "14px",
+                      "&:hover": { color: "red" },
+                      fontFamily: "Arial, sans-serif",
+                      textTransform: "none",
+                      color: "#FF6600",
+                    }}
+                    href="/dashboard"
+                    startIcon={<HomeIcon />}
+                  >
+                    Home
+                  </Button>
+                  <Button
+                    color="white"
+                    sx={{
+                      mr: 2,
+                      fontSize: "14px",
+                      "&:hover": { color: "red" },
+                      fontFamily: "Arial, sans-serif",
+                      
+                    }}
+                    href="/booking"
+                    startIcon={<BookIcon />}
+                  >
+                    Booking
+                  </Button>
+                  <Button
+                    color="white"
+                    sx={{
+                      mr: 2,
+                      fontSize: "14px",
+                      "&:hover": { color: "red" },
+                      fontFamily: "Arial, sans-serif",
+                    }}
+                    href="/cart"
+                    startIcon={<ShoppingCartIcon />}
+                  >
+                    Cart
+                  </Button>
+                  <Button
+                    color="white"
+                    sx={{
+                      mr: 2,
+                      fontSize: "14px",
+                      "&:hover": { color: "red" },
+                      fontFamily: "Arial, sans-serif",
+                    }}
+                    href="/shop"
+                    startIcon={<ShopIcon />}
+                  >
+                    Shop
+                  </Button>
+                  <Button
+                    color="white"
+                    sx={{
+                      mr: 2,
+                      fontSize: "14px",
+                      "&:hover": { color: "red" },
+                      fontFamily: "Arial, sans-serif",
+                    }}
+                    href="/map"
+                    startIcon={<MapIcon />}
+                  >
+                    Map
+                  </Button>
+                </Box>
+              )}
+          <Avatar
+            src="/profile.png"
+            sx={{ ml: 1, cursor: "pointer" }}
+            onClick={handleMenuOpen}
+          />
+          <Menu
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleMenuClose}
+            PaperProps={{ sx: { width: "200px" } }}
+          >
+            <MenuItem onClick={handleMenuClose}>
+              <Button href="/profile" sx={{ textDecoration: "none", color: "inherit" }}>
+                Profile
               </Button>
-            ))}
-            <Avatar
-              src="/profile.png"
-              sx={{ ml: 1, cursor: "pointer" }}
-              onClick={handleMenuOpen}
-            />
-            <Menu
-              anchorEl={anchorEl}
-              open={open}
-              onClose={handleMenuClose}
-              PaperProps={{ sx: { width: "200px" } }}
-            >
-              {menuItems.map((item) => (
-                <MenuItem
-                  key={item.text}
-                  onClick={handleMenuClose}
-                  href={item.href}
-                >
-                  {item.text}
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
+            </MenuItem>
+            <MenuItem onClick={handleMenuClose}>
+              <Button href="/login" sx={{ textDecoration: "none", color: "inherit" }}>
+                Logout
+              </Button>
+            </MenuItem>
+          </Menu>
         </Toolbar>
       </AppBar>
 

@@ -183,6 +183,8 @@ function Cart() {
                   fontSize: "14px",
                   "&:hover": { color: "red" },
                   fontFamily: "Arial, sans-serif",
+                  textTransform: "none",
+                      color: "#FF6600",
                 }}
                 href="/cart"
                 startIcon={<ShoppingCartIcon />}
@@ -235,9 +237,20 @@ function Cart() {
             onClose={handleMenuClose}
             PaperProps={{ sx: { width: "200px" } }}
           >
-            <MenuItem onClick={handleMenuClose} href="/profile">Profile</MenuItem>
-            <MenuItem onClick={handleMenuClose} href="/settings">Settings</MenuItem>
-            <MenuItem onClick={handleMenuClose} href="/login">Logout</MenuItem>
+            <MenuItem onClick={handleMenuClose}>
+                  <Button href="/profile" passHref>
+                    <a style={{ textDecoration: "none", color: "inherit" }}>
+                      Profile
+                    </a>
+                  </Button>
+                </MenuItem>
+                <MenuItem onClick={handleMenuClose}>
+                  <Button href="/login" passHref>
+                    <a style={{ textDecoration: "none", color: "inherit" }}>
+                      Logout
+                    </a>
+                  </Button>
+                </MenuItem>
           </Menu>
         </Toolbar>
       </AppBar>
@@ -287,6 +300,8 @@ function Cart() {
             textAlign: "left",
             fontSize: "1.1rem",
             textTransform: "none",
+            color: "#FF6600",
+
           }}
           href="/cart"
         >
@@ -429,7 +444,24 @@ function Cart() {
           </Card>
         ))}
 
-        <Grid container justifyContent="flex-end" spacing={2} sx={{ mb: 3 }}>
+        <Box
+          sx={{
+            mt: 3,
+            p: 2,
+            border: "1px solid #ddd",
+            borderRadius: "8px",
+            backgroundColor: "#fff",
+            textAlign: "right",
+          }}
+        >
+          <Typography variant="h6" component="div" gutterBottom>
+            Total Amount
+          </Typography>
+          <Typography variant="h4" color="primary" sx={{ fontWeight: "bold" }}>
+            ${calculateTotal()}
+          </Typography>
+        </Box>
+        <Grid container justifyContent="flex-end" spacing={2} sx={{ mt: 1 }}>
           <Grid item>
             <Button
               variant="contained"
@@ -450,23 +482,6 @@ function Cart() {
             </Button>
           </Grid>
         </Grid>
-
-        <Box
-          sx={{
-            mt: 3,
-            p: 2,
-            border: "1px solid #ddd",
-            borderRadius: "8px",
-            backgroundColor: "#fff",
-          }}
-        >
-          <Typography variant="h6" component="div" gutterBottom>
-            Total Amount
-          </Typography>
-          <Typography variant="h4" color="primary">
-            ${calculateTotal()}
-          </Typography>
-        </Box>
       </Container>
     </Box>
   );

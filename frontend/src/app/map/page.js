@@ -13,7 +13,6 @@ import {
   Container,
   Box,
   Paper,
-  Divider,
   Menu,
   MenuItem,
 } from "@mui/material";
@@ -22,11 +21,15 @@ import HomeIcon from "@mui/icons-material/Home";
 import BookingIcon from "@mui/icons-material/Assignment";
 import CartIcon from "@mui/icons-material/ShoppingCart";
 import MapIcon from "@mui/icons-material/Map";
+import { useMediaQuery } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 
 const App = () => {
   const [scrolled, setScrolled] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   useEffect(() => {
     const handleScroll = () => {
@@ -53,8 +56,8 @@ const App = () => {
           backgroundColor: scrolled
             ? "rgba(0, 0, 0, 1)"
             : "rgba(13, 71, 161, 1)",
-            boxShadow: "0 3px 5px rgba(0, 0, 0, 0.4)",
-            height: "70px",
+          boxShadow: "0 3px 5px rgba(0, 0, 0, 0.4)",
+          height: "70px",
           display: "flex",
           justifyContent: "center",
           transition: "background-color 0.3s ease",
@@ -70,28 +73,65 @@ const App = () => {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Carcare
           </Typography>
-          <Box sx={{ display: "flex", gap: 2 }}>
-            {[
-              { href: "/dashboard", text: "Home", icon: <HomeIcon /> },
-              { href: "/booking", text: "Booking", icon: <BookingIcon /> },
-              { href: "/cart", text: "Cart", icon: <CartIcon /> },
-              { href: "/map", text: "Map", icon: <MapIcon /> }
-            ].map((item, index) => (
+          {!isMobile && (
+            <Box sx={{ display: "flex", gap: 2, mr: 2 }}>
               <Button
-                key={item.href}
-                color="inherit" // Use 'inherit' for correct color
+                color="white"
+                sx={{
+                  mr: 2,
+                  fontSize: "14px",
+                  "&:hover": { color: "red" },
+                  fontFamily: "Arial, sans-serif",
+                  
+                }}
+                href="/dashboard"
+                startIcon={<HomeIcon />}
+              >
+                Home
+              </Button>
+              <Button
+                color="white"
                 sx={{
                   mr: 2,
                   fontSize: "14px",
                   "&:hover": { color: "red" },
                   fontFamily: "Arial, sans-serif",
                 }}
-                href={item.href}
-                startIcon={item.icon}
+                href="/booking"
+                startIcon={<BookingIcon />}
               >
-                {item.text}
+                Booking
               </Button>
-            ))}
+              <Button
+                color="white"
+                sx={{
+                  mr: 2,
+                  fontSize: "14px",
+                  "&:hover": { color: "red" },
+                  fontFamily: "Arial, sans-serif",
+                }}
+                href="/cart"
+                startIcon={<CartIcon />}
+              >
+                Cart
+              </Button>
+              <Button
+                color="white"
+                sx={{
+                  mr: 2,
+                  fontSize: "14px",
+                  "&:hover": { color: "red" },
+                  fontFamily: "Arial, sans-serif",
+                  textTransform: "none",
+                  color: "#FF6600",
+                }}
+                href="/map"
+                startIcon={<MapIcon />}
+              >
+                Map
+              </Button>
+            </Box>
+          )}
           <Avatar
             src="/profile.png"
             sx={{ ml: 1, cursor: "pointer" }}
@@ -105,17 +145,17 @@ const App = () => {
               sx: { width: "200px" },
             }}
           >
-            <MenuItem onClick={handleMenuClose} href="/profile">
-              Profile
+            <MenuItem onClick={handleMenuClose}>
+              <Button href="/profile" sx={{ textDecoration: "none", color: "inherit" }}>
+                Profile
+              </Button>
             </MenuItem>
-            <MenuItem onClick={handleMenuClose} href="/settings">
-              Settings
-            </MenuItem>
-            <MenuItem onClick={handleMenuClose} href="/login">
-              Logout
+            <MenuItem onClick={handleMenuClose}>
+              <Button href="/login" sx={{ textDecoration: "none", color: "inherit" }}>
+                Logout
+              </Button>
             </MenuItem>
           </Menu>
-          </Box>
         </Toolbar>
       </AppBar>
 
@@ -196,7 +236,6 @@ const App = () => {
             Nearby Repair Shop(s)
           </Typography>
           <Grid container spacing={2} marginTop={3}>
-            {" "}
             <Grid item xs={12} sm={6} md={4} lg={3}>
               <Card
                 sx={{
@@ -207,7 +246,8 @@ const App = () => {
                   boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
                   width: "100%", 
                   maxWidth: "300px", 
-                  margin: "auto",                 }}
+                  margin: "auto",
+                }}
               >
                 <CardMedia
                   sx={{
@@ -249,7 +289,8 @@ const App = () => {
                   boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
                   width: "100%", 
                   maxWidth: "300px", 
-                  margin: "auto",                 }}
+                  margin: "auto",
+                }}
               >
                 <CardMedia
                   sx={{

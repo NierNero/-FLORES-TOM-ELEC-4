@@ -22,6 +22,7 @@ import {
   ListItem,
   ListItemText,
   ListItemIcon,
+  Link
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import Star from "@mui/icons-material/Star";
@@ -360,6 +361,8 @@ const App = () => {
                   fontSize: "14px",
                   "&:hover": { color: "red" },
                   fontFamily: "Arial, sans-serif",
+                  textTransform: "none",
+                      color: "#FF6600",
                 }}
                 href="/dashboard"
                 startIcon={<HomeIcon />}
@@ -422,14 +425,15 @@ const App = () => {
               },
             }}
           >
-            <MenuItem onClick={handleMenuClose} href="/profile">
-              Profile
+            <MenuItem onClick={handleMenuClose}>
+              <Button href="/profile" passHref>
+                <a style={{ textDecoration: 'none', color: 'inherit' }}>Profile</a>
+              </Button>
             </MenuItem>
-            <MenuItem onClick={handleMenuClose} href="/settings">
-              Settings
-            </MenuItem>
-            <MenuItem onClick={handleMenuClose} href="/login">
-              Logout
+            <MenuItem onClick={handleMenuClose}>
+              <Button href="/login" passHref>
+                <a style={{ textDecoration: 'none', color: 'inherit' }}>Logout</a>
+              </Button>
             </MenuItem>
           </Menu>
         </Toolbar>
