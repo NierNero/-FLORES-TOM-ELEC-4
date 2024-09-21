@@ -16,16 +16,14 @@ function App() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [vehicleName, setVehicleName] = useState("");
-  const [plateNo, setPlateNo] = useState("");
+  const [shop, setShop] = useState("");
   const [error, setError] = useState("");
+  const [image, setImage] = useState(null); // State for the uploaded image
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (!email || !password || !confirmPassword || !firstName || !lastName || !vehicleName || !plateNo) {
+    if (!email || !password || !confirmPassword) {
       setError("Please fill in all fields.");
       return;
     }
@@ -39,10 +37,19 @@ function App() {
 
     console.log("Email:", email);
     console.log("Password:", password);
-    console.log("First Name:", firstName);
-    console.log("Last Name:", lastName);
-    console.log("Vehicle Name:", vehicleName);
-    console.log("Plate Number:", plateNo);
+    console.log("Shop:", shop);
+
+
+    if (image) {
+      console.log("Uploaded Image:", URL.createObjectURL(image));
+    }
+  };
+
+  const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setImage(file);
+    }
   };
 
   return (
@@ -56,7 +63,7 @@ function App() {
         borderRadius: 2,
         boxShadow: 5,
         minHeight: "100vh",
-        backgroundImage: `url('https://source.unsplash.com/random')`,
+        backgroundImage: `url('https://source.unsplash.com/random?shop')`, // Shop-related background
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
@@ -81,27 +88,7 @@ function App() {
         </Typography>
         <form onSubmit={handleSubmit} style={{ width: "100%" }}>
           <TextField
-            label="First Name"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-            required
-            sx={{ bgcolor: grey[50] }}
-          />
-          <TextField
-            label="Last Name"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-            required
-            sx={{ bgcolor: grey[50] }}
-          />
-          <TextField
-            label="Email"
+            label="Email or Username"
             type="email"
             variant="outlined"
             fullWidth
@@ -134,25 +121,42 @@ function App() {
             sx={{ bgcolor: grey[50] }}
           />
           <TextField
-            label="Vehicle Name"
+            label="Shop Name"
+            type="Shop Name"
             variant="outlined"
             fullWidth
             margin="normal"
-            value={vehicleName}
-            onChange={(e) => setVehicleName(e.target.value)}
+            value={shop}
+            onChange={(e) => setShop(e.target.value)}
             required
             sx={{ bgcolor: grey[50] }}
           />
-          <TextField
-            label="Plate Number"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            value={plateNo}
-            onChange={(e) => setPlateNo(e.target.value)}
-            required
-            sx={{ bgcolor: grey[50] }}
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleImageUpload}
+            style={{ margin: '16px 0', width: '100%' }}
           />
+          {image && (
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                mb: 2,
+              }}
+            >
+              <img
+                src={URL.createObjectURL(image)}
+                alt="Uploaded Shop"
+                style={{
+                  maxWidth: '100%',
+                  maxHeight: '200px',
+                  borderRadius: '8px',
+                  objectFit: 'cover',
+                }}
+              />
+            </Box>
+          )}
           {error && (
             <Alert severity="error" sx={{ mt: 2 }}>
               {error}

@@ -11,8 +11,12 @@ import {
   Box,
   Container,
   CssBaseline,
+  IconButton,
+  Divider,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import GoogleIcon from "@mui/icons-material/Google";
 
 const theme = createTheme();
 
@@ -35,7 +39,7 @@ function Login() {
         <Container
           maxWidth="xs"
           sx={{
-            mt: 8,
+            mt: 4,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
@@ -83,7 +87,19 @@ function Login() {
             >
               Log In
             </Button>
-            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+            <Divider sx={{ my: 2 }}>or</Divider>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+              <Button
+                fullWidth
+                variant="outlined"
+                startIcon={<FacebookIcon />}
+                sx={{ mt: 1 }}
+                href="/facebook"
+              >
+                Login with Facebook
+              </Button>
+            </Box>
+            <Box sx={{ display: "flex", justifyContent: "space-between", mt: 2 }}>
               <Link href="/register" variant="body2">
                 Don’t have an account?
               </Link>

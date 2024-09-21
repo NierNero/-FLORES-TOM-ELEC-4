@@ -99,7 +99,7 @@ function Cart() {
   };
 
   const handleCancelPurchase = () => {
-    setCart([]); 
+    setCart([]);
     console.log("Cart cleared");
   };
 
@@ -125,14 +125,20 @@ function Cart() {
           backgroundColor: scrolled
             ? "rgba(0, 0, 0, 1)"
             : "rgba(13, 71, 161, 1)",
-            boxShadow: "0 3px 5px rgba(0, 0, 0, 0.4)",
-            height: "70px",
+          boxShadow: "0 3px 5px rgba(0, 0, 0, 0.4)",
+          height: "70px",
           display: "flex",
           justifyContent: "center",
           transition: "background-color 0.3s ease",
         }}
       >
-        <Toolbar sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+        <Toolbar
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
           {isMobile && (
             <IconButton
               size="large"
@@ -184,7 +190,7 @@ function Cart() {
                   "&:hover": { color: "red" },
                   fontFamily: "Arial, sans-serif",
                   textTransform: "none",
-                      color: "#FF6600",
+                  color: "#FF6600",
                 }}
                 href="/cart"
                 startIcon={<ShoppingCartIcon />}
@@ -238,19 +244,19 @@ function Cart() {
             PaperProps={{ sx: { width: "200px" } }}
           >
             <MenuItem onClick={handleMenuClose}>
-                  <Button href="/profile" passHref>
-                    <a style={{ textDecoration: "none", color: "inherit" }}>
-                      Profile
-                    </a>
-                  </Button>
-                </MenuItem>
-                <MenuItem onClick={handleMenuClose}>
-                  <Button href="/login" passHref>
-                    <a style={{ textDecoration: "none", color: "inherit" }}>
-                      Logout
-                    </a>
-                  </Button>
-                </MenuItem>
+              <Button href="/profile" passHref>
+                <a style={{ textDecoration: "none", color: "inherit" }}>
+                  Profile
+                </a>
+              </Button>
+            </MenuItem>
+            <MenuItem onClick={handleMenuClose}>
+              <Button href="/login" passHref>
+                <a style={{ textDecoration: "none", color: "inherit" }}>
+                  Logout
+                </a>
+              </Button>
+            </MenuItem>
           </Menu>
         </Toolbar>
       </AppBar>
@@ -262,25 +268,45 @@ function Cart() {
         PaperProps={{ sx: { width: 240 } }}
       >
         <List>
-          <ListItem button onClick={handleDrawerClose} component="a" href="/dashboard">
+          <ListItem
+            button
+            onClick={handleDrawerClose}
+            component="a"
+            href="/dashboard"
+          >
             <ListItemIcon>
               <HomeIcon />
             </ListItemIcon>
             <ListItemText primary="Home" />
           </ListItem>
-          <ListItem button onClick={handleDrawerClose} component="a" href="/booking">
+          <ListItem
+            button
+            onClick={handleDrawerClose}
+            component="a"
+            href="/booking"
+          >
             <ListItemIcon>
               <BookIcon />
             </ListItemIcon>
             <ListItemText primary="Booking" />
           </ListItem>
-          <ListItem button onClick={handleDrawerClose} component="a" href="/cart">
+          <ListItem
+            button
+            onClick={handleDrawerClose}
+            component="a"
+            href="/cart"
+          >
             <ListItemIcon>
               <ShoppingCartIcon />
             </ListItemIcon>
             <ListItemText primary="Cart" />
           </ListItem>
-          <ListItem button onClick={handleDrawerClose} component="a" href="/map">
+          <ListItem
+            button
+            onClick={handleDrawerClose}
+            component="a"
+            href="/map"
+          >
             <ListItemIcon>
               <MapIcon />
             </ListItemIcon>
@@ -301,7 +327,6 @@ function Cart() {
             fontSize: "1.1rem",
             textTransform: "none",
             color: "#FF6600",
-
           }}
           href="/cart"
         >
@@ -387,7 +412,7 @@ function Cart() {
         >
           Canceled
         </Button>
-        
+
         <Divider sx={{ mb: 2 }} />
 
         {cart.map((item) => (
@@ -426,7 +451,9 @@ function Cart() {
                     type="number"
                     label="Quantity"
                     value={item.quantity || 1}
-                    onChange={(e) => handleQuantityChange(item.id, e.target.value)}
+                    onChange={(e) =>
+                      handleQuantityChange(item.id, e.target.value)
+                    }
                     size="small"
                     sx={{ width: "100px" }}
                     InputProps={{

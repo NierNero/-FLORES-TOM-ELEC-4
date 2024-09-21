@@ -29,7 +29,7 @@ function App() {
   }, []);
 
   return (
-    <Box sx={{ backgroundColor: '#f0f0f0', minHeight: '100vh' }}>
+    <>
     
       <AppBar 
         position="fixed" 
@@ -80,7 +80,6 @@ function App() {
           alignItems: 'center',
           justifyContent: 'center',
           padding: 0,
-          height: '100vh', 
           overflow: 'hidden',
           marginTop: '70px', 
         }}
@@ -96,8 +95,7 @@ function App() {
           autoplaySpeed={3000} 
           style={{ width: '100%', height: '100%' }} 
         >
-          {[
-            {
+          {[{
               image: '/img/1.jpg',
               title: 'Welcome to Carcare',
               description: 'Your trusted partner for all car maintenance needs.',
@@ -121,7 +119,7 @@ function App() {
               sx={{
                 position: 'relative',
                 width: '100%',
-                height: '100%',
+                height: '500px', // Fixed height for the container
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -134,14 +132,14 @@ function App() {
                 style={{
                   width: '100%',
                   height: '100%',
-                  objectFit: 'cover',
+                  objectFit: 'cover', // Ensure the image covers the container
                 }}
               />
               <Box
                 sx={{
                   position: 'absolute',
                   color: 'white',
-                  backgroundColor: 'rgba(0, 0, 0, 0.0)', 
+                  backgroundColor: 'rgba(0, 0, 0, 0.0)', // Adjust opacity as needed
                   padding: 3, 
                   borderRadius: 1,
                   textAlign: 'left',
@@ -176,7 +174,7 @@ function App() {
           ))}
         </Slider>
       </Box>
-    </Box>
+    </>
   );
 }
 

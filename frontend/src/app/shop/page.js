@@ -1,39 +1,39 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import { 
-  AppBar, 
-  Toolbar, 
-  Typography, 
-  TextField, 
-  Grid, 
-  Card, 
-  CardContent, 
-  CardMedia, 
-  Button, 
+import React, { useState, useEffect } from "react";
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  TextField,
+  Grid,
+  Card,
+  CardContent,
+  CardMedia,
+  Button,
   IconButton,
   Box,
   Avatar,
   Menu,
   MenuItem,
-  Container
-} from '@mui/material';
-import SearchIcon from '@mui/icons-material/Search';
-import HomeIcon from '@mui/icons-material/Home';
-import BookIcon from '@mui/icons-material/Book';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import BuildIcon from '@mui/icons-material/Build'; // Example alternative for "Service"
-import MapIcon from '@mui/icons-material/Map';
+  Container,
+} from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
+import HomeIcon from "@mui/icons-material/Home";
+import BookIcon from "@mui/icons-material/Book";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import BuildIcon from "@mui/icons-material/Build"; // Example alternative for "Service"
+import MapIcon from "@mui/icons-material/Map";
 
 // Dummy function to determine if the screen size is mobile
 const isMobile = window.innerWidth <= 600;
 
 const products = [
-  { id: 1, name: 'Engine Belt', price: 50, image: '/img/belt1.jpg' },
-  { id: 2, name: 'Oil Filter', price: 150, image: '/img/oilfilter.jpg' },
-  { id: 3, name: 'Oil Filter (New)', price: 50, image: '/img/oilfilter1.jpg' },
-  { id: 4, name: 'Engine Belt', price: 50, image: '/img/belt1.jpg' },
-  { id: 5, name: 'Oil Filter (New)', price: 50, image: '/img/oilfilter1.jpg' },
+  { id: 1, name: "Engine Belt", price: 50, image: "/img/belt1.jpg" },
+  { id: 2, name: "Oil Filter", price: 150, image: "/img/oilfilter.jpg" },
+  { id: 3, name: "Oil Filter (New)", price: 50, image: "/img/oilfilter1.jpg" },
+  { id: 4, name: "Engine Belt", price: 50, image: "/img/belt1.jpg" },
+  { id: 5, name: "Oil Filter (New)", price: 50, image: "/img/oilfilter1.jpg" },
 ];
 
 const ProductPage = () => {
@@ -46,8 +46,8 @@ const ProductPage = () => {
       setScrolled(window.scrollY > 50);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const handleMenuOpen = (event) => {
@@ -59,19 +59,26 @@ const ProductPage = () => {
   };
 
   return (
-    <Box sx={{ minHeight: '100vh' }}>
-      <AppBar 
-        position="fixed" 
+    <Box sx={{ minHeight: "100vh" }}>
+      <AppBar
+        position="fixed"
         sx={{
-          backgroundColor: scrolled ? '#333' : '#0d47a1', 
+          backgroundColor: scrolled ? "#333" : "#0d47a1",
           boxShadow: "0 3px 5px rgba(0, 0, 0, 0.4)",
-          height: '70px',
-          display: 'flex',
-          justifyContent: 'center',
-          transition: 'background-color 0.3s ease',
+          height: "70px",
+          display: "flex",
+          justifyContent: "center",
+          transition: "background-color 0.3s ease",
         }}
       >
-        <Toolbar sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+        <Toolbar
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            width: "100%",
+          }}
+        >
           <IconButton
             size="large"
             edge="start"
@@ -92,7 +99,7 @@ const ProductPage = () => {
                   "&:hover": { color: "red" },
                   fontFamily: "Arial, sans-serif",
                   textTransform: "none",
-                      color: "#FF6600",
+                  color: "#FF6600",
                 }}
                 href="/dashboard"
                 startIcon={<HomeIcon />}
@@ -153,35 +160,46 @@ const ProductPage = () => {
               </Button>
             </Box>
           )}
-          <Avatar src="/profile.png" sx={{ ml: 1, cursor: 'pointer' }} onClick={handleMenuOpen} />
+          <Avatar
+            src="/profile.png"
+            sx={{ ml: 1, cursor: "pointer" }}
+            onClick={handleMenuOpen}
+          />
           <Menu
             anchorEl={anchorEl}
             open={open}
             onClose={handleMenuClose}
-            PaperProps={{ sx: { width: '200px' } }}
+            PaperProps={{ sx: { width: "200px" } }}
           >
             <MenuItem onClick={handleMenuClose}>
-                  <Button href="/profile" passHref>
-                    <a style={{ textDecoration: "none", color: "inherit" }}>
-                      Profile
-                    </a>
-                  </Button>
-                </MenuItem>
-                <MenuItem onClick={handleMenuClose}>
-                  <Button href="/login" passHref>
-                    <a style={{ textDecoration: "none", color: "inherit" }}>
-                      Logout
-                    </a>
-                  </Button>
-                </MenuItem>
+              <Button href="/profile" passHref>
+                <a style={{ textDecoration: "none", color: "inherit" }}>
+                  Profile
+                </a>
+              </Button>
+            </MenuItem>
+            <MenuItem onClick={handleMenuClose}>
+              <Button href="/login" passHref>
+                <a style={{ textDecoration: "none", color: "inherit" }}>
+                  Logout
+                </a>
+              </Button>
+            </MenuItem>
           </Menu>
         </Toolbar>
       </AppBar>
 
       {/* Search Bar */}
-      <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '70px', padding: 2 }}>
-        <TextField 
-          placeholder="Search for products..." 
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          marginTop: "70px",
+          padding: 2,
+        }}
+      >
+        <TextField
+          placeholder="Search for products..."
           InputProps={{
             endAdornment: (
               <IconButton>
@@ -189,20 +207,20 @@ const ProductPage = () => {
               </IconButton>
             ),
           }}
-          sx={{ 
-            width: '100%', 
-            maxWidth: 600, 
-            borderRadius: '25px', 
-            backgroundColor: 'white', 
-            '& .MuiOutlinedInput-root': {
-              '& fieldset': {
-                border: 'none',
+          sx={{
+            width: "100%",
+            maxWidth: 600,
+            borderRadius: "25px",
+            backgroundColor: "white",
+            "& .MuiOutlinedInput-root": {
+              "& fieldset": {
+                border: "none",
               },
-              '&:hover fieldset': {
-                border: 'none', 
+              "&:hover fieldset": {
+                border: "none",
               },
-              '&.Mui-focused fieldset': {
-                border: 'none', 
+              "&.Mui-focused fieldset": {
+                border: "none",
               },
             },
           }}
@@ -211,54 +229,73 @@ const ProductPage = () => {
 
       <Container
         sx={{
-          marginTop: '15px',
+          marginTop: "15px",
           padding: 2,
-          backgroundColor: 'white',
-          borderRadius: '10px',
+          backgroundColor: "white",
+          borderRadius: "10px",
           boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-          marginBottom: '12px'
+          marginBottom: "12px",
         }}
       >
         {/* Products Section */}
-        <Grid container spacing={3} justifyContent="center"> 
+        <Grid container spacing={3} justifyContent="center">
           {products.map((product) => (
             <Grid item key={product.id} xs={12} sm={6} md={4} lg={3}>
               <Card
                 sx={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  borderRadius: '12px',
-                  overflow: 'hidden',
-                  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-                  transition: 'transform 0.2s ease-in-out',
-                  '&:hover': { transform: 'scale(1.02)' },
+                  display: "flex",
+                  flexDirection: "column",
+                  borderRadius: "12px",
+                  overflow: "hidden",
+                  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+                  transition: "transform 0.2s ease-in-out",
+                  "&:hover": { transform: "scale(1.02)" },
                 }}
               >
                 <CardMedia
                   component="img"
                   image={product.image}
                   alt={product.name}
-                  sx={{ 
-                    height: 200, 
-                    objectFit: 'cover', 
-                    width: '100%', 
+                  sx={{
+                    height: 200,
+                    objectFit: "cover",
+                    width: "100%",
                   }}
                 />
                 <CardContent>
-                  <Typography variant="h6" component="div" sx={{ marginBottom: 1 }}>
+                  <Typography
+                    variant="h6"
+                    component="div"
+                    sx={{ marginBottom: 1 }}
+                  >
                     {product.name}
                   </Typography>
-                  <Typography variant="body1" color="textSecondary" sx={{ marginBottom: 2 }}>
+                  <Typography
+                    variant="body1"
+                    color="textSecondary"
+                    sx={{ marginBottom: 2 }}
+                  >
                     $ {product.price}
                   </Typography>
                   <Grid container spacing={2}>
                     <Grid item xs={6}>
-                      <Button variant="contained" color="primary" fullWidth>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        fullWidth
+                        href="/placeorder"
+                      >
                         Buy Now
                       </Button>
                     </Grid>
                     <Grid item xs={6}>
-                      <Button variant="outlined" color="primary" fullWidth href="/cart" sx={{ fontSize: '0.690rem' }}>
+                      <Button
+                        variant="outlined"
+                        color="primary"
+                        fullWidth
+                        href="/cart"
+                        sx={{ fontSize: "0.690rem" }}
+                      >
                         Add to Cart
                       </Button>
                     </Grid>

@@ -16,7 +16,8 @@ import {
   Toolbar,
   useMediaQuery,
   Box,
-  useTheme
+  useTheme,
+  Fab // Import Fab
 } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import BookIcon from "@mui/icons-material/Book";
@@ -24,6 +25,7 @@ import CartIcon from "@mui/icons-material/ShoppingCart";
 import MapIcon from "@mui/icons-material/Map";
 import ShopIcon from "@mui/icons-material/Shop";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import ChatIcon from "@mui/icons-material/Chat"; // Import ChatIcon
 import Footer from '../../components/Footer'; // Adjust the path as needed
 
 function App() {
@@ -41,7 +43,6 @@ function App() {
   const handleMenuClose = () => setAnchorEl(null);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-
 
   const menuItem = [
     { text: "Home", icon: <HomeIcon />, href: "/dashboard" },
@@ -84,9 +85,7 @@ function App() {
       <AppBar
         position="fixed"
         sx={{
-          backgroundColor: scrolled
-            ? "rgba(0, 0, 0, 1)"
-            : "rgba(13, 71, 161, 1)",
+          backgroundColor: scrolled ? "rgba(0, 0, 0, 1)" : "rgba(13, 71, 161, 1)",
           boxShadow: "0 3px 5px rgba(0, 0, 0, 0.4)",
           height: "70px",
           display: "flex",
@@ -94,108 +93,41 @@ function App() {
           transition: "background-color 0.3s ease",
         }}
       >
-        <Toolbar
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
+        <Toolbar sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             CARCARE
           </Typography>
           {!isMobile && (
-                <Box sx={{ display: "flex", gap: 2, mr: 2 }}>
-                  <Button
-                    color="white"
-                    sx={{
-                      mr: 2,
-                      fontSize: "14px",
-                      "&:hover": { color: "red" },
-                      fontFamily: "Arial, sans-serif",
-                      textTransform: "none",
-                      color: "#FF6600",
-                    }}
-                    href="/dashboard"
-                    startIcon={<HomeIcon />}
-                  >
-                    Home
-                  </Button>
-                  <Button
-                    color="white"
-                    sx={{
-                      mr: 2,
-                      fontSize: "14px",
-                      "&:hover": { color: "red" },
-                      fontFamily: "Arial, sans-serif",
-                      
-                    }}
-                    href="/booking"
-                    startIcon={<BookIcon />}
-                  >
-                    Booking
-                  </Button>
-                  <Button
-                    color="white"
-                    sx={{
-                      mr: 2,
-                      fontSize: "14px",
-                      "&:hover": { color: "red" },
-                      fontFamily: "Arial, sans-serif",
-                    }}
-                    href="/cart"
-                    startIcon={<ShoppingCartIcon />}
-                  >
-                    Cart
-                  </Button>
-                  <Button
-                    color="white"
-                    sx={{
-                      mr: 2,
-                      fontSize: "14px",
-                      "&:hover": { color: "red" },
-                      fontFamily: "Arial, sans-serif",
-                    }}
-                    href="/shop"
-                    startIcon={<ShopIcon />}
-                  >
-                    Shop
-                  </Button>
-                  <Button
-                    color="white"
-                    sx={{
-                      mr: 2,
-                      fontSize: "14px",
-                      "&:hover": { color: "red" },
-                      fontFamily: "Arial, sans-serif",
-                    }}
-                    href="/map"
-                    startIcon={<MapIcon />}
-                  >
-                    Map
-                  </Button>
-                </Box>
-              )}
-          <Avatar
-            src="/profile.png"
-            sx={{ ml: 1, cursor: "pointer" }}
-            onClick={handleMenuOpen}
-          />
-          <Menu
-            anchorEl={anchorEl}
-            open={open}
-            onClose={handleMenuClose}
-            PaperProps={{ sx: { width: "200px" } }}
-          >
+            <Box sx={{ display: "flex", gap: 2, mr: 2 }}>
+              <Button color="white" sx={{
+                mr: 2, fontSize: "14px", "&:hover": { color: "red" },
+                fontFamily: "Arial, sans-serif", textTransform: "none", color: "#FF6600",
+              }} href="/dashboard" startIcon={<HomeIcon />}>Home</Button>
+              <Button color="white" sx={{
+                mr: 2, fontSize: "14px", "&:hover": { color: "red" },
+                fontFamily: "Arial, sans-serif",
+              }} href="/booking" startIcon={<BookIcon />}>Booking</Button>
+              <Button color="white" sx={{
+                mr: 2, fontSize: "14px", "&:hover": { color: "red" },
+                fontFamily: "Arial, sans-serif",
+              }} href="/cart" startIcon={<ShoppingCartIcon />}>Cart</Button>
+              <Button color="white" sx={{
+                mr: 2, fontSize: "14px", "&:hover": { color: "red" },
+                fontFamily: "Arial, sans-serif",
+              }} href="/shop" startIcon={<ShopIcon />}>Shop</Button>
+              <Button color="white" sx={{
+                mr: 2, fontSize: "14px", "&:hover": { color: "red" },
+                fontFamily: "Arial, sans-serif",
+              }} href="/map" startIcon={<MapIcon />}>Map</Button>
+            </Box>
+          )}
+          <Avatar src="/profile.png" sx={{ ml: 1, cursor: "pointer" }} onClick={handleMenuOpen} />
+          <Menu anchorEl={anchorEl} open={open} onClose={handleMenuClose} PaperProps={{ sx: { width: "200px" } }}>
             <MenuItem onClick={handleMenuClose}>
-              <Button href="/profile" sx={{ textDecoration: "none", color: "inherit" }}>
-                Profile
-              </Button>
+              <Button href="/profile" sx={{ textDecoration: "none", color: "inherit" }}>Profile</Button>
             </MenuItem>
             <MenuItem onClick={handleMenuClose}>
-              <Button href="/login" sx={{ textDecoration: "none", color: "inherit" }}>
-                Logout
-              </Button>
+              <Button href="/login" sx={{ textDecoration: "none", color: "inherit" }}>Logout</Button>
             </MenuItem>
           </Menu>
         </Toolbar>
@@ -213,36 +145,19 @@ function App() {
             opacity: 0.7,
           }}
         />
-        <Box
-          position="absolute"
-          bottom={20}
-          left={20}
-          bgcolor="rgba(0, 0, 0, 0.0)"
-          color="white"
-          p={2}
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "flex-start",
-            textAlign: "left",
-            maxWidth: "80%",
-          }}
-        >
-          <Typography variant="h2" fontWeight="bold" mb={2}>
-            OUR SERVICE
-          </Typography>
-          <Typography
-            variant="h6"
-            mt={2}
-            sx={{ fontSize: { xs: "1rem", sm: "1.2rem", md: "1.5rem" } }}
-          >
+        <Box position="absolute" bottom={20} left={20} bgcolor="rgba(0, 0, 0, 0.0)" color="white" p={2}
+             sx={{
+               display: "flex",
+               flexDirection: "column",
+               alignItems: "flex-start",
+               textAlign: "left",
+               maxWidth: "80%",
+             }}>
+          <Typography variant="h2" fontWeight="bold" mb={2}>OUR SERVICE</Typography>
+          <Typography variant="h6" mt={2} sx={{ fontSize: { xs: "1rem", sm: "1.2rem", md: "1.5rem" } }}>
             Get total care for your car. We offer a range of services provided
           </Typography>
-          <Typography
-            variant="h6"
-            mb={2}
-            sx={{ fontSize: { xs: "1rem", sm: "1.2rem", md: "1.5rem" } }}
-          >
+          <Typography variant="h6" mb={2} sx={{ fontSize: { xs: "1rem", sm: "1.2rem", md: "1.5rem" } }}>
             by skilled and ASE-certified auto technicians.
           </Typography>
         </Box>
@@ -262,45 +177,33 @@ function App() {
         <Grid container spacing={3} justifyContent="center">
           <Grid item xs={12}>
             <CardContent>
-              <Typography
-                variant="h4"
-                gutterBottom
-                mb={5}
-                fontWeight="bold"
-                textAlign="center"
-              >
+              <Typography variant="h4" gutterBottom mb={5} fontWeight="bold" textAlign="center">
                 Repair + Maintenance Services Offered
               </Typography>
-              <Box
-                sx={{
-                  display: "flex",
-                  flexWrap: "wrap",
-                  gap: 1,
-                  justifyContent: "center",
-                }}
-              >
+              <Box sx={{
+                display: "flex",
+                flexWrap: "wrap",
+                gap: 1,
+                justifyContent: "center",
+              }}>
                 {serviceItems.map((item) => (
-                  <Box
-                    key={item.text}
-                    sx={{
-                      display: "flex",
-                      ml: 2,
-                      flexDirection: "column",
-                      alignItems: "center",
-                      cursor: "pointer",
-                      border: "1px solid #ddd",
-                      borderRadius: "10px",
-                      overflow: "hidden",
-                      boxShadow: "0px 4px 8px rgba(0,0,0,0.1)",
-                      transition: "0.3s",
-                      width: "200px",
-                      "&:hover": {
-                        boxShadow: "0px 8px 16px rgba(0,0,0,0.2)",
-                        transform: "scale(1.02)",
-                      },
-                    }}
-                    onClick={() => (window.location.href = item.link)}
-                  >
+                  <Box key={item.text} sx={{
+                    display: "flex",
+                    ml: 2,
+                    flexDirection: "column",
+                    alignItems: "center",
+                    cursor: "pointer",
+                    border: "1px solid #ddd",
+                    borderRadius: "10px",
+                    overflow: "hidden",
+                    boxShadow: "0px 4px 8px rgba(0,0,0,0.1)",
+                    transition: "0.3s",
+                    width: "200px",
+                    "&:hover": {
+                      boxShadow: "0px 8px 16px rgba(0,0,0,0.2)",
+                      transform: "scale(1.02)",
+                    },
+                  }} onClick={() => (window.location.href = item.link)}>
                     <CardMedia
                       component="img"
                       image={item.image}
@@ -324,6 +227,19 @@ function App() {
         </Grid>
       </Container>
       <Footer /> {/* Add the Footer component */}
+
+      
+      <Fab 
+        color="primary" 
+        sx={{
+          position: 'fixed',
+          bottom: 45,
+          right: 45,
+        }} 
+        onClick={() => alert("Chat feature coming soon!")} 
+      >
+        <ChatIcon />
+      </Fab>
     </Box>
   );
 }
