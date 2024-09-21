@@ -153,7 +153,7 @@ function App() {
           </IconButton>
         )}
 
-        <Typography variant="h4" gutterBottom sx={{ mb: 2, color: "black" }}>
+        <Typography variant="h4" gutterBottom sx={{ mb: 2, color: "blue" }}>
           Product Management
         </Typography>
         <Divider sx={{ bgcolor: "white", mt: 2 }} />

@@ -41,7 +41,7 @@ function App() {
             <MenuIcon />
           </IconButton>
         )}
-        <Typography variant="h4" component="h1" sx={{ mb: 2, color: "black" }}>
+        <Typography variant="h4" component="h1" sx={{ mb: 2, color: "blue" }}>
           Dashboard Overview
         </Typography>
         <Divider />
