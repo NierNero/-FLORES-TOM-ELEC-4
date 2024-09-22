@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Drawer,
   Divider,
@@ -14,10 +14,15 @@ import {
   Home as HomeIcon,
   ContactMail as ContactMailIcon,
   Settings as SettingsIcon,
-  Person,
+  Person as PersonIcon,
+  ListAlt,
+  LocalShipping as TrackingIcon,
+  Cancel as CanceledIcon,
+  MonetizationOn as RefundIcon,
 } from "@mui/icons-material";
 import BuildIcon from "@mui/icons-material/Build"; 
 import InventoryIcon from "@mui/icons-material/Inventory";
+import MessageIcon from '@mui/icons-material/Message'; 
 
 const Sidebar = ({ open, handleDrawerToggle }) => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -35,6 +40,11 @@ const Sidebar = ({ open, handleDrawerToggle }) => {
     setAnchorEl(null);
     setAnchorEl1(null);
   };
+
+  useEffect(() => {
+    setAnchorEl(null);
+    setAnchorEl1(null);
+  }, []);
 
   const openPopover = Boolean(anchorEl);
   const openPopover1 = Boolean(anchorEl1);
@@ -69,7 +79,7 @@ const Sidebar = ({ open, handleDrawerToggle }) => {
         <a href="/shopprofile" style={{ textDecoration: "none", color: "inherit" }}>
           <Avatar src="/profile.png" sx={{ cursor: "pointer" }} />
         </a>
-        <span style={{ fontWeight: 'bold', fontSize: '1.2em' }}>Dashboard</span>
+        <span style={{ fontWeight: 'bold', fontSize: '1.2em' }}>Welcome!</span>
         <IconButton onClick={handleDrawerToggle} sx={{ color: "white" }}>
           <MenuIcon />
         </IconButton>
@@ -82,7 +92,10 @@ const Sidebar = ({ open, handleDrawerToggle }) => {
           alignItems: "center",
           color: "white",
           mt: 2,
-          "&:hover": { bgcolor: "#3A3A4D", opacity: 0.8 }
+          ml: '5px',
+          justifyContent: 'flex-start',
+          "&:hover": { bgcolor: "#3A3A4D", opacity: 0.8 },
+          width: '100%',
         }}
         href="/shopdashboard"
       >
@@ -96,11 +109,14 @@ const Sidebar = ({ open, handleDrawerToggle }) => {
           alignItems: "center",
           color: "white",
           mt: 2,
-          "&:hover": { bgcolor: "#3A3A4D", opacity: 0.8 }
+          ml: '5px',
+          justifyContent: 'flex-start',
+          "&:hover": { bgcolor: "#3A3A4D", opacity: 0.8 },
+          width: '100%',
         }}
         onClick={handleOrderMenuToggle}
       >
-        <Person sx={{ mr: 1 }} />
+        <PersonIcon sx={{ mr: 1 }} />
         Customer Order
       </Button>
 
@@ -130,10 +146,11 @@ const Sidebar = ({ open, handleDrawerToggle }) => {
           <Button
             onClick={handleMenuClose}
             component="a"
-            href="/shoporder"
+            href="/shoporderlist"
             sx={{ color: "black", width: "100%", justifyContent: "flex-start", mb: 1 }}
           >
-            Order Status
+            <ListAlt sx={{ mr: 1 }} />
+            Order List
           </Button>
           <Button
             onClick={handleMenuClose}
@@ -141,6 +158,7 @@ const Sidebar = ({ open, handleDrawerToggle }) => {
             href="/tracking"
             sx={{ color: "black", width: "100%", justifyContent: "flex-start", mb: 1 }}
           >
+            <TrackingIcon sx={{ mr: 1 }} />
             Delivery Tracking
           </Button>
           <Button
@@ -149,6 +167,7 @@ const Sidebar = ({ open, handleDrawerToggle }) => {
             href="/gicancel"
             sx={{ color: "black", width: "100%", justifyContent: "flex-start", mb: 1 }}
           >
+            <CanceledIcon sx={{ mr: 1 }} />
             Canceled
           </Button>
           <Button
@@ -157,6 +176,7 @@ const Sidebar = ({ open, handleDrawerToggle }) => {
             href="/refund"
             sx={{ color: "black", width: "100%", justifyContent: "flex-start" }}
           >
+            <RefundIcon sx={{ mr: 1 }} />
             Return/Refund
           </Button>
         </Box>
@@ -168,11 +188,14 @@ const Sidebar = ({ open, handleDrawerToggle }) => {
           alignItems: "center",
           color: "white",
           mt: 2,
-          "&:hover": { bgcolor: "#3A3A4D", opacity: 0.8 }
+          ml: '5px',
+          justifyContent: 'flex-start',
+          "&:hover": { bgcolor: "#3A3A4D", opacity: 0.8 },
+          width: '100%',
         }}
         onClick={handleBookingMenuToggle}
       >
-        <Person sx={{ mr: 1 }} />
+        <PersonIcon sx={{ mr: 1 }} />
         Customer Booking
       </Button>
 
@@ -194,7 +217,7 @@ const Sidebar = ({ open, handleDrawerToggle }) => {
             color: "black",
             borderRadius: 4,
             mt: 1,
-            width: '200px'
+            width: '230px'
           }
         }}
       >
@@ -202,10 +225,11 @@ const Sidebar = ({ open, handleDrawerToggle }) => {
           <Button
             onClick={handleMenuClose}
             component="a"
-            href="/bookingstatus"
+            href="/bookinglist"
             sx={{ color: "black", width: "100%", justifyContent: "flex-start", mb: 1 }}
           >
-            Booking Status
+            <ListAlt sx={{ mr: 1 }} />
+            Booking List
           </Button>
           <Button
             onClick={handleMenuClose}
@@ -213,15 +237,8 @@ const Sidebar = ({ open, handleDrawerToggle }) => {
             href="/shopacceptbooking"
             sx={{ color: "black", width: "100%", justifyContent: "flex-start", mb: 1 }}
           >
-            Accepted Booking
-          </Button>
-          <Button
-            onClick={handleMenuClose}
-            component="a"
-            href="/shopcancel"
-            sx={{ color: "black", width: "100%", justifyContent: "flex-start" }}
-          >
-            Canceled
+            <PersonIcon sx={{ mr: 1 }} />
+            Accepted/Canceled
           </Button>
         </Box>
       </Popover>
@@ -232,7 +249,10 @@ const Sidebar = ({ open, handleDrawerToggle }) => {
           alignItems: "center",
           color: "white",
           mt: 2,
-          "&:hover": { bgcolor: "#3A3A4D", opacity: 0.8 }
+          ml: '5px',
+          justifyContent: 'flex-start',
+          "&:hover": { bgcolor: "#3A3A4D", opacity: 0.8 },
+          width: '100%',
         }}
         href="/shopservice"
       >
@@ -246,12 +266,32 @@ const Sidebar = ({ open, handleDrawerToggle }) => {
           alignItems: "center",
           color: "white",
           mt: 2,
-          "&:hover": { bgcolor: "#3A3A4D", opacity: 0.8 }
+          ml: '5px',
+          justifyContent: 'flex-start',
+          "&:hover": { bgcolor: "#3A3A4D", opacity: 0.8 },
+          width: '100%',
         }}
         href="/inventory"
       >
         <InventoryIcon sx={{ mr: 1 }} />
         Inventory
+      </Button>
+
+      <Button
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          color: "white",
+          mt: 2,
+          ml: '5px',
+          justifyContent: 'flex-start',
+          "&:hover": { bgcolor: "#3A3A4D", opacity: 0.8 },
+          width: '100%',
+        }}
+        href="/customermsg"
+      >
+        <MessageIcon sx={{ mr: 1 }} />
+        Customer Messages
       </Button>
 
       <Divider sx={{ bgcolor: "white", mt: 2 }} />
@@ -262,7 +302,10 @@ const Sidebar = ({ open, handleDrawerToggle }) => {
           alignItems: "center",
           color: "white",
           mt: 2,
-          "&:hover": { bgcolor: "#3A3A4D", opacity: 0.8 }
+          ml: '5px',
+          justifyContent: 'flex-start',
+          "&:hover": { bgcolor: "#3A3A4D", opacity: 0.8 },
+          width: '100%',
         }}
       >
         <SettingsIcon sx={{ mr: 1 }} />
@@ -275,7 +318,10 @@ const Sidebar = ({ open, handleDrawerToggle }) => {
           alignItems: "center",
           color: "white",
           mt: 2,
-          "&:hover": { bgcolor: "#3A3A4D", opacity: 0.8 }
+          ml: '5px',
+          justifyContent: 'flex-start',
+          "&:hover": { bgcolor: "#3A3A4D", opacity: 0.8 },
+          width: '100%',
         }}
       >
         <ContactMailIcon sx={{ mr: 1 }} />
