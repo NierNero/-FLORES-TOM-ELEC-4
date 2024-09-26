@@ -8,6 +8,7 @@ import {
   Grid,
   Card,
   CardContent,
+  Paper
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import Sidebar from "../../components/Sidebar"; // Import the Sidebar component
@@ -41,6 +42,11 @@ function App() {
     { name: 'Aircon Repair', value: 10000 },
     { name: 'Belt Repair', value: 5000 },
     { name: 'Engine Repair', value: 2000 },
+  ];
+
+  const recentActivities = [
+    { service: 'Oil Change', date: '2024-09-25', customer: 'John Doe' },
+    { service: 'Brake Replacement', date: '2024-09-24', customer: 'Jane Smith' },
   ];
 
   return (
@@ -97,7 +103,6 @@ function App() {
             </Card>
           </Grid>
 
-          {/* Revenue Metrics */}
           <Grid item xs={12} sm={6} md={4}>
             <Card sx={{ backgroundColor: "#fffde7", border: "1px solid #ffeb3b" }}>
               <CardContent>
@@ -115,7 +120,6 @@ function App() {
             </Card>
           </Grid>
 
-          {/* Revenue Breakdown */}
           <Grid item xs={12} md={6}>
             <Card sx={{ backgroundColor: "#ffe0b2", border: "1px solid #ff9800" }}>
               <CardContent>
@@ -141,7 +145,6 @@ function App() {
             </Card>
           </Grid>
 
-          {/* Bar Chart for Employee Performance */}
           <Grid item xs={12} md={6}>
             <Card sx={{ backgroundColor: "#bbdefb", border: "1px solid #42a5f5" }}>
               <CardContent>
@@ -159,6 +162,22 @@ function App() {
             </Card>
           </Grid>
         </Grid>
+        <Box mt={4}>
+            <Typography variant="h5" gutterBottom>
+              Recent Activities
+            </Typography>
+            <Paper elevation={2} sx={{ padding: 2 }}>
+              {recentActivities.map((activity, index) => (
+                <Box key={index} mb={2}>
+                  <Typography>
+                    {activity.service} for {activity.customer} on {activity.date}
+                  </Typography>
+                  <LinearProgress variant="determinate" value={70} sx={{ marginTop: 1 }} />
+                  <Divider sx={{ margin: '10px 0' }} />
+                </Box>
+              ))}
+            </Paper>
+          </Box>
       </Box>
     </>
   );

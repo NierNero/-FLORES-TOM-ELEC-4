@@ -25,8 +25,9 @@ import InventoryIcon from "@mui/icons-material/Inventory";
 import MessageIcon from '@mui/icons-material/Message'; 
 
 const Sidebar = ({ open, handleDrawerToggle }) => {
-  const [anchorEl, setAnchorEl] = useState(null);
-  const [anchorEl1, setAnchorEl1] = useState(null);
+  const [anchorEl, setAnchorEl] = useState(false);
+  const [anchorEl1, setAnchorEl1] = useState(false);
+  
 
   const handleOrderMenuToggle = (event) => {
     setAnchorEl(anchorEl ? null : event.currentTarget);
@@ -51,9 +52,9 @@ const Sidebar = ({ open, handleDrawerToggle }) => {
 
   return (
     <Drawer
-      variant="persistent"
       anchor="left"
       open={open}
+      onClose={handleDrawerToggle}
       sx={{
         width: 240,
         flexShrink: 0,
@@ -79,10 +80,7 @@ const Sidebar = ({ open, handleDrawerToggle }) => {
         <a href="/shopprofile" style={{ textDecoration: "none", color: "inherit" }}>
           <Avatar src="/profile.png" sx={{ cursor: "pointer" }} />
         </a>
-        <span style={{ fontWeight: 'bold', fontSize: '1.2em' }}>Welcome!</span>
-        <IconButton onClick={handleDrawerToggle} sx={{ color: "white" }}>
-          <MenuIcon />
-        </IconButton>
+        <span style={{ fontSize: '1.2em', marginRight: '70px' }}>Welcome!</span>
       </Box>
       <Divider sx={{ bgcolor: "white" }} />
 
