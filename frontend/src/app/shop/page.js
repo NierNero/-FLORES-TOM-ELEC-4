@@ -26,8 +26,6 @@ import BuildIcon from "@mui/icons-material/Build"; // Example alternative for "S
 import MapIcon from "@mui/icons-material/Map";
 
 // Dummy function to determine if the screen size is mobile
-const isMobile = window.innerWidth <= 600;
-
 const products = [
   { id: 1, name: "Engine Belt", price: 50, image: "/img/belt1.jpg" },
   { id: 2, name: "Oil Filter", price: 150, image: "/img/oilfilter.jpg" },
@@ -36,10 +34,18 @@ const products = [
   { id: 5, name: "Oil Filter (New)", price: 50, image: "/img/oilfilter1.jpg" },
 ];
 
+const recommendedProducts = [
+  { id: 6, name: "Brake Pads", price: 75, image: "/img/belt1.jpg" },
+  { id: 7, name: "Spark Plugs", price: 30, image: "/img/oilfilter.jpg" },
+  { id: 8, name: "Battery", price: 120, image: "/img/oilfilter.jpg" },
+  { id: 9, name: "Brake Pads", price: 75, image: "/img/belt1.jpg" },
+];
+
 const ProductPage = () => {
   const [scrolled, setScrolled] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 600); // Initialize isMobile based on window size
 
   useEffect(() => {
     const handleScroll = () => {
@@ -227,9 +233,91 @@ const ProductPage = () => {
         />
       </Box>
 
+      <Typography
+        variant="h5"
+        component="div"
+        sx={{
+          marginTop: 4,
+          marginBottom: 2,
+          textAlign: "center",
+          fontWeight: "bold",
+        }}
+      >
+        Recommended for You
+      </Typography>
+      <Grid container spacing={1} justifyContent="center">
+        {recommendedProducts.map((product) => (
+          <Grid item key={product.id} xs={12} sm={6} md={4} lg={3}>
+            <Card
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                borderRadius: "12px",
+                overflow: "hidden",
+                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+                transition:
+                  "transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out",
+                "&:hover": {
+                  transform: "scale(1.05)",
+                  boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2)",
+                },
+                maxWidth: 250,
+                margin: "0 auto",
+              }}
+            >
+              <CardMedia
+                component="img"
+                image={product.image}
+                alt={product.name}
+                sx={{
+                  height: 150,
+                  objectFit: "cover",
+                  width: "100%",
+                }}
+              />
+              <CardContent sx={{ textAlign: "center", padding: "8px" }}>
+                <Typography
+                  variant="h6"
+                  component="div"
+                  sx={{ marginBottom: 0.5, fontWeight: "bold" }}
+                >
+                  {product.name}
+                </Typography>
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  sx={{ marginBottom: 0.5 }}
+                >
+                  $ {product.price}
+                </Typography>
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    marginBottom: 0.5,
+                  }}
+                >
+                  {/* Star ratings */}
+                  <Typography
+                    variant="body2"
+                    color="primary"
+                    sx={{ marginRight: 0.5 }}
+                  >
+                    ★★★★☆
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    (100 reviews)
+                  </Typography>
+                </Box>
+              </CardContent>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
+
       <Container
         sx={{
-          marginTop: "15px",
+          marginTop: "25px",
           padding: 2,
           backgroundColor: "white",
           borderRadius: "10px",
