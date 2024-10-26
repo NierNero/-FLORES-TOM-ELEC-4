@@ -33,7 +33,7 @@ function App() {
 
   const employeePerformance = [
     { name: 'Alice', repairs: 60 },
-    { name: 'Bob', repairs: 50 },
+    { name: 'Bobs', repairs: 50 },
     { name: 'Charlie', repairs: 40 },
   ];
 

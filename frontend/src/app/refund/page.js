@@ -28,7 +28,7 @@ function ReturnRefund() {
     { id: 1, customer: 'Ryan Mijares', orderId: '1001', reason: 'Defective item', status: 'Pending' },
     { id: 2, customer: 'James Detecio', orderId: '1002', reason: 'Wrong item sent', status: 'Pending' },
     { id: 3, customer: 'Sarah Lee', orderId: '1003', reason: 'Changed mind', status: 'Approved' },
-    { id: 4, customer: 'Tom Chen', orderId: '1004', reason: 'Defective item', status: 'Denied' },
+    { id: 4, customer: 'Tom Chen', orderId: '1004', reason: 'Did not receive', status: 'Denied' },
   ]);
   const [filteredRequests, setFilteredRequests] = useState(requests);
   const [searchTerm, setSearchTerm] = useState('');

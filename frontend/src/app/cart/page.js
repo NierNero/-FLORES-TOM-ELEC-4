@@ -48,7 +48,7 @@ const cartItems = [
     name: "Oil Filter",
     price: 15,
     image: "/img/oilfilter.jpg",
-    shop: "Nelson's Automotive Shop",
+    shop: "Suazo's Automotive Shop",
   },
 ];
 

@@ -8,6 +8,8 @@ const staticMessages = [
     { id: 1, content: "Hello, I need help with my order.", name: "John Doe", profilePic: "/img/1.jpg" },
     { id: 2, content: "Can you provide more details about the product?", name: "Jane Smith", profilePic: "/img/1.jpg" },
     { id: 3, content: "I would like to return my purchase.", name: "Alice Johnson", profilePic: "/img/1.jpg" },
+    { id: 4, content: "Thanks!", name: "Alice Johnson", profilePic: "/img/1.jpg" },
+
 ];
 
 function MessagesPage() {

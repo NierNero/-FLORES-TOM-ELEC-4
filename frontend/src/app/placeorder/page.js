@@ -154,7 +154,7 @@ const CheckoutPage = () => {
             >
               <MenuItem value="cash">Cash on Delivery</MenuItem>
               <MenuItem value="spaylater">
-                SPayLater (₱83.52 x 3 months)
+                SPayLater (₱85.52 x 3 months)
               </MenuItem>
               <MenuItem value="creditcard">Credit Card</MenuItem>
             </Select>

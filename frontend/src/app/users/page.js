@@ -146,7 +146,7 @@ const App = () => {
       // Replace with your API call
       const data = [
         { id: 1, username: 'johndoe', email: 'john@example.com', role: 'Admin', status: 'Active', registrationDate: '2023-01-15' },
-        { id: 2, username: 'janedoe', email: 'jane@example.com', role: 'User', status: 'Inactive', registrationDate: '2023-02-20' },
+        { id: 2, username: 'suazo', email: 'suazo@example.com', role: 'User', status: 'Inactive', registrationDate: '2023-02-20' },
       ];
       setUsers(data);
       setLoading(false);

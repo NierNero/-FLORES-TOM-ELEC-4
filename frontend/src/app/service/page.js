@@ -75,7 +75,7 @@ function App() {
     },
     {
       image: "/img/tire.jpg",
-      text: "Tire Conditioning Repair",
+      text: "Tire Conditioning Repairs",
       link: "/tire-conditioning-repair",
     },
   ];

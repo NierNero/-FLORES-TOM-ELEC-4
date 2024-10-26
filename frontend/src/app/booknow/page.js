@@ -43,7 +43,7 @@ function BookingPage() {
     email: "Deticio@gmail.com",
     phone: "09123456789",
     address: "Diri Sa Amoa Ila Suazo Lapu-Lapu City",
-    vehicleName: "Toyota Supra",
+    vehicleName: "Toyota Supra Ultra",
     plateNo: "8",
     service: "",
     message: "",
